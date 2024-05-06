@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { OrderListComponent } from './components/order-list/order-list.component';
+import { CarListComponent } from './components/car-list/car-list.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, OrderListComponent],
+  imports: [RouterOutlet, CommonModule, CarListComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

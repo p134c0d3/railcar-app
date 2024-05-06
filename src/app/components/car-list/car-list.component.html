@@ -1,3 +1,4 @@
+<p>car-list works!</p>
 <html>
   <link
     rel="stylesheet"
@@ -11,21 +12,111 @@
     <div class="container">
       <h3>List of Rail Cars</h3>
       <div>
+        <a class="btn btn-outline-primary" routerLink="/cars/new">Add Car</a>
+      </div>
+      <div>
         <table class="table table-hover">
           <thead class="table-light">
             <tr>
-              <th>Car</th>
-              <th>Weight (lbs)</th>
-              <th>Requested</th>
-              <th>Received</th>
-              <th>Extraction Date</th>
-              <th>Emptied</th>
-              <th>Released</th>
-              <th>Raw Material</th>
+              <th
+                scope="col"
+                class="sort-header"
+                (click)="sortData('carNumber')"
+              >
+                Car
+              </th>
+              <th scope="col" class="sort-header" (click)="sortData('weight')">
+                Weight (lbs)
+              </th>
+              <th
+                scope="col"
+                class="sort-header"
+                (click)="sortData('receivedDate')"
+              >
+                Requested
+              </th>
+              <th
+                scope="col"
+                class="sort-header"
+                (click)="sortData('receivedDate')"
+              >
+                Received
+              </th>
+              <th
+                scope="col"
+                class="sort-header"
+                (click)="sortData('extractionStartDate')"
+              >
+                Extraction Date
+              </th>
+              <th
+                scope="col"
+                class="sort-header"
+                (click)="sortData('emptiedDate')"
+              >
+                Emptied
+              </th>
+              <th
+                scope="col"
+                class="sort-header"
+                (click)="sortData('releasedDate')"
+              >
+                Released
+              </th>
+              <th
+                scope="col"
+                class="sort-header"
+                (click)="sortData('rawMaterial')"
+              >
+                Raw Material
+              </th>
               <th></th>
             </tr>
           </thead>
           <tbody>
+            @for (car of cars; track car.id) {
+            <tr>
+              <!-- <td>{{ car.carNumber }}</td> -->
+              <td>{{ car.weight }}</td>
+              <td>{{ car.requestedDate }}</td>
+              <td>{{ car.receivedDate }}</td>
+              <td>{{ car.extractionStartDate }}</td>
+              <td>{{ car.emptiedDate }}</td>
+              <td>{{ car.releasedDate }}</td>
+              <td>{{ car.rawMaterial }}</td>
+              <td>
+                <a
+                  class="material-symbols-outlined"
+                  edit
+                  data-toggle="popover"
+                  title="Edit"
+                  data-placement="left"
+                  (click)="onEditCar(car.id)"
+                  >Edit</a
+                >
+                <a
+                  class="material-symbols-outlined"
+                  delete
+                  data-toggle="popover"
+                  title="Delete"
+                  data-placement="right"
+                  (click)="onDeleteCar(car.id)"
+                >
+                  delete
+                </a>
+              </td>
+            </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>
+
+<!--
+
+  <tbody>
             <tr>
               <td>VTGX017400</td>
               <td>185,214</td>
@@ -200,8 +291,4 @@
               </td>
             </tr>
           </tbody>
-        </table>
-      </div>
-    </div>
-  </body>
-</html>
+ -->

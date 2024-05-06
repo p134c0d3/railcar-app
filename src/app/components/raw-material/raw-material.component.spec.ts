@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { OrderNewComponent } from './order-new.component';
+import { RawMaterialComponent } from './raw-material.component';
 
-describe('OrderNewComponent', () => {
-  let component: OrderNewComponent;
-  let fixture: ComponentFixture<OrderNewComponent>;
+describe('RawMaterialComponent', () => {
+  let component: RawMaterialComponent;
+  let fixture: ComponentFixture<RawMaterialComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [OrderNewComponent]
+      imports: [RawMaterialComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(OrderNewComponent);
+    fixture = TestBed.createComponent(RawMaterialComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
