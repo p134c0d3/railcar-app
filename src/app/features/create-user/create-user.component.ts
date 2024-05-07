@@ -4,11 +4,12 @@ import { UserService } from '../../shared/user.service';
 import { Router } from '@angular/router';
 import { User } from '../../models/user';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { LoginComponent } from '../login/login.component';
 
 @Component({
   selector: 'app-create-user',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, HttpClientModule],
+  imports: [FormsModule, ReactiveFormsModule, HttpClientModule, LoginComponent],
   templateUrl: './create-user.component.html',
   styleUrl: './create-user.component.scss'
 })
