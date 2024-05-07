@@ -1,1 +1,65 @@
-<p>create-user works!</p>
+<div class="container">
+  <div class="row mt-5">
+    <div class="account-form col-lg-4 bg-white m-auto rounded-top">
+      <h2 class="form-header text-center p-3">Create Account</h2>
+      <!-- Form Start -->
+      <form [formGroup]="createUserForm" class="form" (ngSubmit)="onSubmit()">
+        <div class="input-group mb-3 pt-3">
+          <input
+            class="form-control"
+            type="text"
+            formControlName="first_name"
+            id="firstName"
+            placeholder="First Name"
+            />
+        </div>
+        <div class="input-group mb-3">
+          <input
+            class="form-control"
+            type="text"
+            formControlName="last_name"
+            id="lastName"
+            placeholder="Last Name"
+            />
+        </div>
+        <div class="input-group mb-3">
+          <input
+            class="form-control"
+            type="text"
+            formControlName="email"
+            id="email"
+            placeholder="Email"
+            />
+        </div>
+        <div class="input-group mb-3">
+          <input
+            class="form-control"
+            type="text"
+            formControlName="password"
+            id="password"
+            placeholder="Password"
+            />
+        </div>
+        <div class="input-group mb-3">
+          <input
+            class="form-control"
+            type="text"
+            formControlName="password_confirmation"
+            id="passwordConfirmation"
+            placeholder="Confirm Password"
+            />
+        </div>
+        <div class="d-grid">
+          <div class="btn btn-outline-primary bg-medium">Create Account</div>
+          <p class="text-center text-muted">Already have an account? <a routerLink="/login">Login</a></p>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+

@@ -1,1 +1,41 @@
-<p>login works!</p>
+<div class="container">
+  <div class="row mt-5">
+    <div class="login-form col-lg-4 bg-white m-auto rounded-top">
+      <h2 class="form-header text-center p-3">Login</h2>
+      <!-- Form Start -->
+      <form [formGroup]="loginForm" class="form" (ngSubmit)="onSubmit()">
+        <div class="input-group mb-3">
+          <input
+            class="form-control"
+            type="text"
+            formControlName="email"
+            id="email"
+            placeholder="Email"
+            />
+        </div>
+        <div class="input-group mb-3">
+          <input
+            class="form-control"
+            type="text"
+            formControlName="password"
+            id="password"
+            placeholder="Password"
+            />
+        </div>
+        <div class="input-group mb-3">
+          <input
+            class="form-control"
+            type="text"
+            formControlName="passwordConfirmation"
+            id="passwordConfirmation"
+            placeholder="Confirm Password"
+            />
+        </div>
+        <div class="d-grid">
+          <div class="btn btn-outline-primary bg-medium">Login</div>
+          <p class="text-center text-muted">Don't have an account? <a href="/create-user">Create Account</a></p>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

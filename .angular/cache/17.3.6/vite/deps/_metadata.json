@@ -1,34 +1,58 @@
 {
-  "hash": "bbb326e8",
-  "configHash": "17acc81a",
-  "lockfileHash": "2e7b5d22",
-  "browserHash": "51cf3489",
+  "hash": "24f37702",
+  "configHash": "360392b5",
+  "lockfileHash": "b5f5b95e",
+  "browserHash": "53d928e6",
   "optimized": {
     "@angular/core": {
       "src": "../../../../../node_modules/@angular/core/fesm2022/core.mjs",
       "file": "@angular_core.js",
-      "fileHash": "38103f17",
+      "fileHash": "863067a0",
       "needsInterop": false
     },
     "@angular/platform-browser": {
       "src": "../../../../../node_modules/@angular/platform-browser/fesm2022/platform-browser.mjs",
       "file": "@angular_platform-browser.js",
-      "fileHash": "9b45c208",
+      "fileHash": "18d28d60",
       "needsInterop": false
     },
     "@angular/router": {
       "src": "../../../../../node_modules/@angular/router/fesm2022/router.mjs",
       "file": "@angular_router.js",
-      "fileHash": "9cd47724",
+      "fileHash": "f52e12e2",
+      "needsInterop": false
+    },
+    "@angular/forms": {
+      "src": "../../../../../node_modules/@angular/forms/fesm2022/forms.mjs",
+      "file": "@angular_forms.js",
+      "fileHash": "6ccc9412",
+      "needsInterop": false
+    },
+    "@angular/common/http": {
+      "src": "../../../../../node_modules/@angular/common/fesm2022/http.mjs",
+      "file": "@angular_common_http.js",
+      "fileHash": "5cf565bb",
+      "needsInterop": false
+    },
+    "@angular/common": {
+      "src": "../../../../../node_modules/@angular/common/fesm2022/common.mjs",
+      "file": "@angular_common.js",
+      "fileHash": "98fa4a6a",
       "needsInterop": false
     }
   },
   "chunks": {
-    "chunk-CRIPZOYN": {
-      "file": "chunk-CRIPZOYN.js"
+    "chunk-G3CAMNV2": {
+      "file": "chunk-G3CAMNV2.js"
     },
-    "chunk-WZJTMI35": {
-      "file": "chunk-WZJTMI35.js"
+    "chunk-JGZPNO5Q": {
+      "file": "chunk-JGZPNO5Q.js"
+    },
+    "chunk-CLFKRVZH": {
+      "file": "chunk-CLFKRVZH.js"
+    },
+    "chunk-XHMXEJF3": {
+      "file": "chunk-XHMXEJF3.js"
     }
   }
 }
