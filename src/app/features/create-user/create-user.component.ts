@@ -45,6 +45,7 @@ export class CreateUserComponent {
   ) {}
 
   onSubmit() {
+    console.log(this.user);
     if (this.user.password === this.user.password_confirmation) {
       this.userService.createUser(this.user).subscribe({
         next: (res: any) => {
