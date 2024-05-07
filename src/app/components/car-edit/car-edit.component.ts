@@ -26,13 +26,13 @@ export class CarEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.carEditForm = this.formBuilder.group({
-      carNumber: ['', Validators.required],
-      requestedDate: ['', Validators.required],
-      receivedDate: ['', Validators.required],
-      extractionStartDate: ['', Validators.required],
-      emptiedDate: ['', Validators.required],
-      releasedDate: ['', Validators.required],
-      rawMaterial: ['', Validators.required],
+      car_number: ['', Validators.required],
+      requested_date: ['', Validators.required],
+      received_date: ['', Validators.required],
+      extraction_date: ['', Validators.required],
+      emptied_date: ['', Validators.required],
+      released_date: ['', Validators.required],
+      raw_material: ['', Validators.required],
 
     });
 
@@ -46,14 +46,14 @@ export class CarEditComponent implements OnInit {
     this.carService.getCar(this.id).subscribe((car) => {
       this.car = car;
       this.carEditForm.patchValue({
-        carNumber: this.car.carNumber,
+        carNumber: this.car.car_number,
         weight: this.car.weight,
-        requestedDate: this.car.requestedDate,
-        receivedDate: this.car.receivedDate,
-        extractionStartDate: this.car.extractionStartDate,
-        emptiedDate: this.car.emptiedDate,
-        releasedDate: this.car.releasedDate,
-        rawMaterial: this.car.rawMaterial.material_name
+        requestedDate: this.car.requested_date,
+        receivedDate: this.car.received_date,
+        extractionStartDate: this.car.extraction_start_date,
+        emptiedDate: this.car.emptied_date,
+        releasedDate: this.car.released_date,
+        rawMaterial: this.car.raw_material.material_name
       });
     });
   }

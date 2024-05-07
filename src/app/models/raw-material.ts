@@ -1,4 +1,4 @@
 export interface RawMaterial {
     id: number;
-    name: string;
+    material_name: string;
 }

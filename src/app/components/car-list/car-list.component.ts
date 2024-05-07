@@ -32,49 +32,49 @@ export class CarListComponent implements OnInit{
     this.loadCars();
     console.log(this.cars);
 
-}
-
-loadCars() {
-  this.carService.getCars().subscribe({
-    next: (res:Car[]) => {
-      console.log(res);
-      this.cars = res;
-    },
-    error: (error:any) => {
-      console.log(error);
-    },
-
-  });
-}
-
-onEditCar(id: number) {
-  this.router.navigate(['/car-edit/', id]);
-}
-
-onDeleteCar(id: number) {
-  this.carService.deleteCar(id).subscribe({
-    next: () =>
-      (this.cars = this.cars.filter((car) => car.id !== id)),
-
-    error: (error) => console.error(error)
-  });
-}
-
-sortData(property: any) {
-  if (this.sortProperty === property) {
-    this.isAscending = !this.isAscending;
-  } else {
-    this.sortProperty = property;
-    this.isAscending = true;
   }
-  this.cars.sort((a, b) => {
-    return this.isAscending
-      ? (a[property] > b[property] ? 1 : -1)
-      : (b[property] > a[property] ? 1 : -1);
 
-  });
-  console.log(this.cars);
-}
+  loadCars() {
+    this.carService.getCars().subscribe({
+      next: (res:Car[]) => {
+        console.log(res);
+        this.cars = res;
+      },
+      error: (error:any) => {
+        console.log(error);
+      },
+
+    });
+  }
+
+  onEditCar(id: number) {
+    this.router.navigate(['/car-edit/', id]);
+  }
+
+  onDeleteCar(id: number) {
+    this.carService.deleteCar(id).subscribe({
+      next: () =>
+        (this.cars = this.cars.filter((car) => car.id !== id)),
+
+      error: (error) => console.error(error)
+    });
+  }
+
+  sortData(property: any) {
+    if (this.sortProperty === property) {
+      this.isAscending = !this.isAscending;
+    } else {
+      this.sortProperty = property;
+      this.isAscending = true;
+    }
+    this.cars.sort((a, b) => {
+      return this.isAscending
+        ? (a[property] > b[property] ? 1 : -1)
+        : (b[property] > a[property] ? 1 : -1);
+
+    });
+    console.log(this.cars);
+  }
 }
 
 // ? a[property] > b[property]
