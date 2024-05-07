@@ -1,58 +1,58 @@
 {
-  "hash": "ec5e0851",
-  "configHash": "7de48b52",
-  "lockfileHash": "70d06de0",
-  "browserHash": "3f9ce1bc",
+  "hash": "eeb7c657",
+  "configHash": "da17ba7e",
+  "lockfileHash": "2e7b5d22",
+  "browserHash": "ffdaa3c2",
   "optimized": {
     "@angular/common": {
       "src": "../../../../../node_modules/@angular/common/fesm2022/common.mjs",
       "file": "@angular_common.js",
-      "fileHash": "21a6d277",
+      "fileHash": "b7e5d6f3",
       "needsInterop": false
     },
     "@angular/common/http": {
       "src": "../../../../../node_modules/@angular/common/fesm2022/http.mjs",
       "file": "@angular_common_http.js",
-      "fileHash": "42553e18",
+      "fileHash": "e700c01d",
       "needsInterop": false
     },
     "@angular/core": {
       "src": "../../../../../node_modules/@angular/core/fesm2022/core.mjs",
       "file": "@angular_core.js",
-      "fileHash": "6c751f55",
+      "fileHash": "51731464",
       "needsInterop": false
     },
     "@angular/forms": {
       "src": "../../../../../node_modules/@angular/forms/fesm2022/forms.mjs",
       "file": "@angular_forms.js",
-      "fileHash": "e3007600",
+      "fileHash": "0e5f7197",
       "needsInterop": false
     },
     "@angular/platform-browser": {
       "src": "../../../../../node_modules/@angular/platform-browser/fesm2022/platform-browser.mjs",
       "file": "@angular_platform-browser.js",
-      "fileHash": "0a6a2bb1",
+      "fileHash": "60e06b49",
       "needsInterop": false
     },
     "@angular/router": {
       "src": "../../../../../node_modules/@angular/router/fesm2022/router.mjs",
       "file": "@angular_router.js",
-      "fileHash": "fae6c12b",
+      "fileHash": "fb364d02",
       "needsInterop": false
     }
   },
   "chunks": {
-    "chunk-QSXOFLVL": {
-      "file": "chunk-QSXOFLVL.js"
+    "chunk-G3CAMNV2": {
+      "file": "chunk-G3CAMNV2.js"
     },
-    "chunk-SKF45S4X": {
-      "file": "chunk-SKF45S4X.js"
+    "chunk-JGZPNO5Q": {
+      "file": "chunk-JGZPNO5Q.js"
     },
-    "chunk-5IPOJP64": {
-      "file": "chunk-5IPOJP64.js"
+    "chunk-CLFKRVZH": {
+      "file": "chunk-CLFKRVZH.js"
     },
-    "chunk-IMHRZ32E": {
-      "file": "chunk-IMHRZ32E.js"
+    "chunk-XHMXEJF3": {
+      "file": "chunk-XHMXEJF3.js"
     }
   }
 }

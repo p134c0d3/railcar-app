@@ -12,7 +12,7 @@ export class Car {
 
   constructor(car:any) {
     this.id = car.id || 0;
-    this.carNumber = car.carNumber;
+    this.carNumber = car.car_number;
     this.requestedDate = car.requestedDate;
     this.receivedDate = car.receivedDate;
     this.extractionStartDate = car.extractionStartDate;

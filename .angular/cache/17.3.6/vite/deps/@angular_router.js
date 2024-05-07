@@ -1,7 +1,7 @@
 import {
   Title
-} from "./chunk-QSXOFLVL.js";
-import "./chunk-SKF45S4X.js";
+} from "./chunk-G3CAMNV2.js";
+import "./chunk-JGZPNO5Q.js";
 import {
   DOCUMENT,
   HashLocationStrategy,
@@ -10,7 +10,7 @@ import {
   LocationStrategy,
   PathLocationStrategy,
   ViewportScroller
-} from "./chunk-5IPOJP64.js";
+} from "./chunk-CLFKRVZH.js";
 import {
   APP_BOOTSTRAP_LISTENER,
   APP_INITIALIZER,
@@ -52,7 +52,6 @@ import {
   Subscription,
   Version,
   ViewContainerRef,
-  __async,
   __spreadProps,
   __spreadValues,
   afterNextRender,
@@ -114,7 +113,7 @@ import {
   ɵɵloadQuery,
   ɵɵqueryRefresh,
   ɵɵsanitizeUrlOrResourceUrl
-} from "./chunk-IMHRZ32E.js";
+} from "./chunk-XHMXEJF3.js";
 
 // node_modules/@angular/router/fesm2022/router.mjs
 var PRIMARY_OUTLET = "primary";
@@ -5029,7 +5028,6 @@ var _RouterScroller = class _RouterScroller {
     this.lastSource = "imperative";
     this.restoredId = 0;
     this.store = {};
-    this.environmentInjector = inject(EnvironmentInjector);
     options.scrollPositionRestoration ||= "disabled";
     options.anchorScrolling ||= "disabled";
   }
@@ -5076,21 +5074,13 @@ var _RouterScroller = class _RouterScroller {
     });
   }
   scheduleScrollEvent(routerEvent, anchor) {
-    this.zone.runOutsideAngular(() => __async(this, null, function* () {
-      yield new Promise((resolve) => {
-        setTimeout(() => {
-          resolve();
+    this.zone.runOutsideAngular(() => {
+      setTimeout(() => {
+        this.zone.run(() => {
+          this.transitions.events.next(new Scroll(routerEvent, this.lastSource === "popstate" ? this.store[this.restoredId] : null, anchor));
         });
-        afterNextRender(() => {
-          resolve();
-        }, {
-          injector: this.environmentInjector
-        });
-      });
-      this.zone.run(() => {
-        this.transitions.events.next(new Scroll(routerEvent, this.lastSource === "popstate" ? this.store[this.restoredId] : null, anchor));
-      });
-    }));
+      }, 0);
+    });
   }
   /** @nodoc */
   ngOnDestroy() {
@@ -5526,7 +5516,7 @@ function mapToCanDeactivate(providers) {
 function mapToResolve(provider) {
   return (...params) => inject(provider).resolve(...params);
 }
-var VERSION = new Version("17.3.7");
+var VERSION = new Version("17.3.6");
 export {
   ActivatedRoute,
   ActivatedRouteSnapshot,
@@ -5609,7 +5599,7 @@ export {
 
 @angular/router/fesm2022/router.mjs:
   (**
-   * @license Angular v17.3.7
+   * @license Angular v17.3.6
    * (c) 2010-2024 Google LLC. https://angular.io/
    * License: MIT
    *)

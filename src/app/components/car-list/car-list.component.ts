@@ -30,6 +30,7 @@ export class CarListComponent implements OnInit{
 
   ngOnInit(): void {
     this.loadCars();
+    console.log(this.cars);
 
 }
 
@@ -42,7 +43,7 @@ loadCars() {
     error: (error:any) => {
       console.log(error);
     },
-    
+
   });
 }
 
