@@ -13,31 +13,17 @@ import { Router, RouterLink } from '@angular/router';
 export class NavbarComponent implements OnInit {
   isAdminLoggedIn: boolean = false;
   token: string = 'user logged in';
-  adminToken: string = 'admin logged in';
+  adminToken: string = '';
   orderSearch = new FormGroup({
     orderSearchForm: new FormControl(''),
   });
 
   constructor(private router: Router) {}
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void {}
 
   onSubmit() {
     console.log(this.orderSearch.value);
-  }
-
-  goDashboard() {
-    this.router.navigate(['/dashboard']);
-  }
-
-  goAdminCenter() {
-    this.router.navigate(['/admin-center']);
-  }
-
-  goLogin() {
-    this.router.navigate(['/login']);
   }
 
 }
