@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { UserService } from '../../shared/user.service';
 import { Router } from '@angular/router';
 import { User } from '../../models/user';
@@ -11,7 +16,7 @@ import { LoginComponent } from '../login/login.component';
   standalone: true,
   imports: [FormsModule, ReactiveFormsModule, HttpClientModule, LoginComponent],
   templateUrl: './create-user.component.html',
-  styleUrl: './create-user.component.scss'
+  styleUrl: './create-user.component.scss',
 })
 export class CreateUserComponent {
   user: User = {
@@ -21,8 +26,8 @@ export class CreateUserComponent {
     email: '',
     password: '',
     password_confirmation: '',
-    user_type: ''
-  }
+    user_type: '',
+  };
 
   createUserForm = new FormGroup({
     first_name: new FormControl(''),
@@ -30,10 +35,14 @@ export class CreateUserComponent {
     email: new FormControl(''),
     password: new FormControl(''),
     password_confirmation: new FormControl(''),
-    user_type: new FormControl('')
-  })
+    user_type: new FormControl(''),
+  });
 
-  constructor(private userService: UserService, private router: Router, private http: HttpClient) { }
+  constructor(
+    private userService: UserService,
+    private router: Router,
+    private http: HttpClient
+  ) {}
 
   onSubmit() {
     if (this.user.password === this.user.password_confirmation) {
@@ -44,7 +53,7 @@ export class CreateUserComponent {
         },
         error: (error) => {
           console.error('Error creating user:', error);
-        }
+        },
       });
     } else {
       console.log('Passwords do not match');

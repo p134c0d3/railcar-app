@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { CreateUserComponent } from '../create-user/create-user.component';
 @Component({
@@ -7,18 +12,16 @@ import { CreateUserComponent } from '../create-user/create-user.component';
   standalone: true,
   imports: [FormsModule, ReactiveFormsModule, CreateUserComponent],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+  styleUrl: './login.component.scss',
 })
 export class LoginComponent {
   loginForm = new FormGroup({
     email: new FormControl(''),
     password: new FormControl(''),
-    passwordConfirmation: new FormControl('')
-  })
+    passwordConfirmation: new FormControl(''),
+  });
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {}
 
-onSubmit() {
-
-}
+  onSubmit() {}
 }
