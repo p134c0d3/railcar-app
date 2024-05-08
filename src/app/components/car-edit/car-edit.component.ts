@@ -29,10 +29,10 @@ export class CarEditComponent implements OnInit {
       car_number: ['', Validators.required],
       requested_date: ['', Validators.required],
       received_date: ['', Validators.required],
-      extraction_start_date: ['', Validators.required],
+      extraction_date: ['', Validators.required],
       emptied_date: ['', Validators.required],
       released_date: ['', Validators.required],
-      rawMaterial: ['', Validators.required],
+      raw_material: ['', Validators.required],
 
     });
 
@@ -53,7 +53,7 @@ export class CarEditComponent implements OnInit {
         extractionStartDate: this.car.extraction_start_date,
         emptiedDate: this.car.emptied_date,
         releasedDate: this.car.released_date,
-        rawMaterial: this.car.rawMaterial.material_name
+        rawMaterial: this.car.raw_material.material_name
       });
     });
   }

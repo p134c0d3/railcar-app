@@ -1,0 +1,47 @@
+<nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+  <div class="container-fluid">
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarToggler"
+      aria-controls="navbarToggler"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="#">Railcar App</a>
+    <div class="collapse navbar-collapse" id="navbarToggler">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <!-- Need to link the dashboard link to the dashboard -->
+          <a class="nav-link" aria-current="page" href="#" routerLink="/">Dashboard</a>
+        </li>
+        <!-- Need to show the below dynamically based on if admin is logged in and link to the admin center page for approving requests of new members -->
+        <li class="nav-item" *ngIf="adminToken">
+          <a class="nav-link" href="#" routerLink="/admin-center">Admin Center</a>
+        </li>
+      </ul>
+      <div class="navbar-nav" style="margin-right: 10px;">
+        <div class="nav-item">
+          <!-- Need to link the login link to the login page -->
+          <button class="btn btn-outline-primary" href="#" type="button" routerLink="login">
+            Login
+          </button>
+        </div>
+      </div>
+      <form class="d-flex" role="search" [formGroup]="orderSearch" (ngSubmit)="onSubmit()">
+        <input
+          class="form-control me-2"
+          type="search"
+          placeholder="Search"
+          aria-label="Search"
+          id="orderSearchForm"
+          formControlName="orderSearchForm"
+        />
+        <button class="btn btn-outline-success" type="submit" [disabled]="orderSearch.invalid">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>
