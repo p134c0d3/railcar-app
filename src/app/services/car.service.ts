@@ -28,6 +28,13 @@ export class CarService {
 
   deleteCar(id: number): Observable<Car> {
     return this.http.delete<Car>('http://localhost:3000/cars/${id}');
+  }
 
+  getRawMaterials() {
+    return this.http.get('http://localhost:3000/raw_materials');
+  }
+
+  getRawMaterialOrders(id: number) {
+    return this.http.get(`http://localhost:3000/raw_materials/${id}/orders`);
   }
 }
