@@ -1,13 +1,8 @@
 import { Routes } from '@angular/router';
+import { AppComponent } from './app.component';
+import { LandingComponent } from './features/landing/landing.component';
 
-export const routes: Routes = [
-  { path: 'orders',
-    loadComponent: () => import('./components/order-list/order-list.component').then(c => c.OrderListComponent) },
+export const routes: Routes = [{ path: '', component: LandingComponent }]; // DEFAULT ROUTE
 
-    { path: 'orders/new',
-    loadComponent: () => import('./components/order-new/order-new.component').then(c => c.OrderNewComponent) },
-
-    { path: 'orders/:id',
-    loadComponent: () => import('./components/order-edit/order-edit.component').then(c => c.OrderEditComponent) },
-
-];
+// ROUTES TO LINK TO OTHER COMPONENTS IN APP
+// export const routes: Routes = [{ path: '/', component: AppComponent }, { path: '/dashboard', component: DashboardComponent}, { path: '/admin-center', component: AdminComponent}, { path: '/login', component: LoginComponent}];

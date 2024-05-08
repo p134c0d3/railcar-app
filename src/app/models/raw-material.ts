@@ -1,2 +1,3 @@
-export class RawMaterial {
+export interface RawMaterial {
+    name: string;
 }
