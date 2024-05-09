@@ -24,10 +24,23 @@ export const routes: Routes = [
   },
   { path: 'landing', loadComponent: () => import('./features/landing/landing.component').then(m => m.LandingComponent)},
   { path: 'admin', loadComponent: () => import('./features/admin/admin.component').then(m => m.AdminComponent)},
+  {
+    path: 'create-user',
+    loadComponent: () => import('./features/create-user/create-user.component').then(m => m.CreateUserComponent)
+  },
+  {
+    path: 'login',
+    loadComponent: () => import('./features/login/login.component').then(m => m.LoginComponent),
+  }
 ]; // DEFAULT ROUTE
 
 // ROUTES TO LINK TO OTHER COMPONENTS IN APP
 // export const routes: Routes = [{ path: '/', component: AppComponent }, { path: '/dashboard', component: DashboardComponent}, { path: '/admin-center', component: AdminComponent}, { path: '/login', component: LoginComponent}];
+
+
+
+
+
 
 
 
