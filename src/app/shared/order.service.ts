@@ -34,4 +34,5 @@ export class OrderService {
   deleteOrder(id: number): Observable<any> {
     return this.http.delete<any>(`${this.dbURL}/orders/${id}`);
   }
+
 }

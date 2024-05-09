@@ -6,6 +6,7 @@ import { CarService } from '../../services/car.service';
 import { RawMaterial } from '../../models/raw-material';
 import { RawMaterialComponent } from '../../components/raw-material/raw-material.component';
 import { RawMaterialService } from '../../shared/raw-material.service';
+import { OrderService } from '../../shared/order.service';
 
 
 @Component({
@@ -20,6 +21,8 @@ export class AdminComponent implements OnInit {
   raw_materials: RawMaterial[] = [];
   selectedUser: User = new User(0,'','','','');
   selectedMaterial: RawMaterial = new RawMaterial(0,'');
+  selectedFile: File | null = null;
+
   constructor(private usersService: UsersService, private carService: CarService, private rawMaterialService: RawMaterialService) { }
 
   ngOnInit(): void {
@@ -90,4 +93,15 @@ export class AdminComponent implements OnInit {
     });
   }
 
+  onFileChange(event: any) {
+    this.selectedFile = event.target.files[0];
+  }
+
+  uploadCSV() {
+    if (this.selectedFile) {
+      this.carService.uploadCSV(this.selectedFile).subscribe((data: any) => {
+        console.log("CSV uploaded: ", data);
+      });
+    }
+  }
 }
