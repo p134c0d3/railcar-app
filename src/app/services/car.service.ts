@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Car } from '../models/car';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
@@ -11,30 +12,33 @@ export class CarService {
   constructor(private http: HttpClient) { }
 
   getCars() {
-    return this.http.get('http://localhost:3000/cars');
+    return this.http.get(`${environment.apiURL}/cars`);
   }
 
   getCar(id: number): Observable<Car> {
-    return this.http.get<Car>(`http://localhost:3000/cars/${id}`);
+    return this.http.get<Car>(`${environment.apiURL}/cars/${id}`);
   }
 
   createCar(car: Car): Observable<Car> {
-    return this.http.post<Car>('http://localhost:3000/cars', car);
+    return this.http.post<Car>(`${environment.apiURL}/cars`, car);
   }
 
   updateCar(id: number, car: Car): Observable<Car> {
-    return this.http.put<Car>('http://localhost:3000/cars/${id}', car);
+      return this.http.put<Car>(
+        `${environment.apiURL}/cars/${id}`,
+        car
+      );
   }
 
   deleteCar(id: number): Observable<Car> {
-    return this.http.delete<Car>('http://localhost:3000/cars/${id}');
+    return this.http.delete<Car>(`${environment.apiURL}/cars/${id}`);
   }
 
   getRawMaterials() {
-    return this.http.get('http://localhost:3000/raw_materials');
+    return this.http.get(`${environment.apiURL}/raw_materials`);
   }
 
   getRawMaterialOrders(id: number) {
-    return this.http.get(`http://localhost:3000/raw_materials/${id}/orders`);
+    return this.http.get(`{environment.apiURL}/raw_materials/${id}/orders`);
   }
 }

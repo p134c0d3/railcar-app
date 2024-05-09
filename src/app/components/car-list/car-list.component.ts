@@ -21,10 +21,10 @@ import { RawMaterial } from '../../models/raw-material';
 export class CarListComponent implements OnInit{
   cars: Car[] = [];
 
-   id: number = 0;
+   id: number;
    sortProperty: any = '';
    isAscending: boolean = true;
-  //  rawMaterial: RawMaterial | undefined;
+  //  raw_material: RawMaterial | undefined;
 
   constructor(private router: Router, private carService: CarService) { }
 
