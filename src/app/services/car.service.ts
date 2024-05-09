@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class CarService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient ) { }
 
   getCars() {
     return this.http.get('http://localhost:3000/cars');
@@ -30,9 +30,7 @@ export class CarService {
     return this.http.delete<Car>('http://localhost:3000/cars/${id}');
   }
 
-  getRawMaterials() {
-    return this.http.get('http://localhost:3000/raw_materials');
-  }
+
 
   getRawMaterialOrders(id: number) {
     return this.http.get(`http://localhost:3000/raw_materials/${id}/orders`);
