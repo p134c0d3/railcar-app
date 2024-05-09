@@ -66,7 +66,7 @@ export class CarEditComponent implements OnInit {
         extractionStartDate: this.car.extraction_start_date,
         emptiedDate: this.car.emptied_date,
         releasedDate: this.car.released_date,
-        rawMaterial: this.car.raw_material.id,
+        rawMaterial: this.car.raw_material.material_name,
       });
     });
   }
@@ -86,7 +86,7 @@ export class CarEditComponent implements OnInit {
   getRawMaterials() {
     this.rawMaterialService.getRawMaterials().subscribe((data: any) => {
       this.rawMaterials = data;
-      
+
       // Find index of raw_material id that matches the current car's raw_material id
       const indexToRemove = this.rawMaterials.findIndex(
         (item) => item.id === this.car.raw_material.id
