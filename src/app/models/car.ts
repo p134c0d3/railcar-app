@@ -18,7 +18,7 @@ export class Car {
     this.extraction_start_date = car.extractionStartDate;
     this.emptied_date = car.emptiedDate;
     this.released_date = car.releasedDate;
-    this.raw_material = car.raw_material_id;
+    this.raw_material = car.raw_material;
     this.weight = car.weight;
 }
 

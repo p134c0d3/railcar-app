@@ -48,7 +48,8 @@ export class CarListComponent implements OnInit{
   }
 
   onEditCar(id: number) {
-    this.router.navigate(['/car-edit/', id]);
+    this.router.navigate([`/cars/${id}/edit`]);
+
   }
 
   onDeleteCar(id: number) {

@@ -1,17 +1,17 @@
-<div class="container">
-  <form [formGroup]="carEditForm" (ngSubmit)="onSubmit()">
+<div class="container mt-5">
+  <form [formGroup]="carEditForm" (ngSubmit)="onSubmit()" >
     <div class="form-group">
-      <label for="carNumber">Car Number</label>
+      <label for="carNumber"><strong>Car Number</strong></label>
       <input
         type="text"
-        class="input"
+        class="form-control"
         id="carNumber"
         formControlName="carNumber"
       />
     </div>
 
     <div class="form-group">
-      <label for="weight">Weight</label>
+      <label for="weight"><strong>Weight</strong></label>
       <input
         type="number"
         class="form-control"
@@ -21,7 +21,7 @@
     </div>
 
     <div class="form-group">
-      <label for="requestedDate">Requested Date</label>
+      <label for="requestedDate"><strong>Requested Date</strong></label>
       <input
         type="date"
         class="form-control"
@@ -31,7 +31,7 @@
     </div>
 
     <div class="form-group">
-      <label for="receivedDate">Received Date</label>
+      <label for="receivedDate"><strong>Received Date</strong></label>
       <input
         type="date"
         class="form-control"
@@ -41,7 +41,7 @@
     </div>
 
     <div class="form-group">
-      <label for="extractionStartDate">Extraction Start Date</label>
+      <label for="extractionStartDate"><strong>Extraction Start Date</strong></label>
       <input
         type="date"
         class="form-control"
@@ -51,7 +51,7 @@
     </div>
 
     <div class="form-group">
-      <label for="emptiedDate">Emptied Date</label>
+      <label for="emptiedDate"><strong>Emptied Date</strong></label>
       <input
         type="date"
         class="form-control"
@@ -61,7 +61,7 @@
     </div>
 
     <div class="form-group">
-      <label for="releasedDate">Released Date</label>
+      <label for="releasedDate"><strong>Released Date</strong></label>
       <input
         type="date"
         class="form-control"
@@ -71,21 +71,19 @@
     </div>
 
     <div class="form-group">
-      <label for="rawMaterial">Raw Material</label>
+      <label for="rawMaterial"><strong>Raw Material</strong></label>
       <select
         type="number"
         class="form-control"
         id="rawMaterial"
         formControlName="rawMaterial"
       >
-        <option value="">Select Raw Material</option>
-        <option value="1">Corn Syrup</option>
-        <option value="2">Sucralose</option>
-        <option value="3">AMS</option>
+        <option value="1">{{ car.raw_material.material_name }}</option>
+        <option value="{{ material.id }}" *ngFor="let material of rawMaterials">{{ material.material_name }}</option>
       </select>
     </div>
 
-    <button type="submit">Submit</button>
-    <button type="button" (click)="onCancel()">Cancel</button>
+    <button type="submit" class="btn btn-outline-primary mt-2" [disabled]="carEditForm.invalid">Submit</button>
+    <button type="button" (click)="onCancel()" class="btn btn-outline-primary mt-2 ms-2">Cancel</button>
   </form>
 </div>
