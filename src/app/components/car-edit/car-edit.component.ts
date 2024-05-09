@@ -11,11 +11,15 @@ import { CarService } from '../../services/car.service';
 import { RawMaterialService } from '../../services/raw-material.service';
 import { RawMaterial } from '../../models/raw-material';
 import { NgForOf } from '@angular/common';
+import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'app-car-edit',
   standalone: true,
-  imports: [ReactiveFormsModule, NgForOf],
+
+  imports: [ReactiveFormsModule, NgForOf, CommonModule],
+
   templateUrl: './car-edit.component.html',
   styleUrl: './car-edit.component.scss',
 })
@@ -67,6 +71,7 @@ export class CarEditComponent implements OnInit {
         emptiedDate: this.car.emptied_date,
         releasedDate: this.car.released_date,
         rawMaterial: this.car.raw_material.material_name,
+
       });
     });
   }

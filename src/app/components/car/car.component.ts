@@ -13,7 +13,7 @@ import { RawMaterialComponent } from '../raw-material/raw-material.component';
 })
 export class CarComponent {
   @Input ({ required: true}) car: Car = new Car({});
-  @Input() rawMaterial: RawMaterial;
+  @Input() raw_material: RawMaterial;
   @Input() index: number;
 
 

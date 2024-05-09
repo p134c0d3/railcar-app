@@ -18,7 +18,6 @@ export class CarService {
   }
 
   getCar(id: number): Observable<Car> {
-
     return this.http.get<Car>(`${environment.apiURL}/cars/${id}`);
   }
 

@@ -10,6 +10,6 @@ import { RawMaterial } from '../../models/raw-material';
 })
 export class RawMaterialComponent {
 
-  // @Input ({required: true})
-  // rawMaterial: RawMaterial = new RawMaterial();
+  @Input ({required: true})
+  raw_material: RawMaterial;
 }

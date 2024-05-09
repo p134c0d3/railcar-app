@@ -17,12 +17,12 @@ dbURL = 'http://localhost:3000/raw-materials';
     return this.http.get(`${this.dbURL}/${id}`);
   }
 
-  addRawMaterial(rawMaterial: RawMaterial) {
-    return this.http.post(this.dbURL, rawMaterial);
+  addRawMaterial(raw_material: RawMaterial) {
+    return this.http.post(this.dbURL, raw_material);
   }
 
-  updateRawMaterial(rawMaterial: RawMaterial) {
-    return this.http.put(`${this.dbURL}/${rawMaterial.name}`, rawMaterial);
+  updateRawMaterial(raw_material: RawMaterial) {
+    return this.http.put(`${this.dbURL}/${raw_material.name}`, raw_material);
   }
 
   deleteRawMaterial(id: number) {
