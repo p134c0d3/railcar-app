@@ -1,24 +1,15 @@
-<html>
-  <link
-    rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
-  />
-  <link
-    rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
-  />
-  <div class="container">
-    <form class="car-edit" [formGroup]="carForm" (ngSubmit)="onSubmit()">
-      <div class="row">
-        <div class="col-sm-5">
-          <label for="car_number">Car Number</label>
-          <input
-            type="text"
-            class="form-control"
-            id="car_number"
-            formControlName="car_number"
-          />
-        </div>
+
+<div class="container mt-5">
+  <form [formGroup]="carForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="carNumber">Car Number</label>
+      <input
+        type="text"
+        class="input"
+        id="carNumber"
+        formControlName="carNumber"
+      />
+    </div>
         <p
           class="help is-danger"
           *ngIf="
@@ -26,6 +17,7 @@
             carForm.get('car_number')?.touched
           "
         ></p>
+
 
         <div class="col-sm-5">
           <label for="weight">Weight</label>
