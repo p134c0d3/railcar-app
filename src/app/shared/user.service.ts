@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { User } from '../models/user';
 
 
@@ -8,6 +8,8 @@ import { User } from '../models/user';
   providedIn: 'root'
 })
 export class UserService {
+  currentUserBehaviorSubject = new BehaviorSubject<User | null>(null);
+
   private apiUrl = 'http://localhost:3000';
 
   constructor(private http: HttpClient) { }
@@ -30,5 +32,17 @@ export class UserService {
 
   deleteUser(id: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}/users/${id}`);
+  }
+
+  setCurrentUser(user: User | null) {
+    this.currentUserBehaviorSubject.next(user);
+  }
+
+  getBootstrapData() {
+    return this.http.get(`${this.apiUrl}/bootstrap`).pipe (
+      tap((res: any) => {
+        this.setCurrentUser(res.current_user);
+      })
+    );
   }
 }

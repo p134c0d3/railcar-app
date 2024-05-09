@@ -23,4 +23,6 @@ export class UsersService {
     console.log("Deleting User: ", id)
     return this.http.delete(`${environment.apiURL}/users/${id}`);
   }
+
+  
 }

@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CreateUserComponent } from '../create-user/create-user.component';
+import { AuthenticationService } from '../../shared/authentication.service';
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -15,13 +16,26 @@ import { CreateUserComponent } from '../create-user/create-user.component';
   styleUrl: './login.component.scss',
 })
 export class LoginComponent {
+  email = '';
+  password = '';
+
   loginForm = new FormGroup({
     email: new FormControl(''),
     password: new FormControl(''),
     passwordConfirmation: new FormControl(''),
   });
 
-  constructor(private router: Router) {}
+  constructor(private authService: AuthenticationService, private router: Router) {}
 
-  onSubmit() {}
+  onSubmit() {
+    this.authService.login(this.email, this.password).subscribe({
+      next: (res: any) => {
+        console.log('Logged in successfully', res);
+        this.router.navigate(['/car-list']);
+      },
+      error: (error: any) => {
+        console.error('Login failed', error);
+      },
+    })
+  }
 }
