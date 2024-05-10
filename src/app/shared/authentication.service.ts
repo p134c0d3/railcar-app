@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, switchMap } from 'rxjs';
+import { BehaviorSubject, Observable, switchMap } from 'rxjs';
 import { UserService } from './user.service';
 
 @Injectable({
@@ -19,7 +19,7 @@ export class AuthenticationService {
     }).pipe(switchMap((res: any) => {
       this.setToken(res.token)
       return this.userService.getBootstrapData()
-    }))
+    }));
   }
 
   setToken(token: string) {

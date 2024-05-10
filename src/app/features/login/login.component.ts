@@ -16,8 +16,6 @@ import { AuthenticationService } from '../../shared/authentication.service';
   styleUrl: './login.component.scss',
 })
 export class LoginComponent {
-  email = '';
-  password = '';
 
   loginForm = new FormGroup({
     email: new FormControl(''),
@@ -28,7 +26,7 @@ export class LoginComponent {
   constructor(private authService: AuthenticationService, private router: Router) {}
 
   onSubmit() {
-    this.authService.login(this.email, this.password).subscribe({
+    this.authService.login(this.loginForm.value.email, this.loginForm.value.password).subscribe({
       next: (res: any) => {
         console.log('Logged in successfully', res);
         this.router.navigate(['/car-list']);
