@@ -11,7 +11,7 @@ export class CarService {
   private currentCar: Car;
   constructor(private http: HttpClient) {}
 
-  
+
 
   getCars() {
     return this.http.get(`${environment.apiURL}/cars`);
@@ -34,7 +34,13 @@ export class CarService {
   }
 
   getRawMaterials() {
-    return this.http.get(`${environment.apiURL}/raw_materials`);
+    return this.http.get('http://localhost:3000/raw_materials');
+  }
+
+  uploadCSV(file: File) {
+    const formData = new FormData();
+    formData.append('file', file);
+    return this.http.post('http://localhost:3000/cars/import', formData);
   }
 
   getRawMaterialOrders(id: number) {
