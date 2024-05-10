@@ -94,6 +94,7 @@ export class AdminComponent implements OnInit {
   }
 
   onFileChange(event: any) {
+    console.log("File selected: ", event.target.files[0])
     this.selectedFile = event.target.files[0];
   }
 

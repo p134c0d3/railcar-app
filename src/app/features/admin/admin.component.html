@@ -155,7 +155,7 @@
     <!-- CSV Car upload -->
     <div><h4>CSV Car Upload:</h4>
       <div class="input-group mb-3">
-        <input type="file" accept=".csv" [(ngModel)]="selectedFile" (change)="onFileChange($event)" id="csvFileInput">
+        <input type="file" accept=".csv" (change)="onFileChange($event)" id="csvFileInput">
         <button class="btn btn-secondary" (click)="uploadCSV()">Upload CSV</button>
       </div>
     </div>
