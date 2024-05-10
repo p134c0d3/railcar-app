@@ -1,3 +1,4 @@
+
 import { RawMaterial } from "./raw-material";
 export class Car {
   id: number
@@ -9,17 +10,15 @@ export class Car {
   released_date: string;
   raw_material: RawMaterial;
   weight: number;
-
   constructor(car:any) {
     this.id = car.id || 0;
     this.car_number = car.car_number;
-    this.requested_date = car.requestedDate;
-    this.received_date = car.receivedDate;
-    this.extraction_start_date = car.extractionStartDate;
-    this.emptied_date = car.emptiedDate;
-    this.released_date = car.releasedDate;
+    this.requested_date = car.requested_date;
+    this.received_date = car.received_date;
+    this.extraction_start_date = car.extraction_start_date;
+    this.emptied_date = car.emptied_date;
+    this.released_date = car.released_date;
     this.raw_material = car.raw_material_id;
     this.weight = car.weight;
 }
-
 }

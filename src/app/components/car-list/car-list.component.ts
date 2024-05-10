@@ -1,3 +1,4 @@
+
 import { Component, OnInit } from '@angular/core';
 import { Car } from '../../models/car';
 import { Router, RouterLink, RouterModule } from '@angular/router';
@@ -6,7 +7,6 @@ import { FormsModule } from '@angular/forms';
 import { DatePipe } from '@angular/common'
 import { CarComponent } from '../car/car.component';
 import { RawMaterial } from '../../models/raw-material';
-
 @Component({
   selector: 'app-car-list',
   standalone: true,
@@ -20,20 +20,15 @@ import { RawMaterial } from '../../models/raw-material';
 })
 export class CarListComponent implements OnInit{
   cars: Car[] = [];
-
-   id: number = 0;
+   id: number;
    sortProperty: any = '';
    isAscending: boolean = true;
-  //  rawMaterial: RawMaterial | undefined;
-
+  //  raw_material: RawMaterial | undefined;
   constructor(private router: Router, private carService: CarService) { }
-
   ngOnInit(): void {
     this.loadCars();
     console.log(this.cars);
-
   }
-
   loadCars() {
     this.carService.getCars().subscribe({
       next: (res:Car[]) => {
@@ -43,23 +38,18 @@ export class CarListComponent implements OnInit{
       error: (error:any) => {
         console.log(error);
       },
-
     });
   }
-
   onEditCar(id: number) {
     this.router.navigate(['/car-edit/', id]);
   }
-
   onDeleteCar(id: number) {
     this.carService.deleteCar(id).subscribe({
       next: () =>
         (this.cars = this.cars.filter((car) => car.id !== id)),
-
       error: (error) => console.error(error)
     });
   }
-
   sortData(property: any) {
     if (this.sortProperty === property) {
       this.isAscending = !this.isAscending;
@@ -71,15 +61,8 @@ export class CarListComponent implements OnInit{
       return this.isAscending
         ? (a[property] > b[property] ? 1 : -1)
         : (b[property] > a[property] ? 1 : -1);
-
     });
     console.log(this.cars);
   }
 }
 
-// ? a[property] > b[property]
-// ? 1
-// : -1
-// : b[property] > a[property]
-// ? 1
-// : -1;
