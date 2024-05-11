@@ -17,11 +17,6 @@
           role="search"
           [formGroup]="carSearch"
         >
-          <select class="form-select" aria-label="Search By Option"  id="searchBy" formControlName="searchBy">
-            <option selected>Search By</option>
-            <option value="carNumber">Car Number</option>
-            <option value="materialName">Material Name</option>
-          </select>
           <input
             class="form-control me-2 ms-2"
             type="search"
@@ -30,6 +25,7 @@
             id="searchInput"
             name="searchInput"
             formControlName="orderSearchForm"
+            [(ngModel)]="searchInput"
             required
           />
         </form>
@@ -94,7 +90,7 @@
             </tr>
           </thead>
           <tbody>
-            @for (car of cars | searchFilter: searchBy: searchInput; track car.id ) {
+            @for (car of cars | filter: searchInput; track car.id ) {
             <tr>
               <!-- <td>{{ car.car_number }}</td> -->
               <td>{{ car.car_number }}</td>

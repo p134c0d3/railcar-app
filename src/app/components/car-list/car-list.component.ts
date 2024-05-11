@@ -11,9 +11,10 @@ import {
 } from '@angular/forms';
 import { DatePipe, NgForOf } from '@angular/common';
 import { CarComponent } from '../car/car.component';
-import { RawMaterial } from '../../models/raw-material';
 import { SearchFilterPipe } from './search-filter.pipe';
 import { BrowserModule } from '@angular/platform-browser';
+import { Ng2SearchPipeModule } from '@ngx-maintenance/ng2-search-filter';
+
 
 @Component({
   selector: 'app-car-list',
@@ -27,6 +28,7 @@ import { BrowserModule } from '@angular/platform-browser';
     ReactiveFormsModule,
     SearchFilterPipe,
     NgForOf,
+    Ng2SearchPipeModule
   ],
   templateUrl: './car-list.component.html',
   styleUrl: './car-list.component.scss',
@@ -41,8 +43,8 @@ export class CarListComponent implements OnInit {
     orderSearchForm: new FormControl(''),
     searchBy: new FormControl(''),
   });
-  searchBy = this.carSearch.get('searchBy')?.value;
-  searchInput = this.carSearch.get('orderSearchForm')?.value;
+  searchInput;
+  searchBy;
 
   constructor(private router: Router, private carService: CarService) {}
 

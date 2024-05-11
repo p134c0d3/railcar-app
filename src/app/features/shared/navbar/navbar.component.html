@@ -19,7 +19,7 @@
           <a class="nav-link" aria-current="page" href="#" routerLink="/">Dashboard</a>
         </li>
         <!-- Need to show the below dynamically based on if admin is logged in and link to the admin center page for approving requests of new members -->
-        <li class="nav-item" *ngIf="adminToken">
+        <li class="nav-item" routerLink="/admin">
           <a class="nav-link" href="#" routerLink="/admin-center">Admin Center</a>
         </li>
       </ul>
