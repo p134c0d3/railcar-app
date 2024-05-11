@@ -73,15 +73,14 @@
     <div class="form-group">
       <label for="rawMaterial"><strong>Raw Material</strong></label>
       <select
-        type="number"
-        class="form-control"
-        id="rawMaterial"
-        formControlName="rawMaterial"
+      type="number"
+      class="form-control"
+      id="rawMaterial"
+      formControlName="rawMaterial"
       >
-        <option value="{{ car.raw_material.id }}" selected>{{ car.raw_material.material_name }}</option>
-        <option value="{{ material.id }}" *ngFor="let material of rawMaterials" >{{ material.material_name }}</option>
-      </select>
-    </div>
+      <option *ngFor="let material of rawMaterials" [ngValue]="material.id">{{ material.material_name }}</option>
+    </select>
+  </div>
 
     <button type="submit" class="btn btn-outline-primary mt-2" [disabled]="carEditForm.invalid">Submit</button>
     <button type="button" (click)="onCancel()" class="btn btn-outline-primary mt-2 ms-2">Cancel</button>

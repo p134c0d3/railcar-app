@@ -71,7 +71,7 @@ export class CarEditComponent implements OnInit {
         extractionStartDate: this.car.extraction_start_date,
         emptiedDate: this.car.emptied_date,
         releasedDate: this.car.released_date,
-        rawMaterial: this.car.raw_material.material_name,
+        rawMaterial: this.car.raw_material.id,
       });
     });
   }
