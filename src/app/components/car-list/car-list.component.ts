@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { DatePipe } from '@angular/common'
 import { CarComponent } from '../car/car.component';
 import { RawMaterial } from '../../models/raw-material';
+import { RawMaterialService } from '../../shared/raw-material.service';
 
 
 @Component({
@@ -33,7 +34,7 @@ export class CarListComponent implements OnInit{
   isAscending: boolean = true;
   //  rawMaterial: RawMaterial | undefined;
 
-  constructor(private router: Router, private carService: CarService) { }
+  constructor(private router: Router, private carService: CarService, private rawMaterialService: RawMaterialService) { }
 
   ngOnInit(): void {
     this.loadCars();
@@ -92,7 +93,7 @@ export class CarListComponent implements OnInit{
   }
 
   getRawMaterials() {
-    this.carService.getRawMaterials().subscribe((data: any) => {
+    this.rawMaterialService.getRawMaterials().subscribe((data: any) => {
       this.materials = data;
       console.log(data);
     });
