@@ -28,8 +28,8 @@ export class LoginComponent {
     this.authService.login(this.loginForm.value.email, this.loginForm.value.password).subscribe({
 
       next: (res: any) => {
-        console.log(this.loginForm.value.email, this.loginForm.value.password);
-        // console.log('Logged in successfully', res);
+        console.log('Logged in successfully', res);
+        this.authService.setToken(res.token);
         this.router.navigate(['/landing']);
       },
       error: (error: any) => {

@@ -27,13 +27,11 @@
         <div class="nav-item">
           <!-- Need to link the login link to the login page -->
           @if (authService.isLoggedIn()) {
-          <button class="btn btn-outline-primary" href="#" type="button" routerLink="login">
-            Login
-          </button>
+            <button class="btn btn-outline-primary" href="#" type="button" (click)="logout()">Logout</button>"
         } @else {
-          <button class="btn btn-outline-primary" href="#" type="button" routerLink="login">
-            Logout
-          </button>
+            <button class="btn btn-outline-primary" href="#" type="button" routerLink="login">
+            Login
+            </button>
         }
         </div>
       </div>
