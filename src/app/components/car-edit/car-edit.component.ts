@@ -27,6 +27,7 @@ export class CarEditComponent implements OnInit {
   materialName: string;
   carEditForm: FormGroup;
   car: Car;
+  cars: Car[] = [];
   rawMaterials: RawMaterial[] = [];
 
   constructor(
@@ -88,9 +89,14 @@ export class CarEditComponent implements OnInit {
   }
 
   getRawMaterials() {
-    this.rawMaterialService.getRawMaterials().subscribe((data: any) => {
-      this.rawMaterials = data;
-      console.log(this.rawMaterials); // Updated array without the matching item
+    this.rawMaterialService.getRawMaterials().subscribe({
+      next: (res: RawMaterial[]) => {
+        console.log(res);
+        this.rawMaterials = res;
+      },
+      error: (error: any) => {
+        console.log(error);
+      },
     });
   }
 }
