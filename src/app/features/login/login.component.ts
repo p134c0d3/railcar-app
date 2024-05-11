@@ -20,16 +20,17 @@ export class LoginComponent {
   loginForm = new FormGroup({
     email: new FormControl(''),
     password: new FormControl(''),
-    passwordConfirmation: new FormControl(''),
   });
 
   constructor(private authService: AuthenticationService, private router: Router) {}
 
   onSubmit() {
     this.authService.login(this.loginForm.value.email, this.loginForm.value.password).subscribe({
+
       next: (res: any) => {
-        console.log('Logged in successfully', res);
-        this.router.navigate(['/car-list']);
+        console.log(this.loginForm.value.email, this.loginForm.value.password);
+        // console.log('Logged in successfully', res);
+        this.router.navigate(['/landing']);
       },
       error: (error: any) => {
         console.error('Login failed', error);

@@ -43,6 +43,7 @@ export class CreateUserComponent {
     this.userService.createUser(this.createUserForm.value).subscribe({
       next: (res: any) => {
         console.log(res);
+        this.router.navigate(['/login']);
       },
       error: (error) => {
         console.error(error);

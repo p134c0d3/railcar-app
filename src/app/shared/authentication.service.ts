@@ -16,10 +16,10 @@ export class AuthenticationService {
     return this.http.post<{ token: string }>('http://localhost:3000/login', {
       email,
       password
-    }).pipe(switchMap((res: any) => {
-      this.setToken(res.token)
-      return this.userService.getBootstrapData()
-    }));
+    // }).pipe(switchMap((res: any) => {
+    //   this.setToken(res.token)
+    //   return this.userService.getBootstrapData()
+    });
   }
 
   setToken(token: string) {

@@ -6,9 +6,12 @@ import { CarListComponent } from './components/car-list/car-list.component';
 import { CarNewComponent } from './components/car-new/car-new.component';
 import { CarEditComponent } from './components/car-edit/car-edit.component';
 import { CarComponent } from './components/car/car.component';
+import { authGuard } from './auth/auth.guard';
 
 export const routes: Routes = [
-  { path: '', redirectTo: '/landing', pathMatch: 'full' },
+  { path: '',
+    pathMatch: 'full',
+    loadComponent: () => import('./features/landing/landing.component').then(m => m.LandingComponent), canActivate: [authGuard] },
   { path: 'car-list', component: CarListComponent },
   {
     path: 'cars-list', component: CarListComponent
