@@ -78,8 +78,8 @@
         id="rawMaterial"
         formControlName="rawMaterial"
       >
-        <option value="1">{{ car.raw_material.material_name }}</option>
-        <option value="{{ material.id }}" *ngFor="let material of rawMaterials">{{ material.material_name }}</option>
+        <option value="{{ car.raw_material.id }}" selected>{{ car.raw_material.material_name }}</option>
+        <option value="{{ material.id }}" *ngFor="let material of rawMaterials" >{{ material.material_name }}</option>
       </select>
     </div>
 

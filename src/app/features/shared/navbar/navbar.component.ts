@@ -14,16 +14,12 @@ export class NavbarComponent implements OnInit {
   isAdminLoggedIn: boolean = false;
   token: string = 'user logged in';
   adminToken: string = '';
-  orderSearch = new FormGroup({
-    orderSearchForm: new FormControl(''),
-  });
+
 
   constructor(private router: Router) {}
 
   ngOnInit(): void {}
 
-  onSubmit() {
-    console.log(this.orderSearch.value);
-  }
+
 
 }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Car } from '../../models/car';
 import { Router, RouterLink, RouterModule } from '@angular/router';
 import { CarService } from '../../services/car.service';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DatePipe } from '@angular/common'
 import { CarComponent } from '../car/car.component';
 import { RawMaterial } from '../../models/raw-material';
@@ -14,6 +14,7 @@ import { RawMaterial } from '../../models/raw-material';
     FormsModule,
     DatePipe,
     RouterLink,
+    ReactiveFormsModule
   ],
   templateUrl: './car-list.component.html',
   styleUrl: './car-list.component.scss'
@@ -25,12 +26,17 @@ export class CarListComponent implements OnInit{
    sortProperty: any = '';
    isAscending: boolean = true;
   //  raw_material: RawMaterial | undefined;
+  orderSearch = new FormGroup({
+    orderSearchForm: new FormControl(''),
+  });
 
   constructor(private router: Router, private carService: CarService) { }
 
   ngOnInit(): void {
     this.loadCars();
     console.log(this.cars);
+
+
 
   }
 
@@ -75,6 +81,10 @@ export class CarListComponent implements OnInit{
 
     });
     console.log(this.cars);
+  }
+
+  onSubmit() {
+    console.log(this.orderSearch.value);
   }
 }
 

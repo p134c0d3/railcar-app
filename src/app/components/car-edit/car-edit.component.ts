@@ -1,3 +1,4 @@
+import { RawMaterial } from './../../models/raw-material';
 import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
@@ -9,10 +10,8 @@ import { Car } from '../../models/car';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { CarService } from '../../services/car.service';
 import { RawMaterialService } from '../../services/raw-material.service';
-import { RawMaterial } from '../../models/raw-material';
 import { NgForOf } from '@angular/common';
 import { CommonModule } from '@angular/common';
-
 
 @Component({
   selector: 'app-car-edit',
@@ -25,6 +24,7 @@ import { CommonModule } from '@angular/common';
 })
 export class CarEditComponent implements OnInit {
   id: number;
+  materialName: string;
   carEditForm: FormGroup;
   car: Car;
   rawMaterials: RawMaterial[] = [];
@@ -71,7 +71,6 @@ export class CarEditComponent implements OnInit {
         emptiedDate: this.car.emptied_date,
         releasedDate: this.car.released_date,
         rawMaterial: this.car.raw_material.material_name,
-
       });
     });
   }
@@ -91,17 +90,6 @@ export class CarEditComponent implements OnInit {
   getRawMaterials() {
     this.rawMaterialService.getRawMaterials().subscribe((data: any) => {
       this.rawMaterials = data;
-
-      // Find index of raw_material id that matches the current car's raw_material id
-      const indexToRemove = this.rawMaterials.findIndex(
-        (item) => item.id === this.car.raw_material.id
-      );
-
-      // Remove the index from the array if found
-      if (indexToRemove !== -1) {
-        this.rawMaterials.splice(indexToRemove, 1);
-      }
-
       console.log(this.rawMaterials); // Updated array without the matching item
     });
   }
