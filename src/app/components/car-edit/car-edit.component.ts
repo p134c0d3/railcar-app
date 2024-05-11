@@ -41,13 +41,13 @@ export class CarEditComponent implements OnInit {
   ngOnInit(): void {
     this.carEditForm = this.formBuilder.group({
       carNumber: ['', Validators.required],
-      weight: [0, Validators.required],
+      weight: [0],
       requestedDate: ['', Validators.required],
-      receivedDate: ['', Validators.required],
-      extractionStartDate: ['', Validators.required],
-      emptiedDate: ['', Validators.required],
-      releasedDate: ['', Validators.required],
-      rawMaterial: ['', Validators.required],
+      receivedDate: [''],
+      extractionStartDate: [''],
+      emptiedDate: [''],
+      releasedDate: [''],
+      rawMaterial: [''],
     });
 
     this.route.params.subscribe((params: Params) => {
