@@ -29,10 +29,10 @@ export class CarListComponent implements OnInit{
   selectedItem: string = '';
   filterModCars: Car[] | null = null;
   filterMod: number | null = null;
-  id: number = 0;
+  id: number;
   sortProperty: any = '';
   isAscending: boolean = true;
-  //  rawMaterial: RawMaterial | undefined;
+  //  raw_material: RawMaterial | undefined;
 
   constructor(private router: Router, private carService: CarService, private rawMaterialService: RawMaterialService) { }
 
@@ -57,7 +57,8 @@ export class CarListComponent implements OnInit{
   }
 
   onEditCar(id: number) {
-    this.router.navigate(['/car-edit/', id]);
+    this.router.navigate([`/cars/${id}/edit`]);
+
   }
 
   onDeleteCar(id: number) {
