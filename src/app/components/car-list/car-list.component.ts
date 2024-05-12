@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Car } from '../../models/car';
 import { Router, RouterLink, RouterModule } from '@angular/router';
-import { CarService } from '../../services/car.service';
+import { CarService } from '../../shared/car.service';
 import { FormsModule } from '@angular/forms';
 import { DatePipe } from '@angular/common'
 import { CarComponent } from '../car/car.component';

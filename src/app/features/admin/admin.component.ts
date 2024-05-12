@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { UsersService } from '../../services/users.service';
+import { UserService } from '../../shared/user.service';
 import { User } from '../../models/user.model';
 import { FormsModule } from '@angular/forms';
-import { CarService } from '../../services/car.service';
+import { CarService } from '../../shared/car.service';
 import { RawMaterial } from '../../models/raw-material';
-import { RawMaterialComponent } from '../../components/raw-material/raw-material.component';
+
 import { RawMaterialService } from '../../shared/raw-material.service';
-import { OrderService } from '../../shared/order.service';
+
 
 
 @Component({
@@ -23,7 +23,7 @@ export class AdminComponent implements OnInit {
   selectedMaterial: RawMaterial = new RawMaterial(0,'');
   selectedFile: File | null = null;
 
-  constructor(private usersService: UsersService, private carService: CarService, private rawMaterialService: RawMaterialService) { }
+  constructor(private usersService: UserService, private carService: CarService, private rawMaterialService: RawMaterialService) { }
 
   ngOnInit(): void {
     this.getUsers();
@@ -40,7 +40,7 @@ export class AdminComponent implements OnInit {
 
   getUsers() {
     // Call the service
-    this.usersService.getUsers().subscribe((data: any) => {
+    this.usersService.getAllUsers().subscribe((data: any) => {
       this.users = data;
       console.log("Users: ", this.users);
     });
@@ -58,7 +58,7 @@ export class AdminComponent implements OnInit {
     console.log("Deleting user: ", user)
     this.selectedUser = user;
 
-    this.usersService.delUser(user.id).subscribe((data: any) => {
+    this.usersService.deleteUser(user.id).subscribe((data: any) => {
       this.getUsers();
     });
   }
