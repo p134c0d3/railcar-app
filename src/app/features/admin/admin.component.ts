@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../../models/user.model';
+
 import { FormsModule } from '@angular/forms';
 import { CarService } from '../../services/car.service';
 import { RawMaterial } from '../../models/raw-material';
 import { UserService } from '../../shared/user.service';
+import { User } from '../../models/user.model';
 
 
 @Component({
