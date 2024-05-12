@@ -10,13 +10,13 @@ import Chart from 'chart.js/auto';
 })
 export class DashboardComponent implements OnInit{
   data = [
-    { year: 2010, count: 10 },
-    { year: 2011, count: 20 },
-    { year: 2012, count: 15 },
-    { year: 2013, count: 25 },
-    { year: 2014, count: 22 },
-    { year: 2015, count: 30 },
-    { year: 2016, count: 28 },
+    // { year: 2010, count: 10 },
+    // { year: 2011, count: 20 },
+    // { year: 2012, count: 15 },
+    // { year: 2013, count: 25 },
+    // { year: 2014, count: 22 },
+    { year: "Req", count: 30 },
+    { year: "Rec'd", count: 28 },
   ];
 
   ngOnInit() {
@@ -31,6 +31,7 @@ export class DashboardComponent implements OnInit{
     const acquisitionsCanvas = document.getElementById('acquisitions') as HTMLCanvasElement;
     const acquisitionsCanvas2 = document.getElementById('acquisitions2') as HTMLCanvasElement;
     const acquisitionsCanvas3 = document.getElementById('acquisitions3') as HTMLCanvasElement;
+    const acquisitionsCanvas4 = document.getElementById('acquisitions4') as HTMLCanvasElement;
 
     new Chart(
       acquisitionsCanvas,
@@ -40,10 +41,10 @@ export class DashboardComponent implements OnInit{
           animation: false,
           plugins: {
             legend: {
-              display: false
+              display: true
             },
             tooltip: {
-              enabled: false
+              enabled: true
             }
           }
         },
@@ -67,10 +68,10 @@ export class DashboardComponent implements OnInit{
           animation: false,
           plugins: {
             legend: {
-              display: false
+              display: true
             },
             tooltip: {
-              enabled: false
+              enabled: true
             }
           }
         },
@@ -94,10 +95,37 @@ export class DashboardComponent implements OnInit{
           animation: false,
           plugins: {
             legend: {
-              display: false
+              display: true
             },
             tooltip: {
-              enabled: false
+              enabled: true
+            }
+          }
+        },
+        data: {
+          labels: this.data.map(row => row.year),
+          datasets: [
+            {
+              label: 'Acquisitions by year',
+              data: this.data.map(row => row.count)
+            }
+          ]
+        }
+      }
+    );
+
+    new Chart(
+      acquisitionsCanvas4,
+      {
+        type: 'pie',
+        options: {
+          animation: false,
+          plugins: {
+            legend: {
+              display: true
+            },
+            tooltip: {
+              enabled: true
             }
           }
         },
