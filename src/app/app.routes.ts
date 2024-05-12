@@ -10,48 +10,50 @@ import { authGuard } from './auth/auth.guard';
 export const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   {
-    path: 'cars', component: CarListComponent
+    path: 'cars',
+    component: CarListComponent,
+    canActivate: [authGuard],
   },
   {
-    path: 'cars-list', component: CarListComponent
+    path: 'cars-list',
+    component: CarListComponent,
+    canActivate: [authGuard],
   },
   {
-    path: 'cars/new', component: CarNewComponent
+    path: 'cars/new',
+    component: CarNewComponent,
+    canActivate: [authGuard],
   },
   {
-    path: 'cars/:id', component: CarListComponent
+    path: 'cars/:id',
+    component: CarListComponent,
+    canActivate: [authGuard],
   },
   {
-    path: 'cars/:id/edit', component: CarEditComponent
+    path: 'cars/:id/edit',
+    component: CarEditComponent,
+    canActivate: [authGuard],
   },
   // { path: 'landing', loadComponent: () => import('./features/landing/landing.component').then(m => m.LandingComponent)},
-  { path: 'admin', loadComponent: () => import('./features/admin/admin.component').then(m => m.AdminComponent)},
+  {
+    path: 'admin',
+    loadComponent: () =>
+      import('./features/admin/admin.component').then((m) => m.AdminComponent),
+    canActivate: [authGuard],
+  },
   {
     path: 'create-user',
-    loadComponent: () => import('./features/create-user/create-user.component').then(m => m.CreateUserComponent)
+    loadComponent: () =>
+      import('./features/create-user/create-user.component').then(
+        (m) => m.CreateUserComponent
+      ),
   },
   {
     path: 'login',
-    loadComponent: () => import('./features/login/login.component').then(m => m.LoginComponent),
-  }
+    loadComponent: () =>
+      import('./features/login/login.component').then((m) => m.LoginComponent),
+  },
 ]; // DEFAULT ROUTE
 
 // ROUTES TO LINK TO OTHER COMPONENTS IN APP
 // export const routes: Routes = [{ path: '/', component: AppComponent }, { path: '/dashboard', component: DashboardComponent}, { path: '/admin-center', component: AdminComponent}, { path: '/login', component: LoginComponent}];
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
