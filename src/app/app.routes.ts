@@ -8,7 +8,7 @@ import { CarEditComponent } from './components/car-edit/car-edit.component';
 import { authGuard } from './auth/auth.guard';
 
 export const routes: Routes = [
-  { path: '', redirectTo: '/cars', pathMatch: 'full' },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
   {
     path: 'cars', component: CarListComponent
   },
