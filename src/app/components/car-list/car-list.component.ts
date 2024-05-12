@@ -15,6 +15,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { Ng2SearchPipeModule } from '@ngx-maintenance/ng2-search-filter';
 
 import { RawMaterialService } from '../../shared/raw-material.service';
+import { RawMaterial } from '../../models/raw-material';
 
 
 @Component({

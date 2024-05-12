@@ -23,7 +23,7 @@ export class AdminComponent implements OnInit {
   selectedMaterial: RawMaterial = new RawMaterial(0, '');
   selectedFile: File | null = null;
 
-  constructor(private usersService: UserService, private carService: CarService, private rawMaterialService: RawMaterialService) { }
+  constructor(private userService: UserService, private carService: CarService, private rawMaterialService: RawMaterialService) { }
 
   ngOnInit(): void {
     this.getUsers();
@@ -40,7 +40,7 @@ export class AdminComponent implements OnInit {
 
   getUsers() {
     // Call the service
-    this.usersService.getAllUsers().subscribe((data: any) => {
+    this.userService.getAllUsers().subscribe((data: any) => {
       this.users = data;
       console.log('Users: ', this.users);
     });
@@ -57,7 +57,7 @@ export class AdminComponent implements OnInit {
     console.log('Deleting user: ', user);
     this.selectedUser = user;
 
-    this.usersService.deleteUser(user.id).subscribe((data: any) => {
+    this.userService.deleteUser(user.id).subscribe((data: any) => {
       this.getUsers();
     });
   }

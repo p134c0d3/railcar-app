@@ -10,7 +10,7 @@ import { Car } from '../../models/car';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { CarService } from '../../shared/car.service';
 
-import { RawMaterial } from '../../models/raw-material';
+
 import { NgForOf } from '@angular/common';
 import { CommonModule } from '@angular/common';
 import { RawMaterialService } from '../../shared/raw-material.service';
