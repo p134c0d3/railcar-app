@@ -1,24 +1,33 @@
-
-<div class="container mt-5">
-  <form [formGroup]="carForm" (ngSubmit)="onSubmit()">
-    <div class="form-group">
-      <label for="carNumber">Car Number</label>
-      <input
-        type="text"
-        class="input"
-        id="carNumber"
-        formControlName="carNumber"
-      />
-    </div>
+<html>
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+  />
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+  />
+  <div class="container">
+    <form class="car-new" [formGroup]="carForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col-sm-5">
+          <label for="car_number">Car Number</label>
+          <input
+            type="text"
+            class="form-control"
+            id="car_number"
+            formControlName="car_number"
+          />
+        </div>
         <p
-          class="help is-danger"
+          class="error-message"
           *ngIf="
             carForm.get('car_number').invalid &&
             carForm.get('car_number')?.touched
           "
-        ></p>
-
-
+        >
+          <small>Car number is required</small>
+        </p>
         <div class="col-sm-5">
           <label for="weight">Weight</label>
           <input
@@ -28,8 +37,7 @@
             formControlName="weight"
           />
         </div>
-
-
+      </div>
       <div class="row">
         <div class="col-sm-5">
           <label for="requested_date">Requested Date</label>
@@ -40,7 +48,6 @@
             formControlName="requested_date"
           />
         </div>
-
         <div class="col-sm-5">
           <label for="received_date">Received Date</label>
           <input
@@ -61,7 +68,6 @@
             formControlName="extraction_start_date"
           />
         </div>
-
         <div class="col-sm-5">
           <label for="emptied_date">Emptied Date</label>
           <input
@@ -72,7 +78,6 @@
           />
         </div>
       </div>
-
       <div class="row">
         <div class="col-sm-5">
           <label for="released_date">Released Date</label>
@@ -83,14 +88,13 @@
             formControlName="released_date"
           />
         </div>
-
         <div class="col-sm-5">
-          <label for="raw_material">Raw Material</label>
+          <label for="raw_material_id">Raw Material</label>
           <select
             type="number"
             class="form-select"
-            id="raw_material"
-            formControlName="raw_material"
+            id="raw_material_id"
+            formControlName="raw_material_id"
           >
             <option value="">- Select a raw material -</option>
             <option value="1">Corn Syrup</option>
@@ -101,7 +105,7 @@
       </div>
       <div class="button">
         <button
-          class="btn btn-success"
+          class="btn btn-primary"
           type="submit"
           [disabled]="!carForm.valid"
         >
@@ -113,3 +117,4 @@
       </div>
     </form>
   </div>
+</html>

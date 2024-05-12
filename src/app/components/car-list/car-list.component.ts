@@ -76,11 +76,8 @@ export class CarListComponent implements OnInit{
     });
     console.log(this.cars);
   }
+
+
 }
 
-// ? a[property] > b[property]
-// ? 1
-// : -1
-// : b[property] > a[property]
-// ? 1
-// : -1;
+
