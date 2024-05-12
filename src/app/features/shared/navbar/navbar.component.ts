@@ -4,7 +4,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthenticationService } from '../../../shared/authentication.service';
 import { UserService } from '../../../shared/user.service';
-import { User } from '../../../models/user';
+import { User } from '../../../models/user.model';
 
 
 @Component({
