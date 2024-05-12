@@ -59,6 +59,6 @@ export class CarEditComponent implements OnInit {
   });
 }
 onCancel() {
-  this.router.navigate(['/car-list'], { relativeTo: this.route});
+  this.router.navigate(['/cars'], { relativeTo: this.route});
 }
 }
