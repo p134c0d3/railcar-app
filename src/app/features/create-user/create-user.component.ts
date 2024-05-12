@@ -28,7 +28,7 @@ export class CreateUserComponent {
     email: new FormControl(null, Validators.compose([Validators.email,Validators.required])),
     password: new FormControl(null, Validators.required),
     password_confirmation: new FormControl(null, Validators.required),
-    user_type: new FormControl('pending'),
+    user_type: new FormControl('Pending'),
   })
  ;
 
