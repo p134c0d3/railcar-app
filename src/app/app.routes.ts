@@ -10,6 +10,9 @@ import { authGuard } from './auth/auth.guard';
 export const routes: Routes = [
   { path: '', redirectTo: '/cars', pathMatch: 'full' },
   {
+    path: 'cars', component: CarListComponent
+  },
+  {
     path: 'cars-list', component: CarListComponent
   },
   {

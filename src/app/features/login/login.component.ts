@@ -30,7 +30,7 @@ export class LoginComponent {
       next: (res: any) => {
         console.log('Logged in successfully', res);
         // this.authService.setToken(res.token);
-        this.router.navigate(['/landing']);
+        this.router.navigate(['/cars']);
       },
       error: (error: any) => {
         console.error('Login failed', error);

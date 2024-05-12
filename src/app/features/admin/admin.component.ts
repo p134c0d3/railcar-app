@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { RawMaterialService } from '../../shared/raw-material.service';
 import { FormsModule } from '@angular/forms';
 import { CarService } from '../../services/car.service';
 import { RawMaterial } from '../../models/raw-material';
@@ -21,7 +21,7 @@ export class AdminComponent implements OnInit {
   selectedMaterial: RawMaterial = new RawMaterial(0, '');
   selectedFile: File | null = null;
 
-  constructor(private userService: UserService, private carService: CarService) { }
+  constructor(private userService: UserService, private carService: CarService, private rawMaterialService: RawMaterialService) { }
 
   ngOnInit(): void {
     this.getUsers();
