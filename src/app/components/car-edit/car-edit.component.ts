@@ -1,3 +1,4 @@
+import { RawMaterial } from './../../models/raw-material';
 import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
@@ -26,8 +27,10 @@ import { RawMaterialService } from '../../shared/raw-material.service';
 })
 export class CarEditComponent implements OnInit {
   id: number;
+  materialName: string;
   carEditForm: FormGroup;
   car: Car;
+  cars: Car[] = [];
   rawMaterials: RawMaterial[] = [];
 
   constructor(
@@ -41,13 +44,13 @@ export class CarEditComponent implements OnInit {
   ngOnInit(): void {
     this.carEditForm = this.formBuilder.group({
       carNumber: ['', Validators.required],
-      weight: [0, Validators.required],
+      weight: [0],
       requestedDate: ['', Validators.required],
-      receivedDate: ['', Validators.required],
-      extractionStartDate: ['', Validators.required],
-      emptiedDate: ['', Validators.required],
-      releasedDate: ['', Validators.required],
-      rawMaterial: ['', Validators.required],
+      receivedDate: [''],
+      extractionStartDate: [''],
+      emptiedDate: [''],
+      releasedDate: [''],
+      rawMaterial: [''],
     });
 
     this.route.params.subscribe((params: Params) => {
@@ -71,8 +74,7 @@ export class CarEditComponent implements OnInit {
         extractionStartDate: this.car.extraction_start_date,
         emptiedDate: this.car.emptied_date,
         releasedDate: this.car.released_date,
-        rawMaterial: this.car.raw_material.material_name,
-
+        rawMaterial: this.car.raw_material.id,
       });
     });
   }
@@ -90,20 +92,14 @@ export class CarEditComponent implements OnInit {
   }
 
   getRawMaterials() {
-    this.rawMaterialService.getRawMaterials().subscribe((data: any) => {
-      this.rawMaterials = data;
-
-      // Find index of raw_material id that matches the current car's raw_material id
-      const indexToRemove = this.rawMaterials.findIndex(
-        (item) => item.id === this.car.raw_material.id
-      );
-
-      // Remove the index from the array if found
-      if (indexToRemove !== -1) {
-        this.rawMaterials.splice(indexToRemove, 1);
-      }
-
-      console.log(this.rawMaterials); // Updated array without the matching item
+    this.rawMaterialService.getRawMaterials().subscribe({
+      next: (res: RawMaterial[]) => {
+        console.log(res);
+        this.rawMaterials = res;
+      },
+      error: (error: any) => {
+        console.log(error);
+      },
     });
   }
 }

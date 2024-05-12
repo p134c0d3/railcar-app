@@ -10,8 +10,8 @@
   <body>
     <div class="container">
       <h3>List of Rail Cars</h3>
-      <div>
-        <a class="btn btn-outline-primary mb-3" routerLink="/cars/new">Add Car</a>
+      <div class="d-flex justify-content-between mb-3">
+        <a class="btn btn-outline-primary" routerLink="/cars/new">Add Car</a>
         <a class="btn btn-outline-secondary mb-3"><select [(ngModel)]="selectedCompany" (change)="filterByCompany(selectedCompany)">
           <option value='' selected>Choose Company</option>
           @for (item of this.company; track item){
@@ -43,6 +43,21 @@
           </div>
         </a>
         <a class="btn btn-outline-secondary mb-3" (click)="resetFilters()">Reset</a>
+        <form
+          class="d-flex"
+          role="search"
+        >
+          <input
+            class="form-control me-2 ms-2"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+            id="searchInput"
+            name="searchInput"
+            [(ngModel)]="searchInput"
+            required
+          />
+        </form>
       </div>
       <div>
         <table class="table table-hover">
@@ -104,7 +119,7 @@
             </tr>
           </thead>
           <tbody>
-            @for (car of cars; track car.id) {
+            @for (car of cars | filter: searchInput; track car.id ) {
             <tr>
               <!-- <td>{{ car.car_number }}</td> -->
               <td>{{ car.car_number }}</td>

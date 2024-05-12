@@ -1,7 +1,11 @@
 import { NgForOf, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
+import { AuthenticationService } from '../../../shared/authentication.service';
+import { UserService } from '../../../shared/user.service';
+import { User } from '../../../models/user.model';
+
 
 @Component({
   selector: 'app-navbar',
@@ -14,16 +18,21 @@ export class NavbarComponent implements OnInit {
   isAdminLoggedIn: boolean = false;
   token: string = 'user logged in';
   adminToken: string = '';
-  orderSearch = new FormGroup({
-    orderSearchForm: new FormControl(''),
-  });
+  currentUser: User | null = null;
 
-  constructor(private router: Router) {}
 
-  ngOnInit(): void {}
+  constructor(private router: Router, public authService: AuthenticationService, private userService: UserService) {}
 
-  onSubmit() {
-    console.log(this.orderSearch.value);
+
+  ngOnInit(): void {
+    this.userService.currentUserBehaviorSubject.subscribe((user) => {
+      this.currentUser = user;
+    })
+  }
+
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
 
 }

@@ -14,13 +14,13 @@ import { RawMaterialService } from '../../shared/raw-material.service';
   standalone: true,
   imports: [FormsModule],
   templateUrl: './admin.component.html',
-  styleUrl: './admin.component.scss'
+  styleUrl: './admin.component.scss',
 })
 export class AdminComponent implements OnInit {
   users: User[] = [];
   raw_materials: RawMaterial[] = [];
-  selectedUser: User = new User(0,'','','','');
-  selectedMaterial: RawMaterial = new RawMaterial(0,'');
+  selectedUser: User = new User(0, '', '', '', '');
+  selectedMaterial: RawMaterial = new RawMaterial(0, '');
   selectedFile: File | null = null;
 
   constructor(private usersService: UserService, private carService: CarService, private rawMaterialService: RawMaterialService) { }
@@ -42,20 +42,19 @@ export class AdminComponent implements OnInit {
     // Call the service
     this.usersService.getAllUsers().subscribe((data: any) => {
       this.users = data;
-      console.log("Users: ", this.users);
+      console.log('Users: ', this.users);
     });
   }
 
   updateUser(user: User) {
     console.log("Changing user type: ", user)
-    this.usersService.updateUser(user).subscribe((data: any) => {
+    this.userService.updateUser(user).subscribe((data: any) => {
       this.getUsers();
     });
-
   }
 
   delUser(user: User) {
-    console.log("Deleting user: ", user)
+    console.log('Deleting user: ', user);
     this.selectedUser = user;
 
     this.usersService.deleteUser(user.id).subscribe((data: any) => {
@@ -64,23 +63,25 @@ export class AdminComponent implements OnInit {
   }
 
   newMaterial(item: RawMaterial) {
-    console.log("Adding new Raw Material: ", item)
+    console.log('Adding new Raw Material: ', item);
     this.rawMaterialService.addRawMaterial(item).subscribe((data: any) => {
       this.getRawMaterials();
     });
   }
 
   delMaterial(item: RawMaterial) {
-    console.log("Deleting Raw Material: ", item.material_name)
+    console.log('Deleting Raw Material: ', item.material_name);
     this.selectedMaterial = item;
 
-    this.rawMaterialService.deleteRawMaterial(item.id).subscribe((data: any) => {
-      this.getRawMaterials();
-    });
+    this.rawMaterialService
+      .deleteRawMaterial(item.id)
+      .subscribe((data: any) => {
+        this.getRawMaterials();
+      });
   }
 
   updateMaterial(item: RawMaterial) {
-    console.log("Updating Raw Material: ", item)
+    console.log('Updating Raw Material: ', item);
     this.rawMaterialService.updateRawMaterial(item).subscribe((data: any) => {
       this.getRawMaterials();
     });
@@ -88,20 +89,20 @@ export class AdminComponent implements OnInit {
 
   getRawMaterials() {
     this.rawMaterialService.getRawMaterials().subscribe((data: any) => {
-      console.log("Raw materials: ", data);
+      console.log('Raw materials: ', data);
       this.raw_materials = data;
     });
   }
 
   onFileChange(event: any) {
-    console.log("File selected: ", event.target.files[0])
+    console.log('File selected: ', event.target.files[0]);
     this.selectedFile = event.target.files[0];
   }
 
   uploadCSV() {
     if (this.selectedFile) {
       this.carService.uploadCSV(this.selectedFile).subscribe((data: any) => {
-        console.log("CSV uploaded: ", data);
+        console.log('CSV uploaded: ', data);
       });
     }
   }
