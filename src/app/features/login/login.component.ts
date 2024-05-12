@@ -29,7 +29,7 @@ export class LoginComponent {
 
       next: (res: any) => {
         console.log('Logged in successfully', res);
-        this.authService.setToken(res.token);
+        // this.authService.setToken(res.token);
         this.router.navigate(['/landing']);
       },
       error: (error: any) => {

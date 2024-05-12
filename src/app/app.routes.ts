@@ -5,7 +5,6 @@ import { Car } from './models/car';
 import { CarListComponent } from './components/car-list/car-list.component';
 import { CarNewComponent } from './components/car-new/car-new.component';
 import { CarEditComponent } from './components/car-edit/car-edit.component';
-import { CarComponent } from './components/car/car.component';
 import { authGuard } from './auth/auth.guard';
 
 export const routes: Routes = [
@@ -18,9 +17,6 @@ export const routes: Routes = [
   },
   {
     path: 'cars/new', component: CarNewComponent
-  },
-  {
-    path: 'cars/:id', component: CarComponent
   },
   {
     path: 'car-edit/:id', component: CarEditComponent

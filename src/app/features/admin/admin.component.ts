@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { UsersService } from '../../services/users.service';
 import { User } from '../../models/user.model';
 import { FormsModule } from '@angular/forms';
 import { CarService } from '../../services/car.service';
 import { RawMaterial } from '../../models/raw-material';
+import { UserService } from '../../shared/user.service';
 
 
 @Component({
@@ -18,7 +18,7 @@ export class AdminComponent implements OnInit {
   raw_materials: RawMaterial[] = [];
   selectedUser: User = new User(0,'','','','');
 
-  constructor(private usersService: UsersService, private carService: CarService) { }
+  constructor(private userService: UserService, private carService: CarService) { }
 
   ngOnInit(): void {
     this.getUsers();
@@ -31,7 +31,7 @@ export class AdminComponent implements OnInit {
 
   getUsers() {
     // Call the service
-    this.usersService.getUsers().subscribe((data: any) => {
+    this.userService.getAllUsers().subscribe((data: any) => {
       this.users = data;
       console.log("Users: ", this.users);
     });
@@ -39,7 +39,7 @@ export class AdminComponent implements OnInit {
 
   updateUser(user: User) {
     console.log("Changing user type: ", user)
-    this.usersService.updateUser(user).subscribe((data: any) => {
+    this.userService.updateUser(user).subscribe((data: any) => {
       this.getUsers();
     });
 
@@ -49,7 +49,7 @@ export class AdminComponent implements OnInit {
     console.log("Deleting user: ", user)
     this.selectedUser = user;
 
-    this.usersService.delUser(user.id).subscribe((data: any) => {
+    this.userService.deleteUser(user.id).subscribe((data: any) => {
       this.getUsers();
     });
   }
