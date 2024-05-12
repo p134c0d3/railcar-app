@@ -10,7 +10,6 @@ import {
   Validators,
 } from '@angular/forms';
 import { DatePipe, NgForOf } from '@angular/common';
-import { CarComponent } from '../car/car.component';
 import { SearchFilterPipe } from './search-filter.pipe';
 import { BrowserModule } from '@angular/platform-browser';
 import { Ng2SearchPipeModule } from '@ngx-maintenance/ng2-search-filter';
@@ -20,7 +19,6 @@ import { Ng2SearchPipeModule } from '@ngx-maintenance/ng2-search-filter';
   selector: 'app-car-list',
   standalone: true,
   imports: [
-    CarComponent,
     RouterModule,
     FormsModule,
     DatePipe,

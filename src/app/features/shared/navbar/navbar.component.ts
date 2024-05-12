@@ -1,6 +1,6 @@
 import { NgForOf, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 
 @Component({
