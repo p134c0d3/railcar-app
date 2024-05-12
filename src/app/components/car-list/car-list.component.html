@@ -10,8 +10,23 @@
   <body>
     <div class="container">
       <h3>List of Rail Cars</h3>
-      <div>
+      <div class="d-flex justify-content-between mb-3">
         <a class="btn btn-outline-primary" routerLink="/cars/new">Add Car</a>
+        <form
+          class="d-flex"
+          role="search"
+        >
+          <input
+            class="form-control me-2 ms-2"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+            id="searchInput"
+            name="searchInput"
+            [(ngModel)]="searchInput"
+            required
+          />
+        </form>
       </div>
       <div>
         <table class="table table-hover">
@@ -20,7 +35,7 @@
               <th
                 scope="col"
                 class="sort-header"
-                (click)="sortData('carNumber')"
+                (click)="sortData('car_number')"
               >
                 Car
               </th>
@@ -30,42 +45,42 @@
               <th
                 scope="col"
                 class="sort-header"
-                (click)="sortData('receivedDate')"
+                (click)="sortData('received_date')"
               >
                 Requested
               </th>
               <th
                 scope="col"
                 class="sort-header"
-                (click)="sortData('receivedDate')"
+                (click)="sortData('received_date')"
               >
                 Received
               </th>
               <th
                 scope="col"
                 class="sort-header"
-                (click)="sortData('extractionStartDate')"
+                (click)="sortData('extraction_start_date')"
               >
                 Extraction Date
               </th>
               <th
                 scope="col"
                 class="sort-header"
-                (click)="sortData('emptiedDate')"
+                (click)="sortData('emptied_date')"
               >
                 Emptied
               </th>
               <th
                 scope="col"
                 class="sort-header"
-                (click)="sortData('releasedDate')"
+                (click)="sortData('released_date')"
               >
                 Released
               </th>
               <th
                 scope="col"
                 class="sort-header"
-                (click)="sortData('rawMaterial')"
+                (click)="sortData('raw_material')"
               >
                 Raw Material
               </th>
@@ -73,16 +88,16 @@
             </tr>
           </thead>
           <tbody>
-            @for (car of cars; track car.id) {
+            @for (car of cars | filter: searchInput; track car.id ) {
             <tr>
-              <!-- <td>{{ car.carNumber }}</td> -->
+              <!-- <td>{{ car.car_number }}</td> -->
               <td>{{ car.car_number }}</td>
               <td>{{ car.weight }}</td>
-              <td>{{ car.requested_date || '-'}}</td>
-              <td>{{ car.received_date || '-'}}</td>
-              <td>{{ car.extraction_start_date || '-'}}</td>
-              <td>{{ car.emptied_date || '-'}}</td>
-              <td>{{ car.released_date || '-'}}</td>
+              <td>{{ car.requested_date || "-" }}</td>
+              <td>{{ car.received_date || "-" }}</td>
+              <td>{{ car.extraction_start_date || "-" }}</td>
+              <td>{{ car.emptied_date || "-" }}</td>
+              <td>{{ car.released_date || "-" }}</td>
               <td>{{ car.raw_material.material_name }}</td>
               <td>
                 <a
@@ -113,182 +128,3 @@
     </div>
   </body>
 </html>
-
-<!--
-
-  <tbody>
-            <tr>
-              <td>VTGX017400</td>
-              <td>185,214</td>
-              <td>5/6/2024</td>
-              <td>None</td>
-              <td>None</td>
-              <td>None</td>
-              <td>None</td>
-              <td>Corn Syrup</td>
-              <td>
-                <a
-                  class="material-symbols-outlined"
-                  edit
-                  data-toggle="popover"
-                  title="Edit"
-                  data-placement="left"
-                  >Edit</a
-                >
-                <a
-                  class="material-symbols-outlined"
-                  delete
-                  data-toggle="popover"
-                  title="Delete"
-                  data-placement="right"
-                  >Delete</a
-                >
-              </td>
-            </tr>
-            <tr>
-              <td>UTLX064972</td>
-              <td>185,215</td>
-              <td>05/06/2024</td>
-              <td>None</td>
-              <td>None</td>
-              <td>None</td>
-              <td>None</td>
-              <td>Sucralose</td>
-              <td>
-                <a
-                  class="material-symbols-outlined"
-                  edit
-                  data-toggle="popover"
-                  title="Edit"
-                  data-placement="left"
-                  >edit</a
-                >
-                <a
-                  class="material-symbols-outlined"
-                  delete
-                  data-toggle="popover"
-                  title="Delete"
-                  data-placement="right"
-                >
-                  delete
-                </a>
-              </td>
-            </tr>
-            <tr>
-              <td>UTLX601220</td>
-              <td>185,145</td>
-              <td>4/15/2024</td>
-              <td>4/18/2024</td>
-              <td>None</td>
-              <td>None</td>
-              <td>None</td>
-              <td>AMS</td>
-              <td>
-                <a
-                  class="material-symbols-outlined"
-                  edit
-                  data-toggle="popover"
-                  title="Edit"
-                  data-placement="left"
-                  >edit</a
-                >
-                <a
-                  class="material-symbols-outlined"
-                  delete
-                  data-toggle="popover"
-                  title="Delete"
-                  data-placement="right"
-                >
-                  delete
-                </a>
-              </td>
-            </tr>
-            <tr>
-              <td>GATX004461</td>
-              <td>185,210</td>
-              <td>4/15/2024</td>
-              <td>4/19/2024</td>
-              <td>None</td>
-              <td>None</td>
-              <td>None</td>
-              <td>Corn Syrup</td>
-              <td>
-                <a
-                  class="material-symbols-outlined"
-                  edit
-                  data-toggle="popover"
-                  title="Edit"
-                  data-placement="left"
-                  >edit</a
-                >
-                <a
-                  class="material-symbols-outlined"
-                  delete
-                  data-toggle="popover"
-                  title="Delete"
-                  data-placement="right"
-                >
-                  delete
-                </a>
-              </td>
-            </tr>
-            <tr>
-              <td>UTLX601250</td>
-              <td>185,315</td>
-              <td>4/15/2024</td>
-              <td>None</td>
-              <td>None</td>
-              <td>None</td>
-              <td>None</td>
-              <td>Sucralose</td>
-              <td>
-                <a
-                  class="material-symbols-outlined"
-                  edit
-                  data-toggle="popover"
-                  title="Edit"
-                  data-placement="left"
-                  >edit</a
-                >
-                <a
-                  class="material-symbols-outlined"
-                  delete
-                  data-toggle="popover"
-                  title="Delete"
-                  data-placement="right"
-                >
-                  delete
-                </a>
-              </td>
-            </tr>
-            <tr>
-              <td>UTLX600085</td>
-              <td>185,132</td>
-              <td>4/15/2024</td>
-              <td>4/17/2024</td>
-              <td>None</td>
-              <td>None</td>
-              <td>None</td>
-              <td>AMS</td>
-              <td>
-                <a
-                  class="material-symbols-outlined"
-                  edit
-                  data-toggle="popover"
-                  title="Edit"
-                  data-placement="left"
-                  >edit</a
-                >
-                <a
-                  class="material-symbols-outlined"
-                  delete
-                  data-toggle="popover"
-                  title="Delete"
-                  data-placement="right"
-                >
-                  delete
-                </a>
-              </td>
-            </tr>
-          </tbody>
- -->
