@@ -53,6 +53,14 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./features/login/login.component').then((m) => m.LoginComponent),
   },
+
+  {
+    path: 'dashboard',
+    loadComponent: () =>
+      import('./features/dashboard/dashboard.component').then(
+        (m) => m.DashboardComponent
+      ),
+  }
 ]; // DEFAULT ROUTE
 
 // ROUTES TO LINK TO OTHER COMPONENTS IN APP
