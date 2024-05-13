@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
 import { RawMaterialService } from '../../shared/raw-material.service';
 
 
+
 @Component({
   selector: 'app-car-edit',
   standalone: true,
@@ -30,7 +31,8 @@ export class CarEditComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private carService: CarService
+    private carService: CarService,
+    private rawMaterialService: RawMaterialService
   ) {}
   ngOnInit(): void {
     this.carEditForm = this.formBuilder.group({
@@ -52,14 +54,14 @@ export class CarEditComponent implements OnInit {
     this.carService.getCar(this.id).subscribe((car) => {
       this.car = car;
       this.carEditForm.patchValue({
-        car_number: this.car.car_number,
+        carNumber: this.car.car_number,
         weight: this.car.weight,
         requestedDate: this.car.requested_date,
         receivedDate: this.car.received_date,
         extractionStartDate: this.car.extraction_start_date,
         emptiedDate: this.car.emptied_date,
         releasedDate: this.car.released_date,
-        rawMaterial: this.car.raw_material.id,
+        rawMaterial: this.car.raw_material_id,
       });
     });
   }
