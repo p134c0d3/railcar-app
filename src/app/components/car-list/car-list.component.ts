@@ -57,7 +57,13 @@ export class CarListComponent implements OnInit {
   constructor(private router: Router, private carService: CarService, private rawMaterialService: RawMaterialService) { }
 
   ngOnInit(): void {
-    this.loadCars();
+    this.carService.getCars();
+    this.carService.allCars$.subscribe((res) => {
+      this.allCars = res;
+      this.cars = this.allCars;
+      this.getCompany(this.allCars);
+    });
+
     this.getRawMaterials();
     console.log(this.cars);
 
@@ -67,19 +73,19 @@ export class CarListComponent implements OnInit {
     });
   }
 
-  loadCars() {
-    this.carService.getCars().subscribe({
-      next: (res: Car[]) => {
-        console.log(res);
-        this.allCars = res;
-        this.cars = this.allCars;
-        this.getCompany(this.allCars);
-      },
-      error: (error: any) => {
-        console.log(error);
-      },
-    });
-  }
+  // loadCars() {
+  //   this.carService.getCars().subscribe({
+  //     next: (res: Car[]) => {
+  //       console.log(res);
+  //       this.allCars = res;
+  //       this.cars = this.allCars;
+  //       this.getCompany(this.allCars);
+  //     },
+  //     error: (error: any) => {
+  //       console.log(error);
+  //     },
+  //   });
+  // }
 
   onEditCar(id: number) {
     this.router.navigate([`/cars/${id}/edit`]);
