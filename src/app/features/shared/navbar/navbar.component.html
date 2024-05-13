@@ -16,26 +16,115 @@
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <!-- Need to link the dashboard link to the dashboard -->
-          <a class="nav-link" aria-current="page" href="#" routerLink="/cars">Dashboard</a>
+          <a class="nav-link" aria-current="page" href="#" routerLink="/cars"
+            >Dashboard</a
+          >
         </li>
         <!-- Need to show the below dynamically based on if admin is logged in and link to the admin center page for approving requests of new members -->
         <li class="nav-item" routerLink="/admin">
           <a class="nav-link" href="#" routerLink="/admin">Admin Center</a>
         </li>
+
       </ul>
-      <div class="navbar-nav" style="margin-right: 10px;">
-        <div class="nav-item">
-          <!-- Need to link the login link to the login page -->
-          @if (authService.isLoggedIn()) {
-            <span class="nav-item">Welcome, {{ currentUser?.first_name }}</span>
-            <button class="btn btn-outline-primary" href="#" type="button" (click)="logout()">Logout</button>"
-        } @else {
-            <button class="btn btn-outline-primary" href="#" type="button" routerLink="login">
+      <ul class="navbar-nav" style="margin-right: 10px">
+        <!-- Need to link the login link to the login page -->
+        @if (authService.isLoggedIn()) {
+          <span class="nav-item"
+            >Welcome, {{ currentUser?.first_name }}</span
+          >
+          <li class="nav-item dropdown me-3">
+          <button
+            class="btn btn-dark dropdown-toggle"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+            ></button>
+            <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end">
+              <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#updateProfileModal">Change Password</a></li>
+            </ul>
+          </li>
+        <li class="nav-item">
+        </li>
+
+          <button
+          class="btn btn-outline-primary"
+          href="#"
+          type="button"
+          (click)="logout()"
+          >
+          Logout</button
+          >
+
+         } @else {
+          <li class="nav-item">
+
+            <button
+            class="btn btn-outline-primary"
+            href="#"
+            type="button"
+            routerLink="login"
+            >
             Login
-            </button>
-        }
+          </button>
+        </li>
+      }
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="modal" tabindex="-1" id="updateProfileModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title fw-bold">Change Password</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="row g-3 justify-content-between mb-3">
+          <div class="col-auto">
+            <label for="inputPassword6" class="col-form-label">Current Password:</label>
+          </div>
+          <div class="col-auto">
+            <input
+              type="password"
+              id="inputPassword6"
+              class="form-control"
+              aria-describedby="passwordHelpInline"
+            />
+          </div>
+        </div>
+        <div class="row g-3 justify-content-between mb-3">
+          <div class="col-auto">
+            <label for="inputPassword6" class="col-form-label">New Password:</label>
+          </div>
+          <div class="col-auto">
+            <input
+              type="password"
+              id="inputPassword6"
+              class="form-control"
+              aria-describedby="passwordHelpInline"
+            />
+          </div>
+        </div>
+        <div class="row g-3 justify-content-between mb-3">
+          <div class="col-auto">
+            <label for="inputPassword6" class="col-form-label">Confirm New Password:</label>
+          </div>
+          <div class="col-auto">
+            <input
+              type="password"
+              id="inputPassword6"
+              class="form-control"
+              aria-describedby="passwordHelpInline"
+            />
+          </div>
         </div>
       </div>
     </div>
   </div>
-</nav>
+</div>
