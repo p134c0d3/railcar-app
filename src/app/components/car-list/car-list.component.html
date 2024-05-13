@@ -10,8 +10,54 @@
   <body>
     <div class="container">
       <h3>List of Rail Cars</h3>
-      <div>
-        <a class="btn btn-primary mb-3" routerLink="/cars/new">Add Car</a>
+      <div class="d-flex justify-content-between mb-3">
+        <a class="btn btn-outline-primary" routerLink="/cars/new">Add Car</a>
+        <a class="btn btn-outline-secondary mb-3"><select [(ngModel)]="selectedCompany" (change)="filterByCompany(selectedCompany)">
+          <option value='' selected>Choose Company</option>
+          @for (item of this.company; track item){
+          <option value="{{ item }}">{{ item }}</option>
+          }
+        </select></a>
+        <a class="btn btn-outline-secondary mb-3"><select [(ngModel)]="selectedItem" (change)="filterByMaterial(selectedItem)">
+          <option value='' selected>Choose Raw Material</option>
+          @for (item of this.materials; track item){
+          <option value="{{ item.material_name }}">{{ item.material_name }}</option>
+          }
+        </select></a>
+        <a>
+          <div class="form-check form-check-inline">
+            <input class="btn-check" type="radio" name="inlineRadio" [(ngModel)]="filterMod" id="inlineRadio1" value="1" (change)="filterModify()">
+            <label class="btn btn-outline-secondary mb-3" for="inlineRadio1">Rec'd</label>
+
+            <input class="btn-check" type="radio" name="inlineRadio" [(ngModel)]="filterMod" id="inlineRadio2" value="2" (change)="filterModify()">
+            <label class="btn btn-outline-secondary mb-3" for="inlineRadio2">Not Rec'd</label>
+
+            <input class="btn-check" type="radio" name="inlineRadio" [(ngModel)]="filterMod" id="inlineRadio3" value="3" (change)="filterModify()">
+            <label class="btn btn-outline-secondary mb-3" for="inlineRadio3">Start Extract</label>
+
+            <input class="btn-check" type="radio" name="inlineRadio" [(ngModel)]="filterMod" id="inlineRadio4" value="4" (change)="filterModify()">
+            <label class="btn btn-outline-secondary mb-3" for="inlineRadio4">Emptied</label>
+
+            <input class="btn-check" type="radio" name="inlineRadio" [(ngModel)]="filterMod" id="inlineRadio5" value="5" (change)="filterModify()">
+            <label class="btn btn-outline-secondary mb-3" for="inlineRadio5">Released</label>
+          </div>
+        </a>
+        <a class="btn btn-outline-secondary mb-3" (click)="resetFilters()">Reset</a>
+        <form
+          class="d-flex"
+          role="search"
+        >
+          <input
+            class="form-control me-2 ms-2"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+            id="searchInput"
+            name="searchInput"
+            [(ngModel)]="searchInput"
+            required
+          />
+        </form>
       </div>
       <div>
         <table class="table table-hover">
@@ -73,7 +119,7 @@
             </tr>
           </thead>
           <tbody>
-            @for (car of cars; track car.id) {
+            @for (car of cars | filter: searchInput; track car.id ) {
             <tr>
               <!-- <td>{{ car.car_number }}</td> -->
               <td>{{ car.car_number }}</td>

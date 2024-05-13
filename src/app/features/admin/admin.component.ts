@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { UsersService } from '../../services/users.service';
+import { UserService } from '../../shared/user.service';
 import { User } from '../../models/user.model';
 import { FormsModule } from '@angular/forms';
-import { CarService } from '../../services/car.service';
+import { CarService } from '../../shared/car.service';
 import { RawMaterial } from '../../models/raw-material';
-import { RawMaterialComponent } from '../../components/raw-material/raw-material.component';
+
 import { RawMaterialService } from '../../shared/raw-material.service';
-import { OrderService } from '../../shared/order.service';
+
 
 
 @Component({
@@ -14,16 +14,16 @@ import { OrderService } from '../../shared/order.service';
   standalone: true,
   imports: [FormsModule],
   templateUrl: './admin.component.html',
-  styleUrl: './admin.component.scss'
+  styleUrl: './admin.component.scss',
 })
 export class AdminComponent implements OnInit {
   users: User[] = [];
   raw_materials: RawMaterial[] = [];
-  selectedUser: User = new User(0,'','','','');
-  selectedMaterial: RawMaterial = new RawMaterial(0,'');
+  selectedUser: User = new User(0, '', '', '', '');
+  selectedMaterial: RawMaterial = new RawMaterial(0, '');
   selectedFile: File | null = null;
 
-  constructor(private usersService: UsersService, private carService: CarService, private rawMaterialService: RawMaterialService) { }
+  constructor(private userService: UserService, private carService: CarService, private rawMaterialService: RawMaterialService) { }
 
   ngOnInit(): void {
     this.getUsers();
@@ -40,47 +40,48 @@ export class AdminComponent implements OnInit {
 
   getUsers() {
     // Call the service
-    this.usersService.getUsers().subscribe((data: any) => {
+    this.userService.getAllUsers().subscribe((data: any) => {
       this.users = data;
-      console.log("Users: ", this.users);
+      console.log('Users: ', this.users);
     });
   }
 
   updateUser(user: User) {
     console.log("Changing user type: ", user)
-    this.usersService.updateUser(user).subscribe((data: any) => {
+    this.userService.updateUser(user).subscribe((data: any) => {
       this.getUsers();
     });
-
   }
 
   delUser(user: User) {
-    console.log("Deleting user: ", user)
+    console.log('Deleting user: ', user);
     this.selectedUser = user;
 
-    this.usersService.delUser(user.id).subscribe((data: any) => {
+    this.userService.deleteUser(user.id).subscribe((data: any) => {
       this.getUsers();
     });
   }
 
   newMaterial(item: RawMaterial) {
-    console.log("Adding new Raw Material: ", item)
+    console.log('Adding new Raw Material: ', item);
     this.rawMaterialService.addRawMaterial(item).subscribe((data: any) => {
       this.getRawMaterials();
     });
   }
 
   delMaterial(item: RawMaterial) {
-    console.log("Deleting Raw Material: ", item.material_name)
+    console.log('Deleting Raw Material: ', item.material_name);
     this.selectedMaterial = item;
 
-    this.rawMaterialService.deleteRawMaterial(item.id).subscribe((data: any) => {
-      this.getRawMaterials();
-    });
+    this.rawMaterialService
+      .deleteRawMaterial(item.id)
+      .subscribe((data: any) => {
+        this.getRawMaterials();
+      });
   }
 
   updateMaterial(item: RawMaterial) {
-    console.log("Updating Raw Material: ", item)
+    console.log('Updating Raw Material: ', item);
     this.rawMaterialService.updateRawMaterial(item).subscribe((data: any) => {
       this.getRawMaterials();
     });
@@ -88,20 +89,20 @@ export class AdminComponent implements OnInit {
 
   getRawMaterials() {
     this.rawMaterialService.getRawMaterials().subscribe((data: any) => {
-      console.log("Raw materials: ", data);
+      console.log('Raw materials: ', data);
       this.raw_materials = data;
     });
   }
 
   onFileChange(event: any) {
-    console.log("File selected: ", event.target.files[0])
+    console.log('File selected: ', event.target.files[0]);
     this.selectedFile = event.target.files[0];
   }
 
   uploadCSV() {
     if (this.selectedFile) {
       this.carService.uploadCSV(this.selectedFile).subscribe((data: any) => {
-        console.log("CSV uploaded: ", data);
+        console.log('CSV uploaded: ', data);
       });
     }
   }

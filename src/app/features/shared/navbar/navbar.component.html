@@ -16,32 +16,26 @@
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <!-- Need to link the dashboard link to the dashboard -->
-          <a class="nav-link" aria-current="page" href="#" routerLink="/">Dashboard</a>
+          <a class="nav-link" aria-current="page" href="#" routerLink="/cars">Dashboard</a>
         </li>
         <!-- Need to show the below dynamically based on if admin is logged in and link to the admin center page for approving requests of new members -->
-        <li class="nav-item" *ngIf="adminToken">
-          <a class="nav-link" href="#" routerLink="/admin-center">Admin Center</a>
+        <li class="nav-item" routerLink="/admin">
+          <a class="nav-link" href="#" routerLink="/admin">Admin Center</a>
         </li>
       </ul>
       <div class="navbar-nav" style="margin-right: 10px;">
         <div class="nav-item">
           <!-- Need to link the login link to the login page -->
-          <button class="btn btn-outline-primary" href="#" type="button" routerLink="login">
+          @if (authService.isLoggedIn()) {
+            <span class="nav-item">Welcome, {{ currentUser?.first_name }}</span>
+            <button class="btn btn-outline-primary" href="#" type="button" (click)="logout()">Logout</button>"
+        } @else {
+            <button class="btn btn-outline-primary" href="#" type="button" routerLink="login">
             Login
-          </button>
+            </button>
+        }
         </div>
       </div>
-      <form class="d-flex" role="search" [formGroup]="orderSearch" (ngSubmit)="onSubmit()">
-        <input
-          class="form-control me-2"
-          type="search"
-          placeholder="Search"
-          aria-label="Search"
-          id="orderSearchForm"
-          formControlName="orderSearchForm"
-        />
-        <button class="btn btn-outline-success" type="submit" [disabled]="orderSearch.invalid">Search</button>
-      </form>
     </div>
   </div>
 </nav>

@@ -1,10 +1,16 @@
-
+import { RawMaterial } from './../../models/raw-material';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Car } from '../../models/car';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { CarService } from '../../services/car.service';
+import { CarService } from '../../shared/car.service';
+
+
+import { NgForOf } from '@angular/common';
 import { CommonModule } from '@angular/common';
+import { RawMaterialService } from '../../shared/raw-material.service';
+
+
 @Component({
   selector: 'app-car-edit',
   standalone: true,
@@ -14,8 +20,12 @@ import { CommonModule } from '@angular/common';
 })
 export class CarEditComponent implements OnInit {
   id: number;
+  materialName: string;
   carEditForm: FormGroup;
   car: Car;
+  cars: Car[] = [];
+  rawMaterials: RawMaterial[] = [];
+
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -24,14 +34,14 @@ export class CarEditComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     this.carEditForm = this.formBuilder.group({
-      car_number: ['', Validators.required],
-      weight: ['', Validators.required],
-      requested_date: ['', Validators.required],
-      received_date: ['', Validators.required],
-      extraction_start_date: ['', Validators.required],
-      emptied_date: ['', Validators.required],
-      released_date: ['', Validators.required],
-      raw_material_id: ['', Validators.required],
+      carNumber: ['', Validators.required],
+      weight: [0],
+      requestedDate: ['', Validators.required],
+      receivedDate: [''],
+      extractionStartDate: [''],
+      emptiedDate: [''],
+      releasedDate: [''],
+      rawMaterial: [''],
     });
     this.route.params.subscribe((params: Params) => {
       this.id = +params['id'];
@@ -44,21 +54,36 @@ export class CarEditComponent implements OnInit {
       this.carEditForm.patchValue({
         car_number: this.car.car_number,
         weight: this.car.weight,
-        requested_date: this.car.requested_date,
-        received_date: this.car.received_date,
-        extraction_start_date: this.car.extraction_start_date,
-        emptied_date: this.car.emptied_date,
-        released_date: this.car.released_date,
-        raw_material_id: this.car.raw_material_id
+        requestedDate: this.car.requested_date,
+        receivedDate: this.car.received_date,
+        extractionStartDate: this.car.extraction_start_date,
+        emptiedDate: this.car.emptied_date,
+        releasedDate: this.car.released_date,
+        rawMaterial: this.car.raw_material.id,
       });
     });
   }
   onSubmit() {
     const updatedCarData = this.carEditForm.value;
-    this.carService.updateCar(this.id, updatedCarData).subscribe((res) => { this.router.navigate(['/cars'], { relativeTo:this.route});
-  });
-}
-onCancel() {
-  this.router.navigate(['/cars'], { relativeTo: this.route});
-}
+
+    this.carService.updateCar(this.id, updatedCarData).subscribe((res) => {
+      this.router.navigate(['/cars'], { relativeTo: this.route });
+    });
+  }
+
+  onCancel() {
+    this.router.navigate(['/cars'], { relativeTo: this.route });
+  }
+
+  getRawMaterials() {
+    this.rawMaterialService.getRawMaterials().subscribe({
+      next: (res: RawMaterial[]) => {
+        console.log(res);
+        this.rawMaterials = res;
+      },
+      error: (error: any) => {
+        console.log(error);
+      },
+    });
+  }
 }

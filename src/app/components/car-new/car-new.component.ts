@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import {  FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Car } from '../../models/car';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CarService } from '../../services/car.service';
+import { CarService } from '../../shared/car.service';
 import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-car-new',
