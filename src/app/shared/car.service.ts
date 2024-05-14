@@ -9,7 +9,7 @@ import { environment } from '../../environments/environment.development';
 })
 export class CarService {
   private currentCar: Car;
-  private allCarsSubject = new BehaviorSubject<Car[] | null >(null);
+  allCarsSubject = new BehaviorSubject<Car[] | null >(null);
   allCars$ = this.allCarsSubject.asObservable();
 
   constructor(private http: HttpClient) {}

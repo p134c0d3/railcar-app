@@ -2,26 +2,79 @@ import { Component, OnInit } from '@angular/core';
 import { Chart } from 'chart.js/auto';
 import { CarService } from '../../shared/car.service';
 import { Car } from '../../models/car';
-
+import { FormsModule } from '@angular/forms';
+import { RawMaterial } from '../../models/raw-material';
+import { RawMaterialService } from '../../shared/raw-material.service';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [],
+  imports: [FormsModule],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
 export class DashboardComponent implements OnInit{
-  allCars: Car[] | null = null;
+  allCars: Car[] = [];
+  cars: Car[] = [];
+  company: any[] = [];
+  materials: RawMaterial[] = [];
+  selectedCompany: string = '';
+  selectedItem: string = '';
+  startDate: Date | null = null;
+  endDate: Date = new Date();
   chartData = [
     { year: "Req", count: 30 },
     { year: "Rec'd", count: 28 },
   ];
-  constructor(private carService: CarService) { }
-  ngOnInit() {
-    this.carService.allCars$.subscribe(data => this.allCars = data);
+  constructor(private carService: CarService, private rawMaterialService: RawMaterialService) { }
+
+  ngOnInit(): void {
+    this.carService.getCars();
+    this.carService.allCars$.subscribe((res) => {
+      this.allCars = res;
+      console.log('All cars: ', this.allCars);
+      }
+    );
     this.drawCharts();
     this.drawGuages();
+  }
+
+  getCompany(cars: Car[]) {
+    if (cars === null || cars === undefined) {
+      return;
+    } else {
+    const abbrevs = cars.map(car => car.car_number.slice(0, 4));
+    const uniqueAbbrevs = [...new Set(abbrevs)];  // Set is a collection of unique values
+    console.log(uniqueAbbrevs);
+    this.company = uniqueAbbrevs;
+    }
+  }
+
+  getRawMaterials() {
+    this.rawMaterialService.getRawMaterials().subscribe((data: any) => {
+      this.materials = data;
+      console.log(data);
+    });
+  }
+
+  filterByCompany(term: string) {
+    this.cars = this.allCars.filter(car => car.car_number.includes(term));
+    if (this.selectedItem !== '') {
+      this.cars = this.cars.filter(car => car.raw_material.material_name.includes(this.selectedItem));
+    }
+  }
+
+  filterByMaterial(term: string) {
+    this.cars = this.allCars.filter(car => car.raw_material.material_name.includes(term));
+    if (this.selectedCompany !== '') {
+      this.cars = this.cars.filter(car => car.car_number.includes(this.selectedCompany));
+    }
+  }
+
+  resetFilters() {
+    this.selectedCompany = '';
+    this.selectedItem = '';
+    this.cars = this.allCars;
   }
 
   drawCharts() {
