@@ -31,9 +31,9 @@ export class CarService {
   }
 
   createCar(car: Car): Observable<Car> {
-    return this.http.post<Car>(`${environment.apiURL}/cars}`, car);
+    return this.http.post<Car>(`${environment.apiURL}/cars`, car);
   }
-
+  
   updateCar(id: number, car: Car): Observable<Car> {
     return this.http.put<Car>(`${environment.apiURL}/cars/${id}`, car);
   }
