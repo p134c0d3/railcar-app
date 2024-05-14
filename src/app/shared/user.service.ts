@@ -11,7 +11,7 @@ import { User } from '../models/user.model';
 export class UserService {
   currentUserBehaviorSubject = new BehaviorSubject<User | null>(null);
 
-  private apiUrl = 'http://localhost:3000';
+  private apiUrl = 'https://railcarapi-3752.onrender.com';
 
   constructor(private http: HttpClient) { }
 
