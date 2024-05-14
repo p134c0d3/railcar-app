@@ -33,7 +33,7 @@ export class CarService {
   createCar(car: Car): Observable<Car> {
     return this.http.post<Car>(`${environment.apiURL}/cars`, car);
   }
-  
+
   updateCar(id: number, car: Car): Observable<Car> {
     return this.http.put<Car>(`${environment.apiURL}/cars/${id}`, car);
   }
@@ -43,13 +43,13 @@ export class CarService {
   }
 
   getRawMaterials() {
-    return this.http.get('http://localhost:3000/raw_materials');
+    return this.http.get(`${environment.apiURL}/raw_materials`);
   }
 
   uploadCSV(file: File) {
     const formData = new FormData();
     formData.append('file', file);
-    return this.http.post('http://localhost:3000/cars/import', formData);
+    return this.http.post(`${environment.apiURL}/cars/import`, formData);
   }
 
   getRawMaterialOrders(id: number) {

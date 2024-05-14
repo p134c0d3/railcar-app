@@ -119,10 +119,14 @@ export class CarListComponent implements OnInit {
   }
 
   getCompany(cars: Car[]) {
+    if (cars === null || cars === undefined) {
+      return;
+    } else {
     const abbrevs = cars.map(car => car.car_number.slice(0, 4));
     const uniqueAbbrevs = [...new Set(abbrevs)];  // Set is a collection of unique values
     console.log(uniqueAbbrevs);
     this.company = uniqueAbbrevs;
+    }
   }
 
   getRawMaterials() {
