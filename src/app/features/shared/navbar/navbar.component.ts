@@ -1,6 +1,6 @@
 import { NgForOf, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthenticationService } from '../../../shared/authentication.service';
 import { UserService } from '../../../shared/user.service';
@@ -23,6 +23,11 @@ export class NavbarComponent implements OnInit {
 
   constructor(private router: Router, public authService: AuthenticationService, private userService: UserService) {}
 
+  passChange = new FormGroup({
+    currentPassword: new FormControl(''),
+    newPassword: new FormControl(''),
+    confirmNewPassword: new FormControl(''),
+  })
 
   ngOnInit(): void {
     this.userService.currentUserBehaviorSubject.subscribe((user) => {
@@ -34,5 +39,20 @@ export class NavbarComponent implements OnInit {
     this.authService.logout();
     this.router.navigate(['/login']);
   }
+
+  onSubmit() {
+    const passFormValue = this.passChange.value
+    console.log(passFormValue);
+
+
+    this.userService.updateUser(this.currentUser!).subscribe((data: any) => {
+      console.log(data);
+    });
+
+    console.log(this.currentUser);
+
+  }
+
+
 
 }

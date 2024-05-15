@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, switchMap } from 'rxjs';
 import { UserService } from './user.service';
+import { User } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -39,5 +40,9 @@ export class AuthenticationService {
     localStorage.removeItem('token');
     this.tokenSubject.next(null);
     this.router.navigate(['/login']);
+  }
+
+  changePassword(id: number, user: User) {
+    return this.http.put<User>(`http://localhost:3000/users/${id}`, user)
   }
 }

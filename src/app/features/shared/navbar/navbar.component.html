@@ -24,49 +24,52 @@
         <li class="nav-item" routerLink="/admin">
           <a class="nav-link" href="#" routerLink="/admin">Admin Center</a>
         </li>
-
       </ul>
       <ul class="navbar-nav" style="margin-right: 10px">
         <!-- Need to link the login link to the login page -->
         @if (authService.isLoggedIn()) {
-          <span class="nav-item"
-            >Welcome, {{ currentUser?.first_name }}</span
-          >
-          <li class="nav-item dropdown me-3">
+        <span class="nav-item">Welcome, {{ currentUser?.first_name }}</span>
+        <li class="nav-item dropdown me-3">
           <button
             class="btn btn-dark dropdown-toggle"
             data-bs-toggle="dropdown"
             aria-expanded="false"
-            ></button>
-            <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end">
-              <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#updateProfileModal">Change Password</a></li>
-            </ul>
-          </li>
-        <li class="nav-item">
+          ></button>
+          <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end">
+            <li>
+              <a
+                class="dropdown-item"
+                href="#"
+                data-bs-toggle="modal"
+                data-bs-target="#updateProfileModal"
+                >Change Password</a
+              >
+            </li>
+          </ul>
         </li>
+        <li class="nav-item"></li>
 
-          <button
+        <button
           class="btn btn-outline-primary"
           href="#"
           type="button"
           (click)="logout()"
-          >
-          Logout</button
-          >
+        >
+          Logout
+        </button>
 
-         } @else {
-          <li class="nav-item">
-
-            <button
+        } @else {
+        <li class="nav-item">
+          <button
             class="btn btn-outline-primary"
             href="#"
             type="button"
             routerLink="login"
-            >
+          >
             Login
           </button>
         </li>
-      }
+        }
       </ul>
     </div>
   </div>
@@ -85,45 +88,60 @@
         ></button>
       </div>
       <div class="modal-body">
-        <div class="row g-3 justify-content-between mb-3">
-          <div class="col-auto">
-            <label for="inputPassword6" class="col-form-label">Current Password:</label>
+        <form [formGroup]="passChange" (ngSubmit)="onSubmit()">
+          <div class="row g-3 justify-content-between mb-3">
+            <div class="col-auto">
+              <label for="currentPassword" class="col-form-label"
+                >Current Password:</label
+              >
+            </div>
+            <div class="col-auto">
+              <input
+                type="password"
+                id="currentPassword"
+                class="form-control"
+                aria-describedby="currentPassword"
+                formControlName="currentPassword"
+              />
+            </div>
           </div>
-          <div class="col-auto">
-            <input
-              type="password"
-              id="inputPassword6"
-              class="form-control"
-              aria-describedby="passwordHelpInline"
-            />
+          <div class="row g-3 justify-content-between mb-3">
+            <div class="col-auto">
+              <label for="newPassword" class="col-form-label"
+                >New Password:</label
+              >
+            </div>
+            <div class="col-auto">
+              <input
+                type="password"
+                id="newPassword"
+                class="form-control"
+                aria-describedby="newPassword"
+                formControlName="newPassword"
+              />
+            </div>
           </div>
-        </div>
-        <div class="row g-3 justify-content-between mb-3">
-          <div class="col-auto">
-            <label for="inputPassword6" class="col-form-label">New Password:</label>
+          <div class="row g-3 justify-content-between mb-3">
+            <div class="col-auto">
+              <label for="confirmNewPassword" class="col-form-label"
+                >Confirm New Password:</label
+              >
+            </div>
+            <div class="col-auto">
+              <input
+                type="password"
+                id="confirmNewPassword"
+                class="form-control"
+                aria-describedby="confirmNewPassword"
+                formControlName="confirmNewPassword"
+              />
+            </div>
           </div>
-          <div class="col-auto">
-            <input
-              type="password"
-              id="inputPassword6"
-              class="form-control"
-              aria-describedby="passwordHelpInline"
-            />
+          <div class="modal-footer">
+            <button class="btn btn-outline-primary">Submit</button>
+            <button class="btn btn-outline-danger" data-bs-dismiss="modal">Cancel</button>
           </div>
-        </div>
-        <div class="row g-3 justify-content-between mb-3">
-          <div class="col-auto">
-            <label for="inputPassword6" class="col-form-label">Confirm New Password:</label>
-          </div>
-          <div class="col-auto">
-            <input
-              type="password"
-              id="inputPassword6"
-              class="form-control"
-              aria-describedby="passwordHelpInline"
-            />
-          </div>
-        </div>
+        </form>
       </div>
     </div>
   </div>
