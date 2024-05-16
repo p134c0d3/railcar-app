@@ -5,6 +5,7 @@ import { Car } from '../../models/car';
 import { FormsModule } from '@angular/forms';
 import { RawMaterial } from '../../models/raw-material';
 import { RawMaterialService } from '../../shared/raw-material.service';
+import { ChartService } from '../../shared/chart.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -22,23 +23,68 @@ export class DashboardComponent implements OnInit{
   selectedItem: string = '';
   startDate: Date | null = null;
   endDate: Date = new Date();
+
+  // Dashboard data variables
+  totalRequestedCars: number = 0;
+  totalReceivedCars: number = 0;
+  totalEmptyCars: number = 0;
+  totalUnreceivedCars: number = 0;
+  totalInQueueCars: number = 0;
+  totalStartExtractionCars: number = 0;
+  currentExtractingCars: number = 0;
+  currentEmptyCars: number = 0;
+  currentUnreleasedCars: number = 0;
+  currentReleasedCars: number = 0;
+
+
   chartData = [
     { year: "Req", count: 30 },
     { year: "Rec'd", count: 28 },
   ];
-  constructor(private carService: CarService, private rawMaterialService: RawMaterialService) { }
+  constructor(private carService: CarService, private rawMaterialService: RawMaterialService, private chartService: ChartService) { }
 
   ngOnInit(): void {
     this.carService.getCars();
     this.carService.allCars$.subscribe((res) => {
       this.allCars = res;
       console.log('All cars: ', this.allCars);
+      this.getChartData(this.allCars);
+
       }
+
     );
+
+
+  }
+
+  getChartData(carList: Car[]) {
+    if (carList === null || carList === undefined) {
+      return;
+    }
+    this.totalRequestedCars = carList.length;
+    this.totalReceivedCars = this.chartService.countWithDate(carList, 'received_date');
+    this.totalEmptyCars = this.chartService.countWithDate(carList, 'emptied_date');
+    this.totalUnreceivedCars = this.chartService.countWithButNotDate(carList, 'requested_date', 'received_date');
+    this.totalInQueueCars = this.chartService.countWithButNotDate(carList, 'received_date', 'extraction_start_date');
+    this.totalStartExtractionCars = this.chartService.countWithDate(carList, 'extraction_start_date');
+    this.currentExtractingCars = this.chartService.countWithButNotDate(carList, 'extraction_start_date', 'emptied_date');
+    this.currentEmptyCars = this.chartService.countWithDate(carList, 'emptied_date');
+    this.currentUnreleasedCars = this.chartService.countWithButNotDate(carList, 'emptied_date', 'released_date');
+    this.currentReleasedCars = this.chartService.countWithDate(carList, 'released_date');
+    console.log('Total requested cars: ', this.totalRequestedCars);
+    console.log('Total received cars: ', this.totalReceivedCars);
+    console.log('Total empty cars: ', this.totalEmptyCars);
+    console.log('Total unreceived cars: ', this.totalUnreceivedCars);
+    console.log('Total in queue cars: ', this.totalInQueueCars);
+    console.log('Total start extraction cars: ', this.totalStartExtractionCars);
+    console.log('Current extracting cars: ', this.currentExtractingCars);
+    console.log('Current empty cars: ', this.currentEmptyCars);
+    console.log('Current unreleased cars: ', this.currentUnreleasedCars);
+    console.log('Current released cars: ', this.currentReleasedCars);
     this.drawCharts();
     this.drawGuages();
   }
-
+  
   getCompany(cars: Car[]) {
     if (cars === null || cars === undefined) {
       return;
@@ -75,6 +121,11 @@ export class DashboardComponent implements OnInit{
     this.selectedCompany = '';
     this.selectedItem = '';
     this.cars = this.allCars;
+  }
+
+  updateData() {
+    this.getChartData(this.allCars);
+
   }
 
   drawCharts() {
@@ -196,7 +247,7 @@ export class DashboardComponent implements OnInit{
   gaugeData = {
     labels: [],
     datasets: [{
-      label: 'Weekly Sales',
+      label: 'Total Cars Requested',
       data: [50,50],
       backgroundColor: [
         'rgba(54, 162, 235, 1)',
@@ -210,7 +261,7 @@ export class DashboardComponent implements OnInit{
       circumference: 180,
       rotation: -90,
       cutout: '70%',
-      needleValue: 5,
+      needleValue: this.totalRequestedCars,
     },
     {
       label: 'Weekly Sales',
@@ -219,7 +270,7 @@ export class DashboardComponent implements OnInit{
       circumference: 180,
       rotation: -90,
       cutout: '70%',
-      needleValue: 20,
+      needleValue: this.totalInQueueCars,
     },
     {
       label: 'Weekly Sales',
