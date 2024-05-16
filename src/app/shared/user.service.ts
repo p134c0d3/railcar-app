@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { User } from '../models/user.model';
+import { environment } from '../../environments/environment.development';
 
 
 
@@ -11,8 +12,7 @@ import { User } from '../models/user.model';
 export class UserService {
   currentUserBehaviorSubject = new BehaviorSubject<User | null>(null);
 
-  private apiUrl = 'http://localhost:3000';
-
+  private apiUrl = environment.apiURL;
   constructor(private http: HttpClient) { }
 
   createUser(user: any) {
