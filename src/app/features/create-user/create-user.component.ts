@@ -8,10 +8,10 @@ import {
 } from '@angular/forms';
 import { UserService } from '../../shared/user.service';
 import { Router } from '@angular/router';
-import { User } from '../../models/user';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from '../login/login.component';
 import { CommonModule } from '@angular/common';
+import { matchValidator } from './form-validators';
 
 @Component({
   selector: 'app-create-user',
@@ -21,13 +21,14 @@ import { CommonModule } from '@angular/common';
   styleUrl: './create-user.component.scss',
 })
 export class CreateUserComponent {
+  submitted = false;
 
   createUserForm = new FormGroup({
     first_name: new FormControl(null, Validators.required),
     last_name: new FormControl(null, Validators.required),
     email: new FormControl(null, Validators.compose([Validators.email,Validators.required])),
-    password: new FormControl(null, Validators.required),
-    password_confirmation: new FormControl(null, Validators.required),
+    password: new FormControl(null, [Validators.required, matchValidator('confirmPassword', true)]),
+    password_confirmation: new FormControl(null, [Validators.required, matchValidator('password')]),
     user_type: new FormControl('Pending'),
   })
  ;
@@ -35,11 +36,14 @@ export class CreateUserComponent {
   constructor(
     private userService: UserService,
     private router: Router,
-    private http: HttpClient
   ) {}
 
   onSubmit() {
+    this.submitted = true;
     console.log(this.createUserForm.value);
+    if (this.createUserForm.invalid) {
+      return;
+    } else {
     this.userService.createUser(this.createUserForm.value).subscribe({
       next: (res: any) => {
         console.log(res);
@@ -49,5 +53,6 @@ export class CreateUserComponent {
         console.error(error);
       },
     });
+  }
   }
 }
