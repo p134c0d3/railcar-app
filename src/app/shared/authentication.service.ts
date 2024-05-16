@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable, switchMap } from 'rxjs';
+import { BehaviorSubject, switchMap } from 'rxjs';
 import { UserService } from './user.service';
 import { environment } from '../../environments/environment.development';
 
@@ -10,6 +10,8 @@ import { environment } from '../../environments/environment.development';
 })
 export class AuthenticationService {
   private readonly tokenSubject = new BehaviorSubject<string | null>(null);
+  private apiUrl = environment.apiURL;
+
   private apiUrl = environment.apiURL;
 
   constructor(private http: HttpClient, private router: Router, private userService: UserService) { }

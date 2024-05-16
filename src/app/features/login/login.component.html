@@ -13,7 +13,12 @@
             placeholder="Email"
             autocomplete="email"
             />
-        </div>
+          </div>
+            <div *ngIf="submitted && loginForm.controls.email.errors" class="text-danger">
+              <div *ngIf="submitted && loginForm.controls.email.errors['required']">
+                Please enter a valid email.
+              </div>
+            </div>
         <div class="input-group mb-3">
           <input
             class="form-control"
@@ -22,7 +27,13 @@
             id="password"
             placeholder="Password"
             autocomplete="new-password"
+            required
             />
+        </div>
+        <div *ngIf="submitted && loginForm.controls.password.errors" class="text-danger">
+          <div *ngIf="submitted && loginForm.controls.password.errors['required']">
+            Please enter a valid password.
+          </div>
         </div>
 
         <div class="d-grid">
