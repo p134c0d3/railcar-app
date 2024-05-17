@@ -18,16 +18,17 @@
             id="car_number"
             formControlName="car_number"
           />
+          <p
+            class="error-message"
+            *ngIf="
+              carForm.get('car_number').invalid &&
+              carForm.get('car_number')?.touched
+            "
+          >
+            <small>Car number is required</small>
+          </p>
         </div>
-        <p
-          class="error-message"
-          *ngIf="
-            carForm.get('car_number').invalid &&
-            carForm.get('car_number')?.touched
-          "
-        >
-          <small>Car number is required</small>
-        </p>
+
         <div class="col-sm-5">
           <label for="weight">Weight</label>
           <input

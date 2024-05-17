@@ -12,7 +12,6 @@ export class AuthenticationService {
   private readonly tokenSubject = new BehaviorSubject<string | null>(null);
   private apiUrl = environment.apiURL;
 
-  private apiUrl = environment.apiURL;
 
   constructor(private http: HttpClient, private router: Router, private userService: UserService) { }
 
