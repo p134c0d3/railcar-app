@@ -6,7 +6,6 @@ import { AuthenticationService } from '../../../shared/authentication.service';
 import { UserService } from '../../../shared/user.service';
 import { User } from '../../../models/user.model';
 
-
 @Component({
   selector: 'app-navbar',
   standalone: true,
@@ -20,19 +19,22 @@ export class NavbarComponent implements OnInit {
   adminToken: string = '';
   currentUser: User | null = null;
 
-
-  constructor(private router: Router, public authService: AuthenticationService, private userService: UserService) {}
+  constructor(
+    private router: Router,
+    public authService: AuthenticationService,
+    private userService: UserService
+  ) {}
 
   passChange = new FormGroup({
     currentPassword: new FormControl(''),
     newPassword: new FormControl(''),
     confirmNewPassword: new FormControl(''),
-  })
+  });
 
   ngOnInit(): void {
     this.userService.currentUserBehaviorSubject.subscribe((user) => {
       this.currentUser = user;
-    })
+    });
   }
 
   logout() {
@@ -41,18 +43,35 @@ export class NavbarComponent implements OnInit {
   }
 
   onSubmit() {
-    const passFormValue = this.passChange.value
+    const passFormValue = this.passChange.value;
     console.log(passFormValue);
 
-
-    this.userService.updateUser(this.currentUser!).subscribe((data: any) => {
-      console.log(data);
-    });
-
-    console.log(this.currentUser);
-
+    if (passFormValue.newPassword === passFormValue.confirmNewPassword) {
+      this.updatePass();
+    }
   }
 
+  updatePass() {
+    console.log('Changing Password: ', this.passChange.value);
 
+    const updateUserPassword = new User(
+      this.currentUser.id,
+      this.currentUser.email,
+      this.currentUser.first_name,
+      this.currentUser.last_name,
+      this.currentUser.user_type,
+      this.passChange.value.newPassword,
+      this.passChange.value.confirmNewPassword
+    )
 
+    this.userService.updateUser(updateUserPassword).subscribe({
+      next:(res:any) => {
+        console.log('res', res);
+        this.logout();
+      },
+      error: (error) => {
+        console.error(error);
+      }
+    })
+  }
 }
