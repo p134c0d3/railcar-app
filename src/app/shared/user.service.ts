@@ -4,17 +4,15 @@ import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { User } from '../models/user.model';
 import { environment } from '../../environments/environment.development';
 
-
-
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
   currentUserBehaviorSubject = new BehaviorSubject<User | null>(null);
 
   private apiUrl = environment.apiURL;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   createUser(user: any) {
     return this.http.post(`${this.apiUrl}/users`, user);
@@ -43,7 +41,7 @@ export class UserService {
   getBootstrapData() {
     return this.http.get(`${this.apiUrl}/web/bootstrap`).pipe(
       tap((res: any) => {
-        console.log(res)
+        console.log(res);
         this.setCurrentUser(res.current_user);
       })
     );
