@@ -11,7 +11,9 @@
     <div class="container">
       <h3>List of Rail Cars</h3>
       <div class="d-flex justify-content-between mb-3">
+        @if (authService.isLoggedIn() && currentUser?.user_type === 'admin') {
         <a class="btn btn-outline-primary" routerLink="/cars/new">Add Car</a>
+        }
         <a class="btn btn-outline-secondary mb-3"><select [(ngModel)]="selectedCompany" (change)="filterByCompany(selectedCompany)">
           <option value='' selected>Choose Company</option>
           @for (item of this.company; track item){
@@ -48,7 +50,7 @@
           role="search"
         >
           <input
-            class="form-control me-2 ms-2"
+            class="form-control me-2 ms-2 mb-3"
             type="search"
             placeholder="Search"
             aria-label="Search"
@@ -130,6 +132,8 @@
               <td>{{ car.emptied_date || "-" }}</td>
               <td>{{ car.released_date || "-" }}</td>
               <td>{{ car.raw_material.material_name }}</td>
+
+              @if (authService.isLoggedIn() && currentUser?.user_type === 'Admin') {
               <td>
                 <a
                   class="material-symbols-outlined"
@@ -151,8 +155,10 @@
                   delete
                 </a>
               </td>
+              }
+
             </tr>
-            }
+          }
           </tbody>
         </table>
       </div>

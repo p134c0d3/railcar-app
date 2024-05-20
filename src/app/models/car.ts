@@ -8,6 +8,7 @@ export class Car {
   emptied_date: string;
   released_date: string;
   raw_material: RawMaterial;
+  raw_material_id: number;
   weight: number;
 
   constructor(car:any) {
@@ -18,7 +19,7 @@ export class Car {
     this.extraction_start_date = car.extractionStartDate;
     this.emptied_date = car.emptiedDate;
     this.released_date = car.releasedDate;
-    this.raw_material = car.raw_material;
+    this.raw_material_id = car.raw_material_id;
     this.weight = car.weight;
 }
 

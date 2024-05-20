@@ -1,11 +1,6 @@
 import { RawMaterial } from './../../models/raw-material';
 import { Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Car } from '../../models/car';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { CarService } from '../../shared/car.service';
@@ -16,14 +11,13 @@ import { CommonModule } from '@angular/common';
 import { RawMaterialService } from '../../shared/raw-material.service';
 
 
+
 @Component({
   selector: 'app-car-edit',
   standalone: true,
-
-  imports: [ReactiveFormsModule, NgForOf, CommonModule],
-
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './car-edit.component.html',
-  styleUrl: './car-edit.component.scss',
+  styleUrl: './car-edit.component.scss'
 })
 export class CarEditComponent implements OnInit {
   id: number;
@@ -40,7 +34,6 @@ export class CarEditComponent implements OnInit {
     private carService: CarService,
     private rawMaterialService: RawMaterialService
   ) {}
-
   ngOnInit(): void {
     this.carEditForm = this.formBuilder.group({
       carNumber: ['', Validators.required],
@@ -52,21 +45,15 @@ export class CarEditComponent implements OnInit {
       releasedDate: [''],
       rawMaterial: [''],
     });
-
     this.route.params.subscribe((params: Params) => {
       this.id = +params['id'];
     });
     this.setCarValues();
-    this.getRawMaterials();
   }
-
   setCarValues() {
     this.carService.getCar(this.id).subscribe((car) => {
       this.car = car;
-      // console.log(car);
-
       this.carEditForm.patchValue({
-        id: this.car.id,
         carNumber: this.car.car_number,
         weight: this.car.weight,
         requestedDate: this.car.requested_date,
@@ -74,16 +61,15 @@ export class CarEditComponent implements OnInit {
         extractionStartDate: this.car.extraction_start_date,
         emptiedDate: this.car.emptied_date,
         releasedDate: this.car.released_date,
-        rawMaterial: this.car.raw_material.id,
+        rawMaterial: this.car.raw_material_id,
       });
     });
   }
-
   onSubmit() {
     const updatedCarData = this.carEditForm.value;
 
     this.carService.updateCar(this.id, updatedCarData).subscribe((res) => {
-      this.router.navigate(['/car-list'], { relativeTo: this.route });
+      this.router.navigate(['/cars'], { relativeTo: this.route });
     });
   }
 

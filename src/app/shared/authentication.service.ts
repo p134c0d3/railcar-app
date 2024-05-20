@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable, switchMap } from 'rxjs';
+import { BehaviorSubject, switchMap } from 'rxjs';
 import { UserService } from './user.service';
+import { environment } from '../../environments/environment.development';
 import { User } from '../models/user.model';
 
 @Injectable({
@@ -11,10 +12,12 @@ import { User } from '../models/user.model';
 export class AuthenticationService {
   private readonly tokenSubject = new BehaviorSubject<string | null>(null);
 
+  private apiUrl = environment.apiURL;
+
   constructor(private http: HttpClient, private router: Router, private userService: UserService) { }
 
   login(email: string, password: string) {
-    return this.http.post<{ token: string }>('http://localhost:3000/login', {
+    return this.http.post<{ token: string }>(`${this.apiUrl}/login`, {
       email,
       password
     }).pipe(switchMap((res: any) => {

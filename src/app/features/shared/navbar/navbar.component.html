@@ -21,9 +21,11 @@
           >
         </li>
         <!-- Need to show the below dynamically based on if admin is logged in and link to the admin center page for approving requests of new members -->
+        @if (authService.isLoggedIn() && currentUser?.user_type === 'Admin') {
         <li class="nav-item" routerLink="/admin">
           <a class="nav-link" href="#" routerLink="/admin">Admin Center</a>
         </li>
+      }
       </ul>
       <ul class="navbar-nav" style="margin-right: 10px">
         <!-- Need to link the login link to the login page -->

@@ -1,89 +1,121 @@
-<div class="container mt-5">
-  <form [formGroup]="carEditForm" (ngSubmit)="onSubmit()" >
-    <div class="form-group">
-      <label for="carNumber"><strong>Car Number</strong></label>
-      <input
-        type="text"
-        class="form-control"
-        id="carNumber"
-        formControlName="carNumber"
-      />
-    </div>
-
-    <div class="form-group">
-      <label for="weight"><strong>Weight</strong></label>
-      <input
-        type="number"
-        class="form-control"
-        id="weight"
-        formControlName="weight"
-      />
-    </div>
-
-    <div class="form-group">
-      <label for="requestedDate"><strong>Requested Date</strong></label>
-      <input
-        type="date"
-        class="form-control"
-        id="requestedDate"
-        formControlName="requestedDate"
-      />
-    </div>
-
-    <div class="form-group">
-      <label for="receivedDate"><strong>Received Date</strong></label>
-      <input
-        type="date"
-        class="form-control"
-        id="receivedDate"
-        formControlName="receivedDate"
-      />
-    </div>
-
-    <div class="form-group">
-      <label for="extractionStartDate"><strong>Extraction Start Date</strong></label>
-      <input
-        type="date"
-        class="form-control"
-        id="extractionStartDate"
-        formControlName="extractionStartDate"
-      />
-    </div>
-
-    <div class="form-group">
-      <label for="emptiedDate"><strong>Emptied Date</strong></label>
-      <input
-        type="date"
-        class="form-control"
-        id="emptiedDate"
-        formControlName="emptiedDate"
-      />
-    </div>
-
-    <div class="form-group">
-      <label for="releasedDate"><strong>Released Date</strong></label>
-      <input
-        type="date"
-        class="form-control"
-        id="releasedDate"
-        formControlName="releasedDate"
-      />
-    </div>
-
-    <div class="form-group">
-      <label for="rawMaterial"><strong>Raw Material</strong></label>
-      <select
-      type="number"
-      class="form-control"
-      id="rawMaterial"
-      formControlName="rawMaterial"
-      >
-      <option *ngFor="let material of rawMaterials" [ngValue]="material.id">{{ material.material_name }}</option>
-    </select>
+<html>
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+  />
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+  />
+  <div class="container">
+    <form class="car-edit" [formGroup]="carEditForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col-sm-5">
+          <label for="car_number">Car Number</label>
+          <input
+            type="text"
+            class="form-control"
+            id="carNumber"
+            formControlName="carNumber"
+          />
+        </div>
+        <p
+          class="error-message"
+          *ngIf="
+            carEditForm.get('carNumber').invalid &&
+            carEditForm.get('carNumber')?.touched
+          "
+        >
+          <small>Car number is required</small>
+        </p>
+        <div class="col-sm-5">
+          <label for="weight">Weight</label>
+          <input
+            type="number"
+            class="form-control"
+            id="weight"
+            formControlName="weight"
+          />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-5">
+          <label for="requestedDate">Requested Date</label>
+          <input
+            type="date"
+            class="form-control"
+            id="requested
+            Date"
+            formControlName="requestedDate"
+          />
+        </div>
+        <div class="col-sm-5">
+          <label for="receivedDate">Received Date</label>
+          <input
+            type="date"
+            class="form-control"
+            id="receivedDate"
+            formControlName="receivedDate"
+          />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-5">
+          <label for="extractionStartDate">Extraction Start Date</label>
+          <input
+            type="date"
+            class="form-control"
+            id="extractionStartDate"
+            formControlName="extractionStartDate"
+          />
+        </div>
+        <div class="col-sm-5">
+          <label for="emptiedDate">Emptied Date</label>
+          <input
+            type="date"
+            class="form-control"
+            id="emptiedDate"
+            formControlName="emptiedDate"
+          />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-5">
+          <label for="releasedDate">Released Date</label>
+          <input
+            type="date"
+            class="form-control"
+            id="releasedDate"
+            formControlName="releasedDate"
+          />
+        </div>
+        <div class="col-sm-5">
+          <label for="rawMaterial">Raw Material</label>
+          <select
+            type="number"
+            class="form-select"
+            id="rawMaterial"
+            formControlName="rawMaterial"
+          >
+            <option value="">- Select a raw material -</option>
+            <option value="1">Corn Syrup</option>
+            <option value="2">Sucralose</option>
+            <option value="3">AMS</option>
+          </select>
+        </div>
+      </div>
+      <div class="button">
+        <button
+          class="btn btn-success"
+          type="submit"
+          [disabled]="!carEditForm.valid"
+        >
+          Update
+        </button>
+        <button class="btn btn-warning" type="button" (click)="onCancel()">
+          Cancel
+        </button>
+      </div>
+    </form>
   </div>
-
-    <button type="submit" class="btn btn-outline-primary mt-2" [disabled]="carEditForm.invalid">Submit</button>
-    <button type="button" (click)="onCancel()" class="btn btn-outline-primary mt-2 ms-2">Cancel</button>
-  </form>
-</div>
-
+</html>
