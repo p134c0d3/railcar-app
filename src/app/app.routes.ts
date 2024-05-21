@@ -6,40 +6,44 @@ import { CarListComponent } from './components/car-list/car-list.component';
 import { CarNewComponent } from './components/car-new/car-new.component';
 import { CarEditComponent } from './components/car-edit/car-edit.component';
 import { authGuard } from './auth/auth.guard';
+import { userTypeGuard } from './auth/user-type.guard';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   {
     path: 'cars',
     component: CarListComponent,
-    canActivate: [authGuard],
+    canActivate: [authGuard, userTypeGuard],
+    data: { requiredUserType: ['Admin', 'Basic', 'Pending'] }
   },
   {
     path: 'cars-list',
     component: CarListComponent,
-    canActivate: [authGuard],
+    canActivate: [authGuard, userTypeGuard],
   },
   {
     path: 'cars/new',
     component: CarNewComponent,
-    canActivate: [authGuard],
+    canActivate: [authGuard, userTypeGuard],
+    data: { requiredUserType: 'Admin' }
   },
   {
     path: 'cars/:id',
     component: CarListComponent,
-    canActivate: [authGuard],
+    canActivate: [authGuard, userTypeGuard],
   },
   {
     path: 'cars/:id/edit',
     component: CarEditComponent,
-    canActivate: [authGuard],
+    canActivate: [authGuard, userTypeGuard],
+    data: { requiredUserType: 'Admin'}
   },
-  // { path: 'landing', loadComponent: () => import('./features/landing/landing.component').then(m => m.LandingComponent)},
   {
     path: 'admin',
     loadComponent: () =>
       import('./features/admin/admin.component').then((m) => m.AdminComponent),
-    canActivate: [authGuard],
+    canActivate: [authGuard, userTypeGuard],
+    data: { requiredUserType: 'Admin' }
   },
   {
     path: 'create-user',
@@ -53,7 +57,11 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./features/login/login.component').then((m) => m.LoginComponent),
   },
-]; // DEFAULT ROUTE
-
-// ROUTES TO LINK TO OTHER COMPONENTS IN APP
-// export const routes: Routes = [{ path: '/', component: AppComponent }, { path: '/dashboard', component: DashboardComponent}, { path: '/admin-center', component: AdminComponent}, { path: '/login', component: LoginComponent}];
+  {
+    path: 'pending',
+    loadComponent: () =>
+      import('./features/pending/pending.component').then((m) => m.PendingComponent),
+    canActivate: [authGuard, userTypeGuard],
+    data: { requiredUserType: 'Pending' }
+  },
+];
