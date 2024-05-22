@@ -9,23 +9,24 @@ import { authGuard } from './auth/auth.guard';
 import { userTypeGuard } from './auth/user-type.guard';
 
 export const routes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   {
     path: 'cars',
     component: CarListComponent,
     canActivate: [authGuard, userTypeGuard],
-    data: { requiredUserType: ['Admin', 'Basic', 'Pending'] }
+    data: { requiredUserType: ['Admin', 'Basic'] },
   },
   {
     path: 'cars-list',
     component: CarListComponent,
     canActivate: [authGuard, userTypeGuard],
+    data: { requiredUserType: ['Admin', 'Basic'] },
   },
   {
     path: 'cars/new',
     component: CarNewComponent,
     canActivate: [authGuard, userTypeGuard],
-    data: { requiredUserType: 'Admin' }
+    data: { requiredUserType: 'Admin' },
   },
   {
     path: 'cars/:id',
@@ -36,14 +37,14 @@ export const routes: Routes = [
     path: 'cars/:id/edit',
     component: CarEditComponent,
     canActivate: [authGuard, userTypeGuard],
-    data: { requiredUserType: 'Admin'}
+    data: { requiredUserType: 'Admin' },
   },
   {
     path: 'admin',
     loadComponent: () =>
       import('./features/admin/admin.component').then((m) => m.AdminComponent),
     canActivate: [authGuard, userTypeGuard],
-    data: { requiredUserType: 'Admin' }
+    data: { requiredUserType: 'Admin' },
   },
   {
     path: 'create-user',
@@ -60,8 +61,10 @@ export const routes: Routes = [
   {
     path: 'pending',
     loadComponent: () =>
-      import('./features/pending/pending.component').then((m) => m.PendingComponent),
+      import('./features/pending/pending.component').then(
+        (m) => m.PendingComponent
+      ),
     canActivate: [authGuard, userTypeGuard],
-    data: { requiredUserType: 'Pending' }
+    data: { requiredUserType: 'Pending' },
   },
 ];
