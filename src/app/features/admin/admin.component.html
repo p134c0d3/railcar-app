@@ -1,164 +1,340 @@
 <div class="container">
   <h1>Admin</h1>
-  <hr>
-    <table class="table table-sm table-hover">
-      <thead>
-        <h4>User Configuration:</h4>
-        <tr>
-          <th scope="col">ID</th>
-          <th scope="col">Last Name</th>
-          <th scope="col">First Name</th>
-          <th scope="col">Email</th>
-          <th scope="col">User Type</th>
-          <th scope="col"></th>
-        </tr>
-      </thead>
-      <tbody>
-        @for (user of users; track user) {
-        <tr>
-          <td>{{ user.id }}</td>
-          <td>{{ user.last_name }}</td>
-          <td>{{ user.first_name }}</td>
-          <td>{{ user.email }}</td>
-          <td>
-            <select class="form-select" [(ngModel)]="user.user_type" aria-label="Delete user confirmation" (change)="updateUser(user)">
-              <option value="Pending">Pending</option>
-              <option value="Basic">Basic</option>
-              <option value="Admin">Admin</option>
-            </select>
-          </td>
-          <td>
-            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delUserModal" (click)="selectUser(user)">
-              <i class="bi bi-trash"></i>
-            </button>
-            <div class="modal fade" id="delUserModal" tabindex="-1" aria-labelledby="delUserModalLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="delUserModalLabel">Delete User</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                    Are you sure you want to delete <span style="font-weight:bold">{{ selectedUser.first_name }} {{ selectedUser.last_name }}</span>?
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-danger" (click)="delUser(selectedUser)" data-bs-dismiss="modal" data-bs-target="#delUserModal">Delete</button>
-                  </div>
+  <hr />
+  <table class="table table-sm table-hover">
+    <thead>
+      <h4>User Configuration:</h4>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">User Type</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (user of users; track user) {
+      <tr>
+        <td>{{ user.id }}</td>
+        <td>{{ user.last_name }}</td>
+        <td>{{ user.first_name }}</td>
+        <td>{{ user.email }}</td>
+        <td>
+          <select
+            class="form-select"
+            [(ngModel)]="user.user_type"
+            aria-label="Delete user confirmation"
+            (change)="updateUser(user)"
+          >
+            <option value="Pending">Pending</option>
+            <option value="Basic">Basic</option>
+            <option value="Admin">Admin</option>
+          </select>
+        </td>
+        <td>
+          <button
+            type="button"
+            class="btn btn-outline-danger"
+            data-bs-toggle="modal"
+            data-bs-target="#delUserModal"
+            data-toggle="popover"
+            title="Delete"
+            (click)="selectUser(user)"
+          >
+            <i class="bi bi-trash"></i>
+          </button>
+          <div
+            class="modal fade"
+            id="delUserModal"
+            tabindex="-1"
+            aria-labelledby="delUserModalLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="delUserModalLabel">
+                    Delete User
+                  </h1>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
                 </div>
-              </div>
-            </div>
-          </td>
-
-        </tr>
-      }
-      </tbody>
-    </table>
-    <hr>
-    <!-- Raw Materials Tab le -->
-    <table class="table table-sm table-hover">
-      <thead>
-        <h4>Raw Material Configuration:</h4>
-        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#newMaterialModal">
-          <i class="bi bi-plus"></i> New Material
-        </button>
-        <div class="modal fade" id="newMaterialModal" tabindex="-1" aria-labelledby="newMaterialModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h1 class="modal-title fs-5" id="newMaterialModalLabel">New Material</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                <form>
-                  <div class="mb-3">
-                    <p class="text-danger">Capitalization and spelling must match exactly!</p>
-                    <label for="newMaterialName" class="form-label">Material Name</label>
-                    <input type="text" class="form-control" id="newMaterialName" name="new_material_name" [(ngModel)]="selectedMaterial.material_name" [defaultValue]="selectedMaterial.material_name">
-
-                  </div>
-                </form>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-success" (click)="newMaterial(selectedMaterial)" data-bs-dismiss="modal" data-bs-target="#newUserModal">Create</button>
+                <div class="modal-body">
+                  Are you sure you want to delete
+                  <span style="font-weight: bold"
+                    >{{ selectedUser.first_name }}
+                    {{ selectedUser.last_name }}</span
+                  >?
+                </div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    data-bs-dismiss="modal"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-danger"
+                    (click)="delUser(selectedUser)"
+                    data-bs-dismiss="modal"
+                    data-bs-target="#delUserModal"
+                  >
+                    Delete
+                  </button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <tr>
-          <th scope="col">ID</th>
-          <th scope="col">Name</th>
-          <th scope="col"></th>
-        </tr>
-      </thead>
-      <tbody>
-        @for ( item of raw_materials; track item) {
-        <tr>
-          <td>{{ item.id }}</td>
-          <td>{{ item.material_name }}</td>
-          <td>
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#updateMaterialModal" (click)="selectMaterial(item)">
-              <i class="bi bi-pencil-square"></i>
-            </button>
-            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delMaterialModal" (click)="selectMaterial(item)">
-              <i class="bi bi-trash"></i>
-            </button>
-            <div class="modal fade" id="delMaterialModal" tabindex="-1" aria-labelledby="delMaterialModalLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="delMaterialModalLabel">Delete Material</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                    Are you sure you want to delete <span style="font-weight:bold">{{ selectedMaterial.material_name }}</span>?
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-danger" (click)="delMaterial(selectedMaterial)" data-bs-dismiss="modal" data-bs-target="#delMaterialModal">Delete</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="modal fade" id="updateMaterialModal" tabindex="-1" aria-labelledby="updateMaterialModalLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="updateMaterialModalLabel">Edit Material</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                    <form>
-                      <div class="mb-3">
-                        <p class="text-danger">Caution: Changing the material name will affect all existing records for that material!</p>
-                        <label for="materialName" class="form-label">Material Name</label>
-                        <input type="text" class="form-control" id="materialName" name="material_name" [(ngModel)]="selectedMaterial.material_name" [defaultValue]="selectedMaterial.material_name">
-
-                      </div>
-                    </form>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-success" (click)="updateMaterial(selectedMaterial)" data-bs-dismiss="modal" data-bs-target="#updateMaterialModal">Update</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </td>
-        </tr>
+        </td>
+      </tr>
       }
-      </tbody>
-    </table>
-
-    <hr>
-    <!-- CSV Car upload -->
-    <div><h4>CSV Car Upload:</h4>
-      <div class="input-group mb-3">
-        <input type="file" accept=".csv" (change)="onFileChange($event)" id="csvFileInput">
-        <button class="btn btn-secondary" (click)="uploadCSV()">Upload CSV</button>
+    </tbody>
+  </table>
+  <hr />
+  <!-- Raw Materials Tab le -->
+  <table class="table table-sm table-hover">
+    <thead>
+      <h4>Raw Material Configuration:</h4>
+      <button
+        type="button"
+        class="btn btn-success"
+        data-bs-toggle="modal"
+        data-bs-target="#newMaterialModal"
+      >
+        <i class="bi bi-plus"></i> New Material
+      </button>
+      <div
+        class="modal fade"
+        id="newMaterialModal"
+        tabindex="-1"
+        aria-labelledby="newMaterialModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="newMaterialModalLabel">
+                New Material
+              </h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="mb-3">
+                  <p class="text-danger">
+                    Capitalization and spelling must match exactly!
+                  </p>
+                  <label for="newMaterialName" class="form-label"
+                    >Material Name</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="newMaterialName"
+                    name="new_material_name"
+                    [(ngModel)]="selectedMaterial.material_name"
+                    [defaultValue]="selectedMaterial.material_name"
+                  />
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-primary"
+                data-bs-dismiss="modal"
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                class="btn btn-success"
+                (click)="newMaterial(selectedMaterial)"
+                data-bs-dismiss="modal"
+                data-bs-target="#newUserModal"
+              >
+                Create
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      @for ( item of raw_materials; track item) {
+      <tr>
+        <td>{{ item.id }}</td>
+        <td>{{ item.material_name }}</td>
+        <td>
+          <button
+            type="button"
+            class="btn btn-outline-primary"
+            data-bs-toggle="modal"
+            data-bs-target="#updateMaterialModal"
+            data-toggle="popover"
+            title="Edit"
+            (click)="selectMaterial(item)"
+          >
+            <i class="bi bi-pencil-square"></i>
+          </button>
+          <button
+            type="button"
+            class="btn btn-outline-danger"
+            data-bs-toggle="modal"
+            data-bs-target="#delMaterialModal"
+            data-toggle="popover"
+            title="Delete"
+            (click)="selectMaterial(item)"
+          >
+            <i class="bi bi-trash"></i>
+          </button>
+          <div
+            class="modal fade"
+            id="delMaterialModal"
+            tabindex="-1"
+            aria-labelledby="delMaterialModalLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="delMaterialModalLabel">
+                    Delete Material
+                  </h1>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div class="modal-body">
+                  Are you sure you want to delete
+                  <span style="font-weight: bold">{{
+                    selectedMaterial.material_name
+                  }}</span
+                  >?
+                </div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    data-bs-dismiss="modal"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-danger"
+                    (click)="delMaterial(selectedMaterial)"
+                    data-bs-dismiss="modal"
+                    data-bs-target="#delMaterialModal"
+                  >
+                    Delete
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="modal fade"
+            id="updateMaterialModal"
+            tabindex="-1"
+            aria-labelledby="updateMaterialModalLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="updateMaterialModalLabel">
+                    Edit Material
+                  </h1>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div class="modal-body">
+                  <form>
+                    <div class="mb-3">
+                      <p class="text-danger">
+                        Caution: Changing the material name will affect all
+                        existing records for that material!
+                      </p>
+                      <label for="materialName" class="form-label"
+                        >Material Name</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="materialName"
+                        name="material_name"
+                        [(ngModel)]="selectedMaterial.material_name"
+                        [defaultValue]="selectedMaterial.material_name"
+                      />
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    data-bs-dismiss="modal"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-success"
+                    (click)="updateMaterial(selectedMaterial)"
+                    data-bs-dismiss="modal"
+                    data-bs-target="#updateMaterialModal"
+                  >
+                    Update
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+
+  <hr />
+  <!-- CSV Car upload -->
+  <div>
+    <h4>CSV Car Upload:</h4>
+    <div class="input-group mb-3">
+      <input
+        type="file"
+        accept=".csv"
+        (change)="onFileChange($event)"
+        id="csvFileInput"
+      />
+      <button class="btn btn-secondary" (click)="uploadCSV()">
+        Upload CSV
+      </button>
     </div>
+  </div>
 </div>
-
-

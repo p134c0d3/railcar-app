@@ -106,13 +106,17 @@
       </div>
       <div class="button">
         <button
-          class="btn btn-success"
+          class="btn btn-outline-success"
           type="submit"
           [disabled]="!carEditForm.valid"
         >
           Update
         </button>
-        <button class="btn btn-warning" type="button" (click)="onCancel()">
+        <button
+          class="btn btn-outline-warning"
+          type="button"
+          (click)="onCancel()"
+        >
           Cancel
         </button>
       </div>
