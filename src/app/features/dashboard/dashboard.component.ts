@@ -60,16 +60,16 @@ export class DashboardComponent implements OnInit{
     this.carService.getCars();
     this.carService.allCars$.subscribe((res) => {
       this.allCars = res;
+      this.getCompany(this.allCars);
       console.log('All cars: ', this.allCars);
       this.getChartData(this.allCars);
-
       }
-
     );
-
+    this.getRawMaterials();
 
   }
 
+  
   getChartData(carList: Car[]) {
 
     if (carList === null || carList === undefined) {
@@ -88,7 +88,7 @@ export class DashboardComponent implements OnInit{
     this.avgDaysToReceive = this.chartService.avgDaysBetweenDates(carList, 'requested_date', 'received_date');
     this.avgDaysInQueue = this.chartService.avgDaysBetweenDates(carList, 'received_date', 'extraction_start_date');
     this.avgDaysInExtraction = this.chartService.avgDaysBetweenDates(carList, 'extraction_start_date', 'emptied_date');
-    
+
     console.log('Total requested cars: ', this.totalRequestedCars);
     console.log('Total received cars: ', this.totalReceivedCars);
     console.log('Total empty cars: ', this.totalEmptyCars);
@@ -139,15 +139,19 @@ export class DashboardComponent implements OnInit{
 
   filterByCompany(term: string) {
     this.cars = this.allCars.filter(car => car.car_number.includes(term));
+    this.getChartData(this.cars);
     if (this.selectedItem !== '') {
       this.cars = this.cars.filter(car => car.raw_material.material_name.includes(this.selectedItem));
+      this.getChartData(this.cars);
     }
   }
 
   filterByMaterial(term: string) {
     this.cars = this.allCars.filter(car => car.raw_material.material_name.includes(term));
+    this.getChartData(this.cars);
     if (this.selectedCompany !== '') {
       this.cars = this.cars.filter(car => car.car_number.includes(this.selectedCompany));
+      this.getChartData(this.cars);
     }
   }
 
@@ -155,6 +159,7 @@ export class DashboardComponent implements OnInit{
     this.selectedCompany = '';
     this.selectedItem = '';
     this.cars = this.allCars;
+    this.updateData();
   }
 
   updateData() {
