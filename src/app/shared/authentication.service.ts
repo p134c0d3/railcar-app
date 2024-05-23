@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, switchMap } from 'rxjs';
 import { UserService } from './user.service';
-import { environment } from '../../environments/environment';
+import { environment } from '../../environments/environment.development';
 import { User } from '../models/user.model';
 
 @Injectable({
