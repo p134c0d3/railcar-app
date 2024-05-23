@@ -1,0 +1,125 @@
+<div class="container">
+  <div class="row mt-5">
+    <div class="account-form col-lg-4 bg-white m-auto rounded-top">
+      <h2 class="form-header text-center p-3">Create Account</h2>
+      <!-- Form Start -->
+      <form [formGroup]="createUserForm"  (ngSubmit)="onSubmit()">
+        <div class="input-group mb-3 pt-3">
+          <input
+            class="form-control"
+            type="text"
+            formControlName="first_name"
+            id="firstName"
+            placeholder="First Name"
+            [ngClass]="{ 'is-invalid':submitted && createUserForm.controls.first_name.errors }"
+            />
+          </div>
+          <div *ngIf="submitted && createUserForm.controls.first_name.errors" class="text-danger">
+            <div *ngIf="submitted && createUserForm.controls.first_name.errors['required']">
+              First name is required.
+            </div>
+          </div>
+
+
+        <div class="input-group mb-3">
+          <input
+            class="form-control"
+            type="text"
+            formControlName="last_name"
+            id="lastName"
+            placeholder="Last Name"
+            [ngClass]="{ 'is-invalid':submitted && createUserForm.controls.last_name.errors }"
+            />
+          </div>
+            <div *ngIf="submitted && createUserForm.controls.last_name.errors" class="text-danger">
+              <div *ngIf="submitted && createUserForm.controls.last_name.errors['required']">
+                Last name is required.
+              </div>
+            </div>
+
+        <div class="input-group mb-3">
+          <input
+            class="form-control"
+            type="text"
+            formControlName="email"
+            id="email"
+            placeholder="Email"
+            autocomplete="email"
+            [ngClass]="{ 'is-invalid':submitted && createUserForm.controls.email.errors }"
+            />
+          </div>
+          <div *ngIf="submitted && createUserForm.controls.email.errors" class="text-danger">
+            <div *ngIf="submitted && createUserForm.controls.email.errors['required']">
+              Email is required.
+            </div>
+            <div *ngIf="submitted && createUserForm.controls.email.errors['email']">
+              Please enter a valid email address.
+            </div>
+
+
+        </div>
+        <div class="input-group mb-3">
+          <input
+            class="form-control"
+            type="password"
+            formControlName="password"
+            id="password"
+            placeholder="Password"
+            autocomplete="new-password"
+            [ngClass]="{ 'is-invalid':submitted && createUserForm.controls.password.errors }"
+            />
+          </div>
+            <div *ngIf="submitted && createUserForm.controls.password.errors" class="text-danger">
+              <div *ngIf="submitted && createUserForm.controls.password.errors['required']">
+                Password is required.
+              </div>
+            </div>
+
+
+        <div class="input-group mb-3">
+          <input
+            class="form-control"
+            type="password"
+            formControlName="password_confirmation"
+            id="passwordConfirmation"
+            placeholder="Confirm Password"
+            autocomplete="new-password"
+            [ngClass]="{ 'is-invalid':submitted && createUserForm.controls.password_confirmation.errors }"
+            />
+          </div>
+            <div *ngIf="submitted && createUserForm.controls.password_confirmation.errors" class="text-danger">
+              <div *ngIf="submitted && createUserForm.controls.password_confirmation.errors['required']">
+                Password confirmation is required.
+              </div>
+              <div *ngIf="submitted && createUserForm.controls.password_confirmation.errors['matching']">
+                Passwords do not match.
+              </div>
+            </div>
+
+        <div class="d-grid">
+          <div class="btn btn-outline-primary bg-medium" (click)="onSubmit()">Create Account</div>
+          <p class="text-center text-muted">Already have an account? <a href="/login">Login</a></p>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- <script>
+  const form = document.querySelector('createUserForm');
+
+  form.addEventListener('submit', (event) => {
+    if(!form.checkValidity()) {
+      event.preventDefault();
+    }
+    form.classList.add('was-validated');
+    console.log("Submit");
+    }, false
+  );
+</script> -->
+
+
+
+
+
+

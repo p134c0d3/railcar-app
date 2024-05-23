@@ -1,0 +1,167 @@
+<html>
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+  />
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+  />
+  <body>
+    <div class="container">
+      <h3>List of Rail Cars</h3>
+      <div class="d-flex justify-content-between mb-3">
+        @if (authService.isLoggedIn() && currentUser?.user_type === 'Admin') {
+        <a class="btn btn-outline-primary" routerLink="/cars/new">Add Car</a>
+        }
+        <a class="btn btn-outline-secondary mb-3"><select [(ngModel)]="selectedCompany" (change)="filterByCompany(selectedCompany)">
+          <option value='' selected>Choose Company</option>
+          @for (item of this.company; track item){
+          <option value="{{ item }}">{{ item }}</option>
+          }
+        </select></a>
+        <a class="btn btn-outline-secondary mb-3"><select [(ngModel)]="selectedItem" (change)="filterByMaterial(selectedItem)">
+          <option value='' selected>Choose Raw Material</option>
+          @for (item of this.materials; track item){
+          <option value="{{ item.material_name }}">{{ item.material_name }}</option>
+          }
+        </select></a>
+        <a>
+          <div class="form-check form-check-inline">
+            <input class="btn-check" type="radio" name="inlineRadio" [(ngModel)]="filterMod" id="inlineRadio1" value="1" (change)="filterModify()">
+            <label class="btn btn-outline-secondary mb-3" for="inlineRadio1">Rec'd</label>
+
+            <input class="btn-check" type="radio" name="inlineRadio" [(ngModel)]="filterMod" id="inlineRadio2" value="2" (change)="filterModify()">
+            <label class="btn btn-outline-secondary mb-3" for="inlineRadio2">Not Rec'd</label>
+
+            <input class="btn-check" type="radio" name="inlineRadio" [(ngModel)]="filterMod" id="inlineRadio3" value="3" (change)="filterModify()">
+            <label class="btn btn-outline-secondary mb-3" for="inlineRadio3">Start Extract</label>
+
+            <input class="btn-check" type="radio" name="inlineRadio" [(ngModel)]="filterMod" id="inlineRadio4" value="4" (change)="filterModify()">
+            <label class="btn btn-outline-secondary mb-3" for="inlineRadio4">Emptied</label>
+
+            <input class="btn-check" type="radio" name="inlineRadio" [(ngModel)]="filterMod" id="inlineRadio5" value="5" (change)="filterModify()">
+            <label class="btn btn-outline-secondary mb-3" for="inlineRadio5">Released</label>
+          </div>
+        </a>
+        <a class="btn btn-outline-secondary mb-3" (click)="resetFilters()">Reset</a>
+        <form
+          class="d-flex"
+          role="search"
+        >
+          <input
+            class="form-control me-2 ms-2 mb-3"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+            id="searchInput"
+            name="searchInput"
+            [(ngModel)]="searchInput"
+            required
+          />
+        </form>
+      </div>
+      <div>
+        <table class="table table-hover">
+          <thead class="table-light">
+            <tr>
+              <th
+                scope="col"
+                class="sort-header"
+                (click)="sortData('car_number')"
+              >
+                Car
+              </th>
+              <th scope="col" class="sort-header" (click)="sortData('weight')">
+                Weight (lbs)
+              </th>
+              <th
+                scope="col"
+                class="sort-header"
+                (click)="sortData('received_date')"
+              >
+                Requested
+              </th>
+              <th
+                scope="col"
+                class="sort-header"
+                (click)="sortData('received_date')"
+              >
+                Received
+              </th>
+              <th
+                scope="col"
+                class="sort-header"
+                (click)="sortData('extraction_start_date')"
+              >
+                Extraction Date
+              </th>
+              <th
+                scope="col"
+                class="sort-header"
+                (click)="sortData('emptied_date')"
+              >
+                Emptied
+              </th>
+              <th
+                scope="col"
+                class="sort-header"
+                (click)="sortData('released_date')"
+              >
+                Released
+              </th>
+              <th
+                scope="col"
+                class="sort-header"
+                (click)="sortData('raw_material')"
+              >
+                Raw Material
+              </th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (car of cars | filter: searchInput; track car.id ) {
+            <tr>
+              <!-- <td>{{ car.car_number }}</td> -->
+              <td>{{ car.car_number }}</td>
+              <td>{{ car.weight }}</td>
+              <td>{{ car.requested_date || "-" }}</td>
+              <td>{{ car.received_date || "-" }}</td>
+              <td>{{ car.extraction_start_date || "-" }}</td>
+              <td>{{ car.emptied_date || "-" }}</td>
+              <td>{{ car.released_date || "-" }}</td>
+              <td>{{ car.raw_material.material_name }}</td>
+
+              @if (authService.isLoggedIn() && currentUser?.user_type === 'Admin') {
+              <td>
+                <a
+                  class="material-symbols-outlined"
+                  edit
+                  data-toggle="popover"
+                  title="Edit"
+                  data-placement="left"
+                  (click)="onEditCar(car.id)"
+                  >Edit</a
+                >
+                <a
+                  class="material-symbols-outlined"
+                  delete
+                  data-toggle="popover"
+                  title="Delete"
+                  data-placement="right"
+                  (click)="onDeleteCar(car.id)"
+                >
+                  delete
+                </a>
+              </td>
+              }
+
+            </tr>
+          }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

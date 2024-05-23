@@ -11,37 +11,138 @@
     >
       <span class="navbar-toggler-icon"></span>
     </button>
-    <a class="navbar-brand" href="#">Railcar App</a>
+    <a class="navbar-brand" href="#" routerLink="/cars">Railcar App</a>
     <div class="collapse navbar-collapse" id="navbarToggler">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <!-- Need to link the dashboard link to the dashboard -->
-          <a class="nav-link" aria-current="page" href="#" routerLink="/">Dashboard</a>
+          <a class="nav-link" aria-current="page" href="#" routerLink="/cars"
+            >Dashboard</a
+          >
         </li>
-        <!-- Need to show the below dynamically based on if admin is logged in and link to the admin center page for approving requests of new members -->
-        <li class="nav-item" *ngIf="adminToken">
-          <a class="nav-link" href="#" routerLink="/admin-center">Admin Center</a>
+        @if (authService.isLoggedIn() && currentUser?.user_type === 'Admin') {
+        <li class="nav-item" routerLink="/admin">
+          <a class="nav-link" href="#" routerLink="/admin">Admin Center</a>
         </li>
+      }
       </ul>
-      <div class="navbar-nav" style="margin-right: 10px;">
-        <div class="nav-item">
-          <!-- Need to link the login link to the login page -->
-          <button class="btn btn-outline-primary" href="#" type="button" routerLink="login">
+      <ul class="navbar-nav" style="margin-right: 10px">
+        @if (authService.isLoggedIn()) {
+        <span class="nav-item">Welcome, {{ currentUser?.first_name }}</span>
+        <li class="nav-item dropdown me-3">
+          <button
+            class="btn btn-dark dropdown-toggle"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          ></button>
+          <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end">
+            <li>
+              <a
+                class="dropdown-item"
+                href="#"
+                data-bs-toggle="modal"
+                data-bs-target="#updateProfileModal"
+                >Change Password</a
+              >
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item"></li>
+
+        <button
+          class="btn btn-outline-primary"
+          href="#"
+          type="button"
+          (click)="logout()"
+        >
+          Logout
+        </button>
+
+        } @else {
+        <li class="nav-item">
+          <button
+            class="btn btn-outline-primary"
+            href="#"
+            type="button"
+            routerLink="login"
+          >
             Login
           </button>
-        </div>
-      </div>
-      <form class="d-flex" role="search" [formGroup]="orderSearch" (ngSubmit)="onSubmit()">
-        <input
-          class="form-control me-2"
-          type="search"
-          placeholder="Search"
-          aria-label="Search"
-          id="orderSearchForm"
-          formControlName="orderSearchForm"
-        />
-        <button class="btn btn-outline-success" type="submit" [disabled]="orderSearch.invalid">Search</button>
-      </form>
+        </li>
+        }
+      </ul>
     </div>
   </div>
 </nav>
+
+<div class="modal" tabindex="-1" id="updateProfileModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title fw-bold">Change Password</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="passChange" (ngSubmit)="onSubmit()">
+          <div class="row g-3 justify-content-between mb-3">
+            <div class="col-auto">
+              <label for="currentPassword" class="col-form-label"
+                >Current Password:</label
+              >
+            </div>
+            <div class="col-auto">
+              <input
+                type="password"
+                id="currentPassword"
+                class="form-control"
+                aria-describedby="currentPassword"
+                formControlName="currentPassword"
+              />
+            </div>
+          </div>
+          <div class="row g-3 justify-content-between mb-3">
+            <div class="col-auto">
+              <label for="newPassword" class="col-form-label"
+                >New Password:</label
+              >
+            </div>
+            <div class="col-auto">
+              <input
+                type="password"
+                id="newPassword"
+                class="form-control"
+                aria-describedby="newPassword"
+                formControlName="newPassword"
+              />
+            </div>
+          </div>
+          <div class="row g-3 justify-content-between mb-3">
+            <div class="col-auto">
+              <label for="confirmNewPassword" class="col-form-label"
+                >Confirm New Password:</label
+              >
+            </div>
+            <div class="col-auto">
+              <input
+                type="password"
+                id="confirmNewPassword"
+                class="form-control"
+                aria-describedby="confirmNewPassword"
+                formControlName="confirmNewPassword"
+              />
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-outline-primary">Submit</button>
+            <button class="btn btn-outline-danger" data-bs-dismiss="modal">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
