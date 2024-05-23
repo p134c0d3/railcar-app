@@ -1,0 +1,149 @@
+<div class="container">
+  <div>
+    <a class="btn btn-outline-secondary mb-3"><select [(ngModel)]="selectedCompany" (change)="filterByCompany(selectedCompany)">
+      <option value='' selected>Choose Company</option>
+      @for (item of this.company; track item){
+      <option value="{{ item }}">{{ item }}</option>
+      }
+    </select></a>
+    <a class="btn btn-outline-secondary mb-3"><select [(ngModel)]="selectedItem" (change)="filterByMaterial(selectedItem)">
+      <option value='' selected>Choose Raw Material</option>
+      @for (item of this.materials; track item){
+      <option value="{{ item.material_name }}">{{ item.material_name }}</option>
+      }
+    </select></a>
+    <a class="btn btn-outline-secondary mb-3">
+      <label for="startDate">Start Date: </label>
+      <input type="date" [(ngModel)]="startDate" id="startDate" name="startDate" required>
+      <label for="endDate">End Date: </label>
+      <input type="date" [(ngModel)]="endDate" id="endDate" name="endDate" required>
+    </a>
+    <a class="btn btn-outline-secondary mb-3" (click)="resetFilters()">Reset</a>
+  </div>
+  <hr>
+  <!-- Chart Cards -->
+  <div class="row row-cols-2 row-cols-md-4 g-4">
+    <div class="col">
+      <div class="card m-2 text-bg-light h-100">
+        <canvas id="chartsCanvas" #chartsCanvas></canvas>
+        <div class="card-body">
+          <p class="card-text">(of total Requested)</p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card m-2 text-bg-light h-100">
+        <canvas id="chartsCanvas1" #chartsCanvas1></canvas>
+        <div class="card-body">
+          <p class="card-text">(of total Recv'd)</p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+    <div class="card m-2 text-bg-light h-100">
+      <canvas id="chartsCanvas2" #chartsCanvas2></canvas>
+      <div class="card-body">
+        <p class="card-text">(of total Started Extraction)</p>
+      </div>
+    </div>
+    </div>
+    <div class="col">
+      <div class="card m-2 text-bg-light h-100">
+        <canvas id="chartsCanvas3" #chartsCanvas3></canvas>
+        <div class="card-body">
+          <p class="card-text">(of total Empty)</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <!-- Gauge Cards -->
+  <div class="row row-cols-2 row-cols-md-5 g-4">
+    <div class="col">
+      <div class="card m-2 text-bg-light h-100">
+        <!-- <canvas id="gauge1" #gauge1></canvas> -->
+        <div class="card-body p-0">
+          <p class="needleValue">{{ this.totalRequestedCars }}</p>
+          <p class="card-text">Cars Requested</p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card m-2 text-bg-light h-100">
+        <!-- <canvas id="gauge2" #gauge2></canvas> -->
+        <div class="card-body p-0">
+          <p class="needleValue">{{ this.totalInQueueCars }}</p>
+          <p class="card-text">Cars in queue for Extraction</p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+    <div class="card m-2 text-bg-light h-100">
+      <!-- <canvas id="gauge3" #gauge3></canvas> -->
+      <div class="card-body p-0">
+        <p class="needleValue">{{ this.currentExtractingCars }}</p>
+        <p class="card-text">Cars in Extraction</p>
+      </div>
+    </div>
+    </div>
+    <div class="col">
+      <div class="card m-2 text-bg-light h-100">
+        <!-- <canvas id="gauge4" #gauge4></canvas> -->
+        <div class="card-body p-0">
+          <p class="needleValue">{{ this.currentEmptyCars}}</p>
+          <p class="card-text">Cars Emptied</p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card m-2 text-bg-light h-100">
+        <!-- <canvas id="gauge5" #gauge5></canvas> -->
+        <div class="card-body p-0">
+          <p class="needleValue">{{ this.currentReleasedCars }}</p>
+          <p class="card-text">Cars Released</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <!-- Horiziontal Cards -->
+  <div class="row row-col-2 row-col-md-3 justify-content-between g-4 mt-2">
+    <div class="card mb-3" style="max-width: 350px">
+      <div class="row g-0">
+        <div class="col-md-6">
+          <p class="summaryValue">{{ this.avgDaysToReceive }}</p>
+        </div>
+        <div class="col-md-6">
+          <div class="card-body">
+            <h5 class="card-title">Avg. Days to Receive</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card mb-3" style="max-width: 350px">
+      <div class="row g-0">
+        <div class="col-md-6">
+          <p class="summaryValue">{{ this.avgDaysInQueue }}</p>
+        </div>
+        <div class="col-md-6">
+          <div class="card-body">
+            <h5 class="card-title">Avg. Days in Queue</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card mb-3" style="max-width: 350px">
+      <div class="row g-0">
+        <div class="col-md-6">
+          <p class="summaryValue">{{ this.avgDaysInExtraction }}</p>
+        </div>
+        <div class="col-md-6">
+          <div class="card-body">
+            <h5 class="card-title">Avg. Days in Extraction</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
