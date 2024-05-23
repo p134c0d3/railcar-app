@@ -12,11 +12,13 @@
       <h3>List of Rail Cars</h3>
       <div class="d-flex justify-content-between mb-3">
         @if (authService.isLoggedIn() && currentUser?.user_type === 'Admin') {
+
         <a
           class="btn btn-outline-primary d-flex aline-items-center"
           routerLink="/cars/new"
           >Add Car</a
         >
+
         }
         <a class="col-sm-2"
           ><select
