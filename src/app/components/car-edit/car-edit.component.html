@@ -97,10 +97,12 @@
             id="rawMaterial"
             formControlName="rawMaterial"
           >
-            <option value="">- Select a raw material -</option>
-            <option value="1">Corn Syrup</option>
-            <option value="2">Sucralose</option>
-            <option value="3">AMS</option>
+            <option
+              value="{{ material.id }}"
+              *ngFor="let material of rawMaterials"
+            >
+              {{ material.material_name }}
+            </option>
           </select>
         </div>
       </div>
