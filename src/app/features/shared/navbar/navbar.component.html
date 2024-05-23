@@ -29,7 +29,7 @@
       <ul class="navbar-nav" style="margin-right: 10px">
         @if (authService.isLoggedIn()) {
         <span class="nav-item">Welcome, {{ currentUser?.first_name }}</span>
-        <li class="nav-item dropdown me-3">
+        <li class="nav-item dropdown me-3" *ngIf="notPending()">
           <button
             class="btn btn-dark dropdown-toggle"
             data-bs-toggle="dropdown"
@@ -88,7 +88,7 @@
         ></button>
       </div>
       <div class="modal-body">
-        <form [formGroup]="passChange" (ngSubmit)="onSubmit()" *ngIf="notPending()">
+        <form [formGroup]="passChange" (ngSubmit)="onSubmit()">
           <div class="row g-3 justify-content-between mb-3">
             <div class="col-auto">
               <label for="currentPassword" class="col-form-label"
