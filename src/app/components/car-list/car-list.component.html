@@ -133,7 +133,7 @@
               <td>{{ car.released_date || "-" }}</td>
               <td>{{ car.raw_material.material_name }}</td>
 
-              @if (authService.isLoggedIn() && currentUser?.user_type === 'admin') {
+              @if (authService.isLoggedIn() && currentUser?.user_type === 'Admin') {
               <td>
                 <a
                   class="material-symbols-outlined"
