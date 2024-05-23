@@ -12,6 +12,24 @@
       <h3>List of Rail Cars</h3>
       <div class="d-flex justify-content-between mb-3">
         @if (authService.isLoggedIn() && currentUser?.user_type === 'Admin') {
+        <a class="btn btn-outline-primary mb-3" routerLink="/cars/new">Add Car</a>
+        }
+        <a class="btn btn-outline-secondary mb-3"><select [(ngModel)]="selectedCompany" (change)="filterByCompany(selectedCompany)">
+          <option value='' selected>Choose Company</option>
+          @for (item of this.company; track item){
+          <option value="{{ item }}">{{ item }}</option>
+          }
+        </select></a>
+        <a class="btn btn-outline-secondary mb-3"><select [(ngModel)]="selectedItem" (change)="filterByMaterial(selectedItem)">
+          <option value='' selected>Choose Raw Material</option>
+          @for (item of this.materials; track item){
+          <option value="{{ item.material_name }}">{{ item.material_name }}</option>
+          }
+        </select></a>
+        <a>
+          <div class="form-check form-check-inline">
+            <input class="btn-check" type="radio" name="inlineRadio" [(ngModel)]="filterMod" id="inlineRadio1" value="1" (change)="filterModify()">
+            <label class="btn btn-outline-secondary mb-3" for="inlineRadio1">Rec'd</label>
 
         <a
           class="btn btn-outline-primary d-flex aline-items-center"
