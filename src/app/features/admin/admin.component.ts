@@ -7,8 +7,6 @@ import { RawMaterial } from '../../models/raw-material';
 
 import { RawMaterialService } from '../../shared/raw-material.service';
 
-
-
 @Component({
   selector: 'app-admin',
   standalone: true,
@@ -19,11 +17,15 @@ import { RawMaterialService } from '../../shared/raw-material.service';
 export class AdminComponent implements OnInit {
   users: User[] = [];
   raw_materials: RawMaterial[] = [];
-  selectedUser: User = new User(0, '', '', '', '');
+  selectedUser: User = new User(0, '', '', '', '', '', '');
   selectedMaterial: RawMaterial = new RawMaterial(0, '');
   selectedFile: File | null = null;
 
-  constructor(private userService: UserService, private carService: CarService, private rawMaterialService: RawMaterialService) { }
+  constructor(
+    private userService: UserService,
+    private carService: CarService,
+    private rawMaterialService: RawMaterialService
+  ) {}
 
   ngOnInit(): void {
     this.getUsers();
@@ -47,7 +49,7 @@ export class AdminComponent implements OnInit {
   }
 
   updateUser(user: User) {
-    console.log("Changing user type: ", user)
+    console.log('Changing user type: ', user);
     this.userService.updateUser(user).subscribe((data: any) => {
       this.getUsers();
     });

@@ -16,6 +16,9 @@ import { Ng2SearchPipeModule } from '@ngx-maintenance/ng2-search-filter';
 
 import { RawMaterialService } from '../../shared/raw-material.service';
 import { RawMaterial } from '../../models/raw-material';
+import { AuthenticationService } from '../../shared/authentication.service';
+import { User } from '../../models/user.model';
+import { UserService } from '../../shared/user.service';
 
 
 @Component({
@@ -35,6 +38,7 @@ import { RawMaterial } from '../../models/raw-material';
   styleUrl: './car-list.component.scss',
 })
 export class CarListComponent implements OnInit {
+  currentUser: User | null = null;
   allCars: Car[] = [];
   cars: Car[] = [];
   company: any[] = [];
@@ -54,7 +58,13 @@ export class CarListComponent implements OnInit {
   searchInput;
   searchBy;
 
-  constructor(private router: Router, private carService: CarService, private rawMaterialService: RawMaterialService) { }
+  constructor(
+    private router: Router,
+    private carService: CarService,
+    private rawMaterialService: RawMaterialService,
+    public authService: AuthenticationService,
+    private userService: UserService
+  ) { }
 
   ngOnInit(): void {
     this.carService.getCars();
@@ -71,6 +81,10 @@ export class CarListComponent implements OnInit {
       orderSearchForm: new FormControl(''),
       searchBy: new FormControl(''),
     });
+
+    this.userService.currentUserBehaviorSubject.subscribe((user) => {
+      this.currentUser = user;
+    })
   }
 
   // loadCars() {
