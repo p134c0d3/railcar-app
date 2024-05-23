@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthenticationService } from '../../shared/authentication.service';
 
 @Component({
   selector: 'app-pending',
@@ -9,4 +10,8 @@ import { Component } from '@angular/core';
 })
 export class PendingComponent {
 
+  constructor(private authService: AuthenticationService) { }
+  logout() {
+    this.authService.logout();
+  }
 }
