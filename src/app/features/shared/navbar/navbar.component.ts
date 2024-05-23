@@ -74,4 +74,14 @@ export class NavbarComponent implements OnInit {
       }
     })
   }
+
+  notPending() {
+    if (this.currentUser) {
+      if (this.currentUser.user_type === 'Pending') {
+        return false;
+      } else {
+        return true;
+      }
+    }
+  }
 }
