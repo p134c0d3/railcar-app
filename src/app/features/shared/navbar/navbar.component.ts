@@ -76,13 +76,13 @@ export class NavbarComponent implements OnInit {
     });
   }
 
-  notPending() {
-    this.userService.getBootstrapData().subscribe((data: any) => {
-      if (data.current_user.user_type == 'Pending') {
-        return false;
-      } else {
-        return true;
-      }
-    })
-  }
+  // notPending() {
+  //   this.userService.getBootstrapData().subscribe((data: any) => {
+  //     if (data.current_user.user_type == 'Pending') {
+  //       return false;
+  //     } else {
+  //       return true;
+  //     }
+  //   })
+  // }
 }

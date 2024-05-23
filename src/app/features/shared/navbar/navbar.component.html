@@ -16,7 +16,7 @@
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <!-- Need to link the dashboard link to the dashboard -->
-          <a class="nav-link" aria-current="page" href="#" routerLink="/cars" *ngIf="notPending()"
+          <a class="nav-link" aria-current="page" href="#" routerLink="/cars"
             >Dashboard</a
           >
         </li>
@@ -29,7 +29,7 @@
       <ul class="navbar-nav" style="margin-right: 10px">
         @if (authService.isLoggedIn()) {
         <span class="nav-item">Welcome, {{ currentUser?.first_name }}</span>
-        <li class="nav-item dropdown me-3" *ngIf="notPending()">
+        <li class="nav-item dropdown me-3">
           <button
             class="btn btn-dark dropdown-toggle"
             data-bs-toggle="dropdown"
