@@ -12,7 +12,7 @@
       <h3>List of Rail Cars</h3>
       <div class="d-flex justify-content-between mb-3">
         @if (authService.isLoggedIn() && currentUser?.user_type === 'Admin') {
-        <a class="btn btn-outline-primary" routerLink="/cars/new">Add Car</a>
+        <a class="btn btn-outline-primary mb-3" routerLink="/cars/new">Add Car</a>
         }
         <a class="btn btn-outline-secondary mb-3"><select [(ngModel)]="selectedCompany" (change)="filterByCompany(selectedCompany)">
           <option value='' selected>Choose Company</option>
