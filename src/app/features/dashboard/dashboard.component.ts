@@ -50,6 +50,9 @@ export class DashboardComponent implements OnInit{
   currentEmptyCars: number = 0;
   currentUnreleasedCars: number = 0;
   currentReleasedCars: number = 0;
+  avgDaysToReceive: number = 0;
+  avgDaysInQueue: number = 0;
+  avgDaysInExtraction: number = 0;
 
   constructor(private carService: CarService, private rawMaterialService: RawMaterialService, private chartService: ChartService) { }
 
@@ -82,6 +85,10 @@ export class DashboardComponent implements OnInit{
     this.currentEmptyCars = this.chartService.countWithDate(carList, 'emptied_date');
     this.currentUnreleasedCars = this.chartService.countWithButNotDate(carList, 'emptied_date', 'released_date');
     this.currentReleasedCars = this.chartService.countWithDate(carList, 'released_date');
+    this.avgDaysToReceive = this.chartService.avgDaysBetweenDates(carList, 'requested_date', 'received_date');
+    this.avgDaysInQueue = this.chartService.avgDaysBetweenDates(carList, 'received_date', 'extraction_start_date');
+    this.avgDaysInExtraction = this.chartService.avgDaysBetweenDates(carList, 'extraction_start_date', 'emptied_date');
+    
     console.log('Total requested cars: ', this.totalRequestedCars);
     console.log('Total received cars: ', this.totalReceivedCars);
     console.log('Total empty cars: ', this.totalEmptyCars);
