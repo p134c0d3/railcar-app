@@ -1,21 +1,17 @@
 <div class="container">
   <div>
-    <div class="dropdown mb-3">
-      <a class="dropdown-toggle"><select [(ngModel)]="selectedCompany" (change)="filterByCompany(selectedCompany)">
+      <select [(ngModel)]="selectedCompany" (change)="filterByCompany(selectedCompany)" class="form-select">
         <option value='' selected>Choose Company</option>
         @for (item of this.company; track item){
           <option value="{{ item }}">{{ item }}</option>
         }
-      </select></a>
-    </div>
-    <div class="dropdown mb-3">
-      <a class="dropdown-toggle"><select [(ngModel)]="selectedItem" (change)="filterByMaterial(selectedItem)">
+      </select>
+      <select [(ngModel)]="selectedItem" (change)="filterByMaterial(selectedItem)" class="form-select">
         <option value='' selected>Choose Raw Material</option>
         @for (item of this.materials; track item){
           <option value="{{ item.material_name }}">{{ item.material_name }}</option>
         }
-      </select></a>
-    </div>
+      </select>
     <a class="mb-3">
       <label for="startDate">Start Date: </label>
       <input type="date" [(ngModel)]="startDate" id="startDate" name="startDate" required>
