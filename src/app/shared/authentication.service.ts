@@ -22,7 +22,7 @@ export class AuthenticationService {
 
   login(email: string, password: string) {
     return this.http
-      .post<{ token: string }>(`${this.apiUrl}/login`, {
+      .post<{ token: string }>(`${this.apiUrl}login`, {
         email,
         password,
       })
@@ -54,9 +54,6 @@ export class AuthenticationService {
   }
 
   changePassword(id: number, user: User) {
-    return this.http.put<User>(
-      `${environment.apiURL}/users/${id}`,
-      user
-    );
+    return this.http.put<User>(`${environment.apiURL}/users/${id}`, user);
   }
 }
