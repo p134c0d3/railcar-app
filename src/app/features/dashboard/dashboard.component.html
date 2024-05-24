@@ -1,7 +1,7 @@
 <div class="container">
-  <div class="space-between row">
+  <div>
     <div class="dropdown mb-3">
-      <a class="btn btn-outline-secondary dropdown-toggle"><select [(ngModel)]="selectedCompany" (change)="filterByCompany(selectedCompany)">
+      <a class="dropdown-toggle"><select [(ngModel)]="selectedCompany" (change)="filterByCompany(selectedCompany)">
         <option value='' selected>Choose Company</option>
         @for (item of this.company; track item){
           <option value="{{ item }}">{{ item }}</option>
@@ -9,14 +9,14 @@
       </select></a>
     </div>
     <div class="dropdown mb-3">
-      <a class="btn btn-outline-secondary dropdown-toggle"><select [(ngModel)]="selectedItem" (change)="filterByMaterial(selectedItem)">
+      <a class="dropdown-toggle"><select [(ngModel)]="selectedItem" (change)="filterByMaterial(selectedItem)">
         <option value='' selected>Choose Raw Material</option>
         @for (item of this.materials; track item){
           <option value="{{ item.material_name }}">{{ item.material_name }}</option>
         }
       </select></a>
     </div>
-    <a class="btn btn-outline-secondary mb-3">
+    <a class="mb-3">
       <label for="startDate">Start Date: </label>
       <input type="date" [(ngModel)]="startDate" id="startDate" name="startDate" required>
       <label for="endDate">End Date: </label>
