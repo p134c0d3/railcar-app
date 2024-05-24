@@ -22,7 +22,7 @@ export class AuthenticationService {
 
   login(email: string, password: string) {
     return this.http
-      .post<{ token: string }>(`${this.apiUrl}login`, {
+      .post<{ token: string }>(`${this.apiUrl}/login`, {
         email,
         password,
       })
