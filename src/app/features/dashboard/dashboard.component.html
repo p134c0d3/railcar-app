@@ -1,5 +1,5 @@
 <div class="container">
-  <div>
+  <div class="row-cols-md-5">
       <select [(ngModel)]="selectedCompany" (change)="filterByCompany(selectedCompany)" class="form-select">
         <option value='' selected>Choose Company</option>
         @for (item of this.company; track item){
