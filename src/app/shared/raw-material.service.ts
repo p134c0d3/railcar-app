@@ -19,6 +19,7 @@ export class RawMaterialService {
   }
 
   addRawMaterial(rawMaterial: RawMaterial) {
+    console.log(rawMaterial);
     return this.http.post(`${environment.apiURL}/raw_materials`, rawMaterial);
   }
 

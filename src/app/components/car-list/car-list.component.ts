@@ -67,7 +67,13 @@ export class CarListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.loadCars();
+    this.carService.getCars();
+    this.carService.allCars$.subscribe((res) => {
+      this.allCars = res;
+      this.cars = this.allCars;
+      this.getCompany(this.allCars);
+    });
+
     this.getRawMaterials();
     console.log(this.cars);
 
@@ -81,19 +87,19 @@ export class CarListComponent implements OnInit {
     })
   }
 
-  loadCars() {
-    this.carService.getCars().subscribe({
-      next: (res: Car[]) => {
-        console.log(res);
-        this.allCars = res;
-        this.cars = this.allCars;
-        this.getCompany(this.allCars);
-      },
-      error: (error: any) => {
-        console.log(error);
-      },
-    });
-  }
+  // loadCars() {
+  //   this.carService.getCars().subscribe({
+  //     next: (res: Car[]) => {
+  //       console.log(res);
+  //       this.allCars = res;
+  //       this.cars = this.allCars;
+  //       this.getCompany(this.allCars);
+  //     },
+  //     error: (error: any) => {
+  //       console.log(error);
+  //     },
+  //   });
+  // }
 
   onEditCar(id: number) {
     this.router.navigate([`/cars/${id}/edit`]);
@@ -127,10 +133,14 @@ export class CarListComponent implements OnInit {
   }
 
   getCompany(cars: Car[]) {
+    if (cars === null || cars === undefined) {
+      return;
+    } else {
     const abbrevs = cars.map(car => car.car_number.slice(0, 4));
     const uniqueAbbrevs = [...new Set(abbrevs)];  // Set is a collection of unique values
     console.log(uniqueAbbrevs);
     this.company = uniqueAbbrevs;
+    }
   }
 
   getRawMaterials() {

@@ -1,0 +1,25 @@
+.card {
+  max-width: 15rem;
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s;
+}
+
+.card-text {
+  text-align: center;
+}
+
+.needleValue {
+  font-size: 3rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.summaryValue {
+  font-size: 5rem;
+  font-weight: bold;
+  text-align: center;
+}

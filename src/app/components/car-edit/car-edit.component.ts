@@ -1,44 +1,43 @@
-import { RawMaterial } from './../../models/raw-material';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { Car } from '../../models/car';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { RawMaterial } from '../../models/raw-material';
+import { CommonModule, NgForOf } from '@angular/common';
 import { CarService } from '../../shared/car.service';
-
-
-import { NgForOf } from '@angular/common';
-import { CommonModule } from '@angular/common';
 import { RawMaterialService } from '../../shared/raw-material.service';
-
-
 
 @Component({
   selector: 'app-car-edit',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, NgForOf, CommonModule],
   templateUrl: './car-edit.component.html',
-  styleUrl: './car-edit.component.scss'
+  styleUrl: './car-edit.component.scss',
 })
 export class CarEditComponent implements OnInit {
   id: number;
-  materialName: string;
   carEditForm: FormGroup;
   car: Car;
-  cars: Car[] = [];
   rawMaterials: RawMaterial[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private carService: CarService,
-    private rawMaterialService: RawMaterialService
+   private carService: CarService,
+   private rawMaterialService: RawMaterialService
   ) {}
+
   ngOnInit(): void {
     this.carEditForm = this.formBuilder.group({
       carNumber: ['', Validators.required],
       weight: [0],
-      requestedDate: ['', Validators.required],
+      requestedDate: [''],
       receivedDate: [''],
       extractionStartDate: [''],
       emptiedDate: [''],
@@ -49,11 +48,14 @@ export class CarEditComponent implements OnInit {
       this.id = +params['id'];
     });
     this.setCarValues();
+    this.getRawMaterials();
   }
   setCarValues() {
     this.carService.getCar(this.id).subscribe((car) => {
       this.car = car;
+
       this.carEditForm.patchValue({
+        id: this.car.id,
         carNumber: this.car.car_number,
         weight: this.car.weight,
         requestedDate: this.car.requested_date,
@@ -61,7 +63,7 @@ export class CarEditComponent implements OnInit {
         extractionStartDate: this.car.extraction_start_date,
         emptiedDate: this.car.emptied_date,
         releasedDate: this.car.released_date,
-        rawMaterial: this.car.raw_material_id,
+        rawMaterial: this.car.raw_material.id,
       });
     });
   }
