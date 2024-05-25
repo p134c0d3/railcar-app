@@ -1,60 +1,69 @@
-<div class="container">
-  <div>
-    <a class="btn btn-outline-secondary mb-3"><select [(ngModel)]="selectedCompany" (change)="filterByCompany(selectedCompany)">
-      <option value='' selected>Choose Company</option>
-      @for (item of this.company; track item){
-      <option value="{{ item }}">{{ item }}</option>
-      }
-    </select></a>
-    <a class="btn btn-outline-secondary mb-3"><select [(ngModel)]="selectedItem" (change)="filterByMaterial(selectedItem)">
-      <option value='' selected>Choose Raw Material</option>
-      @for (item of this.materials; track item){
-      <option value="{{ item.material_name }}">{{ item.material_name }}</option>
-      }
-    </select></a>
-    <a class="btn btn-outline-secondary mb-3">
-      <label for="startDate">Start Date: </label>
-      <input type="date" [(ngModel)]="startDate" id="startDate" name="startDate" required>
-      <label for="endDate">End Date: </label>
-      <input type="date" [(ngModel)]="endDate" id="endDate" name="endDate" required>
-    </a>
-    <a class="btn btn-outline-secondary mb-3" (click)="resetFilters()">Reset</a>
+<div class="container text-center">
+  <div class="d-flex justify-content-evenly form-group mt-3">
+    <div class="flex-fill">
+      <select [(ngModel)]="selectedCompany" class="form-select" style="height:100%" (change)="filterByCompany(selectedCompany)">
+        <option value='' selected>Choose Company</option>
+        @for (item of this.company; track item){
+        <option value="{{ item }}">{{ item }}</option>
+        }
+      </select>
+    </div>
+    <div class="flex-fill">
+      <select [(ngModel)]="selectedItem" class="form-select" style="height:100%; margin-left: 3px" (change)="filterByMaterial(selectedItem)">
+        <option value='' selected>Choose Raw Material</option>
+        @for (item of this.materials; track item){
+        <option value="{{ item.material_name }}">{{ item.material_name }}</option>
+        }
+      </select>
+    </div>
+
+    <div class="flex-fill d-inline-flex">
+      <label class="form-label" for="startDate">Start Date: </label>
+      <input class="form-control" type="date" [(ngModel)]="startDate" id="startDate" name="startDate" required>
+    </div>
+    <div class="flex-fill d-inline-flex">
+      <label class="form-label" for="endDate">End Date: </label>
+      <input class="form-control" type="date" [(ngModel)]="endDate" id="endDate" name="endDate" required>
+    </div>
+    <div class="flex-fill">
+      <button class="btn btn-outline-secondary" style="height:100%; width: 75%" (click)="resetFilters()">Reset</button>
+    </div>
   </div>
   <hr>
   <!-- Chart Cards -->
-  <div class="row row-cols-2 row-cols-md-4 g-4">
-    <div class="col">
+  <div class="row row-cols-2 row-cols-md-4 g-4 mt-3 justify-content-between">
+    <!-- <div class="col"> -->
       <div class="card m-2 text-bg-light h-100">
         <canvas id="chartsCanvas" #chartsCanvas></canvas>
         <div class="card-body">
           <p class="card-text">(of total Requested)</p>
         </div>
       </div>
-    </div>
-    <div class="col">
+    <!-- </div> -->
+    <!-- <div class="col"> -->
       <div class="card m-2 text-bg-light h-100">
         <canvas id="chartsCanvas1" #chartsCanvas1></canvas>
         <div class="card-body">
           <p class="card-text">(of total Recv'd)</p>
         </div>
       </div>
-    </div>
-    <div class="col">
+    <!-- </div> -->
+    <!-- <div class="col"> -->
     <div class="card m-2 text-bg-light h-100">
       <canvas id="chartsCanvas2" #chartsCanvas2></canvas>
       <div class="card-body">
-        <p class="card-text">(of total Started Extraction)</p>
+        <p class="card-text">(of total Start Extraction)</p>
       </div>
     </div>
-    </div>
-    <div class="col">
+    <!-- </div> -->
+    <!-- <div class="col"> -->
       <div class="card m-2 text-bg-light h-100">
         <canvas id="chartsCanvas3" #chartsCanvas3></canvas>
         <div class="card-body">
           <p class="card-text">(of total Empty)</p>
         </div>
       </div>
-    </div>
+    <!-- </div> -->
   </div>
   <hr>
   <!-- Gauge Cards -->
