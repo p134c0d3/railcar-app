@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, switchMap } from 'rxjs';
 import { UserService } from './user.service';
-import { environment } from '../../environments/environment.development';
+import { environment } from '../../environments/environment';
 import { User } from '../models/user.model';
 
 @Injectable({
@@ -54,9 +54,6 @@ export class AuthenticationService {
   }
 
   changePassword(id: number, user: User) {
-    return this.http.put<User>(
-      `${environment.apiURL}/users/${id}`,
-      user
-    );
+    return this.http.put<User>(`${environment.apiURL}/users/${id}`, user);
   }
 }

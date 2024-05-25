@@ -15,7 +15,7 @@ import { ChartService } from '../../shared/chart.service';
   styleUrl: './dashboard.component.scss'
 })
 export class DashboardComponent implements OnInit{
-  
+
   public myChart1: Chart<'pie', number[], string> | undefined;
   public myChart2: Chart<'pie', number[], string> | undefined;
   public myChart3: Chart<'pie', number[], string> | undefined;
@@ -57,7 +57,7 @@ export class DashboardComponent implements OnInit{
   constructor(private carService: CarService, private rawMaterialService: RawMaterialService, private chartService: ChartService) { }
 
   ngOnInit(): void {
-    this.carService.getCars();
+    // this.carService.getCars();
     this.carService.allCars$.subscribe((res) => {
       this.allCars = res;
       this.getCompany(this.allCars);
@@ -69,7 +69,7 @@ export class DashboardComponent implements OnInit{
 
   }
 
-  
+
   getChartData(carList: Car[]) {
 
     if (carList === null || carList === undefined) {
@@ -118,7 +118,7 @@ export class DashboardComponent implements OnInit{
     this.drawCharts();
     // this.drawGuages();
   }
-  
+
   getCompany(cars: Car[]) {
     if (cars === null || cars === undefined) {
       return;
@@ -172,7 +172,7 @@ export class DashboardComponent implements OnInit{
     const chartsCanvas2 = document.getElementById(`chartsCanvas1`) as HTMLCanvasElement;
     const chartsCanvas3 = document.getElementById(`chartsCanvas2`) as HTMLCanvasElement;
     const chartsCanvas4 = document.getElementById(`chartsCanvas3`) as HTMLCanvasElement;
-    const ctx = chartsCanvas.getContext('2d');
+    // const ctx = chartsCanvas.getContext('2d');
 
     // this.chartData = [
     //   { year: "Req", count: this.totalRequestedCars },
@@ -207,7 +207,7 @@ export class DashboardComponent implements OnInit{
         }
       }
     );
-  
+
 
   if (this.myChart2) {
     this.myChart2.destroy();
