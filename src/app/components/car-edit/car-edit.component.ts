@@ -35,14 +35,14 @@ export class CarEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.carEditForm = this.formBuilder.group({
-      carNumber: ['', Validators.required],
+      car_number: ['', Validators.required],
       weight: [0],
-      requestedDate: [''],
-      receivedDate: [''],
-      extractionStartDate: [''],
-      emptiedDate: [''],
-      releasedDate: [''],
-      rawMaterial: [''],
+      requested_date: [''],
+      received_date: [''],
+      extraction_start_date: [''],
+      emptied_date: [''],
+      released_date: [''],
+      raw_material_id: [''],
     });
     this.route.params.subscribe((params: Params) => {
       this.id = +params['id'];
@@ -56,20 +56,20 @@ export class CarEditComponent implements OnInit {
 
       this.carEditForm.patchValue({
         id: this.car.id,
-        carNumber: this.car.car_number,
+        car_number: this.car.car_number,
         weight: this.car.weight,
-        requestedDate: this.car.requested_date,
-        receivedDate: this.car.received_date,
-        extractionStartDate: this.car.extraction_start_date,
-        emptiedDate: this.car.emptied_date,
-        releasedDate: this.car.released_date,
-        rawMaterial: this.car.raw_material.id,
+        requested_date: this.car.requested_date,
+        received_date: this.car.received_date,
+        extraction_start_date: this.car.extraction_start_date,
+        emptied_date: this.car.emptied_date,
+        released_date: this.car.released_date,
+        raw_material_id: this.car.raw_material.id,
       });
     });
   }
   onSubmit() {
     const updatedCarData = this.carEditForm.value;
-
+    console.log("Submitted Car Data: ", updatedCarData);
     this.carService.updateCar(this.id, updatedCarData).subscribe((res) => {
       this.router.navigate(['/cars'], { relativeTo: this.route });
     });

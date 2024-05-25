@@ -10,10 +10,10 @@
   <body>
     <div class="container">
       <h3>List of Rail Cars</h3>
-      <div class="d-flex justify-content-evenly form-group">
+      <div class="d-flex justify-content-evenly align-items-start">
         <div class="flex-fill">
           @if (authService.isLoggedIn() && currentUser?.user_type === 'Admin') {
-          <button class="btn btn-outline-primary mb-3" routerLink="/cars/new">
+          <button class="btn btn-outline-primary mb-3" style="height:75%; width: 100%" routerLink="/cars/new">
             Add Car
           </button>
           }
@@ -21,6 +21,7 @@
 
         <div class="flex-fill">
           <select
+            style="height:75%; margin-left: 3px"
             [(ngModel)]="selectedCompany"
             class="form-select"
             (change)="filterByCompany(selectedCompany)"
@@ -33,6 +34,7 @@
         </div>
         <div class="flex-fill" style="margin-left: 3px;">
           <select
+            style="height:75%; margin-left: 3px"
             [(ngModel)]="selectedItem"
             class="form-select"
             (change)="filterByMaterial(selectedItem)"
@@ -56,7 +58,7 @@
             value="1"
             (change)="filterModify()"
           />
-          <label class="btn btn-outline-secondary mb-3" for="inlineRadio1"
+          <label class="btn btn-outline-secondary mb-3" style="height:75%;" for="inlineRadio1"
             >Rec'd</label
           >
 
@@ -69,7 +71,7 @@
             value="2"
             (change)="filterModify()"
           />
-          <label class="btn btn-outline-secondary mb-3" for="inlineRadio2"
+          <label class="btn btn-outline-secondary mb-3" style="height:75%;" for="inlineRadio2"
             >Not Rec'd</label
           >
 
@@ -82,7 +84,7 @@
             value="3"
             (change)="filterModify()"
           />
-          <label class="btn btn-outline-secondary mb-3" for="inlineRadio3"
+          <label class="btn btn-outline-secondary mb-3" style="height:75%;" for="inlineRadio3"
             >Start Extract</label
           >
 
@@ -95,7 +97,7 @@
             value="4"
             (change)="filterModify()"
           />
-          <label class="btn btn-outline-secondary mb-3" for="inlineRadio4"
+          <label class="btn btn-outline-secondary mb-3" style="height:75%;" for="inlineRadio4"
             >Emptied</label
           >
 
@@ -108,22 +110,23 @@
             value="5"
             (change)="filterModify()"
           />
-          <label class="btn btn-outline-secondary mb-3" for="inlineRadio5"
+          <label class="btn btn-outline-secondary mb-3" style="height:75%;" for="inlineRadio5"
             >Released</label
           >
         </div>
         <div class="flex-fill">
           <button
             class="btn btn-outline-secondary mb-3"
+            style="height:75%;"
             (click)="resetFilters()"
           >
             Reset
           </button>
         </div>
         <div class="flex-fill">
-          <form class="d-flex" role="search">
+          <form class="d-flex" style="height:75%;" role="search">
             <input
-              class="form-control me-2 ms-2 mb-3"
+              class="form-control"
               type="search"
               placeholder="Search"
               aria-label="Search"
