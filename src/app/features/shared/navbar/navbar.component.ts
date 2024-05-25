@@ -5,6 +5,7 @@ import { Router, RouterLink } from '@angular/router';
 import { AuthenticationService } from '../../../shared/authentication.service';
 import { UserService } from '../../../shared/user.service';
 import { User } from '../../../models/user.model';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -62,16 +63,26 @@ export class NavbarComponent implements OnInit {
       this.currentUser.user_type,
       this.passChange.value.newPassword,
       this.passChange.value.confirmNewPassword
-    )
+    );
 
     this.userService.updateUser(updateUserPassword).subscribe({
-      next:(res:any) => {
+      next: (res: any) => {
         console.log('res', res);
         this.logout();
       },
       error: (error) => {
         console.error(error);
-      }
-    })
+      },
+    });
   }
+
+  // notPending() {
+  //   this.userService.getBootstrapData().subscribe((data: any) => {
+  //     if (data.current_user.user_type == 'Pending') {
+  //       return false;
+  //     } else {
+  //       return true;
+  //     }
+  //   })
+  // }
 }
