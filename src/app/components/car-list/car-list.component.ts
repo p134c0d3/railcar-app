@@ -186,13 +186,13 @@ export class CarListComponent implements OnInit {
 
     if (this.filterMod !== null) {
       if (this.filterMod == 1) {
-        this.cars = this.cars.filter(car => car.received_date !== null);
+        this.cars = this.cars.filter(car => car.received_date !== null && car.extraction_start_date === null);
       } else if (this.filterMod == 2) {
         this.cars = this.cars.filter(car => car.received_date === null);
       } else if (this.filterMod == 3) {
-        this.cars = this.cars.filter(car => car.extraction_start_date !== null);
+        this.cars = this.cars.filter(car => car.extraction_start_date !== null && car.emptied_date === null);
       } else if (this.filterMod == 4) {
-        this.cars = this.cars.filter(car => car.emptied_date !== null);
+        this.cars = this.cars.filter(car => car.emptied_date !== null && car.released_date === null);
       } else if (this.filterMod == 5) {
         this.cars = this.cars.filter(car => car.released_date !== null);
       }
@@ -214,14 +214,14 @@ export class CarListComponent implements OnInit {
     } else {
       this.cars = this.filterModCars;
     }
-    if (this.filterMod == 1){
-      this.cars = this.cars.filter(car => car.received_date !== null);
+    if (this.filterMod == 1) {
+      this.cars = this.cars.filter(car => car.received_date !== null && car.extraction_start_date === null);
     } else if (this.filterMod == 2) {
       this.cars = this.cars.filter(car => car.received_date === null);
     } else if (this.filterMod == 3) {
-      this.cars = this.cars.filter(car => car.extraction_start_date !== null);
+      this.cars = this.cars.filter(car => car.extraction_start_date !== null && car.emptied_date === null);
     } else if (this.filterMod == 4) {
-      this.cars = this.cars.filter(car => car.emptied_date !== null);
+      this.cars = this.cars.filter(car => car.emptied_date !== null && car.released_date === null);
     } else if (this.filterMod == 5) {
       this.cars = this.cars.filter(car => car.released_date !== null);
     }
