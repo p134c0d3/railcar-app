@@ -72,8 +72,9 @@
       <div class="card m-2 text-bg-light h-100">
         <!-- <canvas id="gauge1" #gauge1></canvas> -->
         <div class="card-body p-0">
-          <p class="needleValue">{{ this.totalRequestedCars }}</p>
-          <p class="card-text">Cars Requested</p>
+          <p>Unreceived: </p>
+          <p><span class="needleValue">{{ this.totalUnreceivedCars }}</span></p>
+          <p class="card-text">Weight: (lbs) <span class="needleValue">{{ this.currentWeightRequested }}</span></p>
         </div>
       </div>
     </div>
@@ -81,8 +82,9 @@
       <div class="card m-2 text-bg-light h-100">
         <!-- <canvas id="gauge2" #gauge2></canvas> -->
         <div class="card-body p-0">
-          <p class="needleValue">{{ this.totalInQueueCars }}</p>
-          <p class="card-text">Cars in queue for Extraction</p>
+          <p>In Queue: </p>
+          <p><span class="needleValue">{{ this.totalInQueueCars }}</span></p>
+          <p class="card-text">Weight: (lbs) <span class="needleValue">{{ this.currentWeightInQueue }}</span></p>
         </div>
       </div>
     </div>
@@ -90,8 +92,9 @@
     <div class="card m-2 text-bg-light h-100">
       <!-- <canvas id="gauge3" #gauge3></canvas> -->
       <div class="card-body p-0">
-        <p class="needleValue">{{ this.currentExtractingCars }}</p>
-        <p class="card-text">Cars in Extraction</p>
+        <p>Extracting: </p>
+        <p><span class="needleValue">{{ this.currentExtractingCars }}</span></p>
+        <p class="card-text">Weight: (lbs) <span class="needleValue">{{ this.currentWeightExtracting }}</span></p>
       </div>
     </div>
     </div>
@@ -99,17 +102,18 @@
       <div class="card m-2 text-bg-light h-100">
         <!-- <canvas id="gauge4" #gauge4></canvas> -->
         <div class="card-body p-0">
-          <p class="needleValue">{{ this.currentEmptyCars}}</p>
-          <p class="card-text">Cars Emptied</p>
+          <p>Emptied: </p>
+          <p><span class="needleValue">{{ this.currentEmptyCars}}</span></p>
+          <p class="card-text">Weight: (lbs) <span class="needleValue">{{ this.currentWeightEmptied}}</span></p>
         </div>
       </div>
     </div>
     <div class="col">
       <div class="card m-2 text-bg-light h-100">
         <!-- <canvas id="gauge5" #gauge5></canvas> -->
-        <div class="card-body p-0">
-          <p class="needleValue">{{ this.currentReleasedCars }}</p>
-          <p class="card-text">Cars Released</p>
+        <div class="card-body p-0 mt-5" >
+          <p>Released: </p><p><span class="needleValue">{{ this.currentReleasedCars }}</span></p>
+
         </div>
       </div>
     </div>

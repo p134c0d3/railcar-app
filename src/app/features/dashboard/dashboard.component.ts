@@ -16,20 +16,20 @@ import { ChartService } from '../../shared/chart.service';
 })
 export class DashboardComponent implements OnInit{
 
-  public myChart1: Chart<'pie', number[], string> | undefined;
-  public myChart2: Chart<'pie', number[], string> | undefined;
-  public myChart3: Chart<'pie', number[], string> | undefined;
-  public myChart4: Chart<'pie', number[], string> | undefined;
-  public myChart5: Chart<'doughnut', number[], string> | undefined;
-  public myChart6: Chart<'doughnut', number[], string> | undefined;
-  public myChart7: Chart<'doughnut', number[], string> | undefined;
-  public myChart8: Chart<'doughnut', number[], string> | undefined;
-  public myChart9: Chart<'doughnut', number[], string> | undefined;
+  public myChart1: Chart<'pie', string[], string> | undefined;
+  public myChart2: Chart<'pie', string[], string> | undefined;
+  public myChart3: Chart<'pie', string[], string> | undefined;
+  public myChart4: Chart<'pie', string[], string> | undefined;
+  // public myChart5: Chart<'doughnut', number[], string> | undefined;
+  // public myChart6: Chart<'doughnut', number[], string> | undefined;
+  // public myChart7: Chart<'doughnut', number[], string> | undefined;
+  // public myChart8: Chart<'doughnut', number[], string> | undefined;
+  // public myChart9: Chart<'doughnut', number[], string> | undefined;
   // Chart Data arrays - values will be pushed in when fetched
-  chart1Data: { field: string; count: number; }[] = [];
-  chart2Data: { field: string; count: number; }[] = [];
-  chart3Data: { field: string; count: number; }[] = [];
-  chart4Data: { field: string; count: number; }[] = [];
+  chart1Data: { field: string; count: string; }[] = [];
+  chart2Data: { field: string; count: string; }[] = [];
+  chart3Data: { field: string; count: string; }[] = [];
+  chart4Data: { field: string; count: string; }[] = [];
   allCars: Car[] = [];
   cars: Car[] = [];
   company: any[] = [];
@@ -40,19 +40,23 @@ export class DashboardComponent implements OnInit{
   endDate: Date = new Date();
 
   // Dashboard data variables
-  totalRequestedCars: number = 0;
-  totalReceivedCars: number = 0;
-  totalEmptyCars: number = 0;
-  totalUnreceivedCars: number = 0;
-  totalInQueueCars: number = 0;
-  totalStartExtractionCars: number = 0;
-  currentExtractingCars: number = 0;
-  currentEmptyCars: number = 0;
-  currentUnreleasedCars: number = 0;
-  currentReleasedCars: number = 0;
-  avgDaysToReceive: number = 0;
-  avgDaysInQueue: number = 0;
-  avgDaysInExtraction: number = 0;
+  totalRequestedCars: string ='';
+  totalReceivedCars: string ='';
+  totalEmptyCars: string ='';
+  totalUnreceivedCars: string ='';
+  totalInQueueCars: string ='';
+  totalStartExtractionCars: string ='';
+  currentExtractingCars: string ='';
+  currentEmptyCars: string ='';
+  currentUnreleasedCars: string ='';
+  currentReleasedCars: string ='';
+  avgDaysToReceive: string ='';
+  avgDaysInQueue: string ='';
+  avgDaysInExtraction: string ='';
+  currentWeightExtracting: string ='';
+  currentWeightInQueue: string ='';
+  currentWeightRequested: string ='';
+  currentWeightEmptied: string ='';
 
   constructor(private carService: CarService, private rawMaterialService: RawMaterialService, private chartService: ChartService) { }
 
@@ -75,19 +79,23 @@ export class DashboardComponent implements OnInit{
     if (carList === null || carList === undefined) {
       return;
     }
-    this.totalRequestedCars = carList.length;
-    this.totalReceivedCars = this.chartService.countWithDate(carList, 'received_date');
-    this.totalEmptyCars = this.chartService.countWithDate(carList, 'emptied_date');
-    this.totalUnreceivedCars = this.chartService.countWithButNotDate(carList, 'requested_date', 'received_date');
-    this.totalInQueueCars = this.chartService.countWithButNotDate(carList, 'received_date', 'extraction_start_date');
-    this.totalStartExtractionCars = this.chartService.countWithDate(carList, 'extraction_start_date');
-    this.currentExtractingCars = this.chartService.countWithButNotDate(carList, 'extraction_start_date', 'emptied_date');
-    this.currentEmptyCars = this.chartService.countWithDate(carList, 'emptied_date');
-    this.currentUnreleasedCars = this.chartService.countWithButNotDate(carList, 'emptied_date', 'released_date');
-    this.currentReleasedCars = this.chartService.countWithDate(carList, 'released_date');
-    this.avgDaysToReceive = this.chartService.avgDaysBetweenDates(carList, 'requested_date', 'received_date');
-    this.avgDaysInQueue = this.chartService.avgDaysBetweenDates(carList, 'received_date', 'extraction_start_date');
-    this.avgDaysInExtraction = this.chartService.avgDaysBetweenDates(carList, 'extraction_start_date', 'emptied_date');
+    this.totalRequestedCars = carList.length.toLocaleString();
+    this.totalReceivedCars = this.chartService.countWithDate(carList, 'received_date').toLocaleString();
+    this.totalEmptyCars = this.chartService.countWithDate(carList, 'emptied_date').toLocaleString();
+    this.totalUnreceivedCars = this.chartService.countWithButNotDate(carList, 'requested_date', 'received_date').toLocaleString();
+    this.totalInQueueCars = this.chartService.countWithButNotDate(carList, 'received_date', 'extraction_start_date').toLocaleString();
+    this.totalStartExtractionCars = this.chartService.countWithDate(carList, 'extraction_start_date').toLocaleString();
+    this.currentExtractingCars = this.chartService.countWithButNotDate(carList, 'extraction_start_date', 'emptied_date').toLocaleString();
+    this.currentEmptyCars = this.chartService.countWithDate(carList, 'emptied_date').toLocaleString();
+    this.currentUnreleasedCars = this.chartService.countWithButNotDate(carList, 'emptied_date', 'released_date').toLocaleString();
+    this.currentReleasedCars = this.chartService.countWithDate(carList, 'released_date').toLocaleString();
+    this.avgDaysToReceive = this.chartService.avgDaysBetweenDates(carList, 'requested_date', 'received_date').toLocaleString();
+    this.avgDaysInQueue = this.chartService.avgDaysBetweenDates(carList, 'received_date', 'extraction_start_date').toLocaleString();
+    this.avgDaysInExtraction = this.chartService.avgDaysBetweenDates(carList, 'extraction_start_date', 'emptied_date').toLocaleString();
+    this.currentWeightExtracting = this.chartService.currentWeight(carList, 'extraction_start_date', 'emptied_date').toLocaleString();
+    this.currentWeightInQueue = this.chartService.currentWeight(carList, 'received_date', 'extraction_start_date').toLocaleString();
+    this.currentWeightRequested = this.chartService.currentWeight(carList, 'requested_date', 'received_date').toLocaleString();
+    this.currentWeightEmptied = this.chartService.currentWeight(carList, 'emptied_date', '').toLocaleString();
 
     console.log('Total requested cars: ', this.totalRequestedCars);
     console.log('Total received cars: ', this.totalReceivedCars);
@@ -200,8 +208,13 @@ export class DashboardComponent implements OnInit{
           labels: this.chart1Data.map(row => row.field),
           datasets: [
             {
-              label: 'Requested vs Received',
-              data: this.chart1Data.map(row => row.count)
+              label: '',
+              data: this.chart1Data.map(row => row.count),
+              backgroundColor: [
+                'rgba(51,153,102)',
+                'rgba(255,165,0)'
+
+              ],
             }
           ]
         }
@@ -231,8 +244,13 @@ export class DashboardComponent implements OnInit{
           labels: this.chart2Data.map(row => row.field),
           datasets: [
             {
-              label: 'In Queue vs Extracting',
-              data: this.chart2Data.map(row => row.count)
+              label: '',
+              data: this.chart2Data.map(row => row.count),
+              backgroundColor: [
+                'rgba(51,153,102)',
+                'rgba(255,255,0)'
+
+              ],
             }
           ]
         }
@@ -261,8 +279,12 @@ export class DashboardComponent implements OnInit{
           labels: this.chart3Data.map(row => row.field),
           datasets: [
             {
-              label: 'Extracting vs Empty',
-              data: this.chart3Data.map(row => row.count)
+              label: '',
+              data: this.chart3Data.map(row => row.count),
+              backgroundColor: [
+                      'rgba(54, 162, 235, 1)',
+                      'rgba(220,20,60)'
+                    ],
             }
           ]
         }
@@ -291,8 +313,12 @@ export class DashboardComponent implements OnInit{
           labels: this.chart4Data.map(row => row.field),
           datasets: [
             {
-              label: 'Unreleased vs Released',
-              data: this.chart4Data.map(row => row.count)
+              label: '',
+              data: this.chart4Data.map(row => row.count),
+              backgroundColor: [
+                      'rgba(220,20,60)',
+                      'rgba(72,61,139)'
+                    ],
             }
           ]
         }

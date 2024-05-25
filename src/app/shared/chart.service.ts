@@ -6,7 +6,7 @@ import { CarService } from './car.service';
   providedIn: 'root'
 })
 export class ChartService {
-  
+
   constructor() { }
 
   countWithDate(carList: Car[], field: string) {
@@ -49,6 +49,24 @@ export class ChartService {
 
     return Math.round(avgDays * 10) / 10; // round to the nearest tenth decimal place
 
+  }
+
+  currentWeight(carList: Car[], includeField: string, excludeField: string): number {
+    let totalWeight = 0;
+    if (excludeField === '') {
+      for (const car of carList) {
+        if (Boolean(car[includeField])) {
+          totalWeight += car.weight;
+        }
+      }
+     } else{
+    for (const car of carList) {
+      if (Boolean(car[includeField]) && !Boolean(car[excludeField])) {
+        totalWeight += car.weight;
+      }
+    }
+  }
+    return totalWeight;
   }
 
 }
