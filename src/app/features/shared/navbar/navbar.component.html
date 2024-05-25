@@ -11,7 +11,7 @@
     >
       <span class="navbar-toggler-icon"></span>
     </button>
-    <a class="navbar-brand" href="#" routerLink="/cars">Railcar App</a>
+    <a class="navbar-brand" routerLink="/cars">Railcar App</a>
     <div class="collapse navbar-collapse" id="navbarToggler">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
@@ -21,10 +21,10 @@
           >
         </li>
         @if (authService.isLoggedIn() && currentUser?.user_type === 'Admin') {
-        <li class="nav-item" routerLink="/admin">
+        <li class="nav-item">
           <a class="nav-link" routerLink="/admin">Admin Center</a>
         </li>
-        <li class="nav-item" routerLink="/dashboard">
+        <li class="nav-item">
           <a class="nav-link" routerLink="/dashboard">Dashboard</a>
         </li>
       }
@@ -42,7 +42,6 @@
             <li>
               <a
                 class="dropdown-item"
-                href="#"
                 data-bs-toggle="modal"
                 data-bs-target="#updateProfileModal"
                 >Change Password</a
@@ -54,7 +53,6 @@
 
         <button
           class="btn btn-outline-primary"
-          href="#"
           type="button"
           (click)="logout()"
         >
@@ -65,7 +63,6 @@
         <li class="nav-item">
           <button
             class="btn btn-outline-primary"
-            href="#"
             type="button"
             routerLink="login"
           >

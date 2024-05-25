@@ -29,8 +29,8 @@ export class CarEditComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-   private carService: CarService,
-   private rawMaterialService: RawMaterialService
+    private carService: CarService,
+    private rawMaterialService: RawMaterialService
   ) {}
 
   ngOnInit(): void {
@@ -71,6 +71,8 @@ export class CarEditComponent implements OnInit {
     const updatedCarData = this.carEditForm.value;
     console.log("Submitted Car Data: ", updatedCarData);
     this.carService.updateCar(this.id, updatedCarData).subscribe((res) => {
+      console.log(res);
+
       this.router.navigate(['/cars'], { relativeTo: this.route });
     });
   }
