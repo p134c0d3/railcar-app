@@ -250,6 +250,10 @@ export class DashboardComponent implements OnInit{
             },
             tooltip: {
               enabled: true
+            },
+            title: {
+              display: true,
+              text: 'Total Requested'
             }
           }
         },
@@ -286,6 +290,10 @@ export class DashboardComponent implements OnInit{
             },
             tooltip: {
               enabled: true
+            },
+            title: {
+              display: true,
+              text: "Total Recv'd"
             }
           }
         },
@@ -320,6 +328,10 @@ export class DashboardComponent implements OnInit{
             },
             tooltip: {
               enabled: true
+            },
+            title: {
+              display: true,
+              text: 'Started Extraction'
             }
           }
         },
@@ -354,6 +366,10 @@ export class DashboardComponent implements OnInit{
             },
             tooltip: {
               enabled: true
+            },
+            title: {
+              display: true,
+              text: 'Total Empty'
             }
           }
         },
