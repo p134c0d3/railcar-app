@@ -43,12 +43,9 @@ export class ChartService {
     if (validCount === 0) {
       return 0;
     }
-
     const avgDiff = totalDiff / validCount;
     const avgDays = avgDiff / (1000 * 60 * 60 * 24); // convert milliseconds to days
-
     return Math.round(avgDays * 10) / 10; // round to the nearest tenth decimal place
-
   }
 
   currentWeight(carList: Car[], includeField: string, excludeField: string): number {

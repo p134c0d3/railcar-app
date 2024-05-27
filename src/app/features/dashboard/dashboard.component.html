@@ -19,11 +19,11 @@
 
     <div class="flex-fill d-inline-flex">
       <label class="form-label" for="startDate">Start Date: </label>
-      <input class="form-control" type="date" [(ngModel)]="startDate" id="startDate" name="startDate" required>
+      <input class="form-control" type="date" [(ngModel)]="startDate" id="startDate" name="startDate" (change)="filterByDate()" required>
     </div>
     <div class="flex-fill d-inline-flex">
       <label class="form-label" for="endDate">End Date: </label>
-      <input class="form-control" type="date" [(ngModel)]="endDate" id="endDate" name="endDate" required>
+      <input class="form-control" type="date" [(ngModel)]="endDate" id="endDate" name="endDate" (change)="filterByDate()" required>
     </div>
     <div class="flex-fill">
       <button class="btn btn-outline-secondary" style="height:100%; width: 75%" (click)="resetFilters()">Reset</button>
@@ -32,45 +32,36 @@
   <hr>
   <!-- Chart Cards -->
   <div class="row row-cols-2 row-cols-md-4 g-4 mt-3 justify-content-between">
-    <!-- <div class="col"> -->
-      <div class="card m-2 text-bg-light h-100">
-        <canvas id="chartsCanvas" #chartsCanvas></canvas>
-        <div class="card-body">
-          <p class="card-text">(of total Requested)</p>
-        </div>
+    <div class="card m-2 text-bg-light h-100">
+      <canvas id="chartsCanvas" #chartsCanvas></canvas>
+      <div class="card-body">
+        <p class="card-text">(of total Requested)</p>
       </div>
-    <!-- </div> -->
-    <!-- <div class="col"> -->
-      <div class="card m-2 text-bg-light h-100">
-        <canvas id="chartsCanvas1" #chartsCanvas1></canvas>
-        <div class="card-body">
-          <p class="card-text">(of total Recv'd)</p>
-        </div>
+    </div>
+    <div class="card m-2 text-bg-light h-100">
+      <canvas id="chartsCanvas1" #chartsCanvas1></canvas>
+      <div class="card-body">
+        <p class="card-text">(of total Recv'd)</p>
       </div>
-    <!-- </div> -->
-    <!-- <div class="col"> -->
+    </div>
     <div class="card m-2 text-bg-light h-100">
       <canvas id="chartsCanvas2" #chartsCanvas2></canvas>
       <div class="card-body">
         <p class="card-text">(of total Start Extraction)</p>
       </div>
     </div>
-    <!-- </div> -->
-    <!-- <div class="col"> -->
-      <div class="card m-2 text-bg-light h-100">
-        <canvas id="chartsCanvas3" #chartsCanvas3></canvas>
-        <div class="card-body">
-          <p class="card-text">(of total Empty)</p>
-        </div>
+    <div class="card m-2 text-bg-light h-100">
+      <canvas id="chartsCanvas3" #chartsCanvas3></canvas>
+      <div class="card-body">
+        <p class="card-text">(of total Empty)</p>
       </div>
-    <!-- </div> -->
+    </div>
   </div>
   <hr>
   <!-- Gauge Cards -->
-  <div class="row row-cols-2 row-cols-md-5 g-4">
+  <div class="row row-cols-2 row-cols-md-5 g-4 mb-4">
     <div class="col">
       <div class="card m-2 text-bg-light h-100">
-        <!-- <canvas id="gauge1" #gauge1></canvas> -->
         <div class="card-body p-0">
           <p>Unreceived: </p>
           <p><span class="needleValue">{{ this.totalUnreceivedCars }}</span></p>
@@ -80,7 +71,6 @@
     </div>
     <div class="col">
       <div class="card m-2 text-bg-light h-100">
-        <!-- <canvas id="gauge2" #gauge2></canvas> -->
         <div class="card-body p-0">
           <p>In Queue: </p>
           <p><span class="needleValue">{{ this.totalInQueueCars }}</span></p>
@@ -90,7 +80,6 @@
     </div>
     <div class="col">
     <div class="card m-2 text-bg-light h-100">
-      <!-- <canvas id="gauge3" #gauge3></canvas> -->
       <div class="card-body p-0">
         <p>Extracting: </p>
         <p><span class="needleValue">{{ this.currentExtractingCars }}</span></p>
@@ -100,7 +89,6 @@
     </div>
     <div class="col">
       <div class="card m-2 text-bg-light h-100">
-        <!-- <canvas id="gauge4" #gauge4></canvas> -->
         <div class="card-body p-0">
           <p>Emptied: </p>
           <p><span class="needleValue">{{ this.currentEmptyCars}}</span></p>
@@ -110,10 +98,8 @@
     </div>
     <div class="col">
       <div class="card m-2 text-bg-light h-100">
-        <!-- <canvas id="gauge5" #gauge5></canvas> -->
         <div class="card-body p-0 mt-5" >
           <p>Released: </p><p><span class="needleValue">{{ this.currentReleasedCars }}</span></p>
-
         </div>
       </div>
     </div>
@@ -129,6 +115,7 @@
         <div class="col-md-6">
           <div class="card-body">
             <h5 class="card-title">Avg. Days to Receive</h5>
+            <small>(of received cars)</small>
           </div>
         </div>
       </div>
@@ -141,6 +128,7 @@
         <div class="col-md-6">
           <div class="card-body">
             <h5 class="card-title">Avg. Days in Queue</h5>
+            <small>(of cars out of queue)</small>
           </div>
         </div>
       </div>
@@ -153,6 +141,7 @@
         <div class="col-md-6">
           <div class="card-body">
             <h5 class="card-title">Avg. Days in Extraction</h5>
+            <small>(of cars finished extracting)</small>
           </div>
         </div>
       </div>
