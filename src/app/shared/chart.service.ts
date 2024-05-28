@@ -6,7 +6,7 @@ import { CarService } from './car.service';
   providedIn: 'root'
 })
 export class ChartService {
-  
+
   constructor() { }
 
   countWithDate(carList: Car[], field: string) {
@@ -43,12 +43,27 @@ export class ChartService {
     if (validCount === 0) {
       return 0;
     }
-
     const avgDiff = totalDiff / validCount;
     const avgDays = avgDiff / (1000 * 60 * 60 * 24); // convert milliseconds to days
-
     return Math.round(avgDays * 10) / 10; // round to the nearest tenth decimal place
+  }
 
+  currentWeight(carList: Car[], includeField: string, excludeField: string): number {
+    let totalWeight = 0;
+    if (excludeField === '') {
+      for (const car of carList) {
+        if (Boolean(car[includeField])) {
+          totalWeight += car.weight;
+        }
+      }
+     } else{
+    for (const car of carList) {
+      if (Boolean(car[includeField]) && !Boolean(car[excludeField])) {
+        totalWeight += car.weight;
+      }
+    }
+  }
+    return totalWeight;
   }
 
 }

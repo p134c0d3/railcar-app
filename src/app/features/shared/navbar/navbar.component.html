@@ -21,18 +21,18 @@
           >
         </li>
         @if (authService.isLoggedIn() && currentUser?.user_type === 'Admin') {
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/admin">Admin Center</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/dashboard">Dashboard</a>
-        </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/dashboard">Dashboard</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/admin">Admin Center</a>
+          </li>
       }
       </ul>
       <ul class="navbar-nav" style="margin-right: 10px">
         @if (authService.isLoggedIn()) {
-        <span class="nav-item">Welcome, {{ currentUser?.first_name }}</span>
-        <li class="nav-item dropdown me-3">
+        <span class="nav-item align-self-center">Welcome, {{ currentUser?.first_name }}</span>
+        <li class="nav-item dropdown me-3 align-self-center">
           <button
             class="btn btn-dark dropdown-toggle"
             data-bs-toggle="dropdown"

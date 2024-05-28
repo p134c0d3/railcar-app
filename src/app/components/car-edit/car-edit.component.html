@@ -15,15 +15,15 @@
           <input
             type="text"
             class="form-control"
-            id="carNumber"
-            formControlName="carNumber"
+            id="car_number"
+            formControlName="car_number"
           />
         </div>
         <p
           class="error-message"
           *ngIf="
-            carEditForm.get('carNumber').invalid &&
-            carEditForm.get('carNumber')?.touched
+            carEditForm.get('car_number').invalid &&
+            carEditForm.get('car_number')?.touched
           "
         >
           <small>Car number is required</small>
@@ -40,62 +40,61 @@
       </div>
       <div class="row">
         <div class="col-sm-5">
-          <label for="requestedDate">Requested Date</label>
+          <label for="requested_date">Requested Date</label>
           <input
             type="date"
             class="form-control"
-            id="requested
-            Date"
-            formControlName="requestedDate"
+            id="requested_d            Date"
+            formControlName="requested_date"
           />
         </div>
         <div class="col-sm-5">
-          <label for="receivedDate">Received Date</label>
+          <label for="received_date">Received Date</label>
           <input
             type="date"
             class="form-control"
-            id="receivedDate"
-            formControlName="receivedDate"
-          />
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-5">
-          <label for="extractionStartDate">Extraction Start Date</label>
-          <input
-            type="date"
-            class="form-control"
-            id="extractionStartDate"
-            formControlName="extractionStartDate"
-          />
-        </div>
-        <div class="col-sm-5">
-          <label for="emptiedDate">Emptied Date</label>
-          <input
-            type="date"
-            class="form-control"
-            id="emptiedDate"
-            formControlName="emptiedDate"
+            id="received_date"
+            formControlName="received_date"
           />
         </div>
       </div>
       <div class="row">
         <div class="col-sm-5">
-          <label for="releasedDate">Released Date</label>
+          <label for="extraction_start_date">Extraction Start Date</label>
           <input
             type="date"
             class="form-control"
-            id="releasedDate"
-            formControlName="releasedDate"
+            id="extraction_start_date"
+            formControlName="extraction_start_date"
           />
         </div>
         <div class="col-sm-5">
-          <label for="rawMaterial">Raw Material</label>
+          <label for="emptied_date">Emptied Date</label>
+          <input
+            type="date"
+            class="form-control"
+            id="emptied_date"
+            formControlName="emptied_date"
+          />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-5">
+          <label for="released_date">Released Date</label>
+          <input
+            type="date"
+            class="form-control"
+            id="released_date"
+            formControlName="released_date"
+          />
+        </div>
+        <div class="col-sm-5">
+          <label for="raw_material_id">Raw Material</label>
           <select
             type="number"
             class="form-select"
-            id="rawMaterial"
-            formControlName="rawMaterial"
+            id="raw_material_id"
+            formControlName="raw_material_id"
           >
             <option
               value="{{ material.id }}"

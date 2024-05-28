@@ -32,6 +32,7 @@ export class CarNewComponent{
     console.log(formValue)
     this.carService.createCar(formValue).subscribe({
       next: (data:any) => {
+        this.carService.getCars();
         this.router.navigate(['/cars']);
       },
       error: (error:any) => {

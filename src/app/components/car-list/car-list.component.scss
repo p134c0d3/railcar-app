@@ -23,16 +23,16 @@ box-shadow: 0 0 20px rgba(0,0,0,0.6);
   font-size: 20px;
   text-decoration: none;
   }
-  .btn.btn-outline-primary {
-      padding : .5rem;
-      margin-right: 8px;
-      text-align: center;
-      font-weight: bold;
-      align-items: center;
-      width: 65px;
-      height: 50px;
+  // .btn.btn-outline-primary {
+  //     padding : .5rem;
+  //     margin-right: 8px;
+  //     text-align: center;
+  //     font-weight: bold;
+  //     align-items: center;
+  //     width: 65px;
+  //     height: 50px;
 
-  }
+  // }
 
   .col-sm-2 {
     border-radius: 10px;
@@ -52,5 +52,9 @@ box-shadow: 0 0 20px rgba(0,0,0,0.6);
   }
 
   .sortData {
+    cursor: pointer;
+  }
+
+  .sort-header {
     cursor: pointer;
   }

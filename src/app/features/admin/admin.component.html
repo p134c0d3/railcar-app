@@ -32,7 +32,7 @@
             <option value="Admin">Admin</option>
           </select>
         </td>
-        <td>
+        <td class="d-flex justify-content-end">
           <button
             type="button"
             class="btn btn-outline-danger"
@@ -182,7 +182,7 @@
       <tr>
         <td>{{ item.id }}</td>
         <td>{{ item.material_name }}</td>
-        <td>
+        <td class="d-flex justify-content-end">
           <button
             type="button"
             class="btn btn-outline-primary"
@@ -202,6 +202,7 @@
             data-toggle="popover"
             title="Delete"
             (click)="selectMaterial(item)"
+            style="margin-left: 2px"
           >
             <i class="bi bi-trash"></i>
           </button>
@@ -331,6 +332,7 @@
         accept=".csv"
         (change)="onFileChange($event)"
         id="csvFileInput"
+        class="form-control"
       />
       <button class="btn btn-secondary" (click)="uploadCSV()">
         Upload CSV
