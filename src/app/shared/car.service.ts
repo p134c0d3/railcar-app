@@ -35,7 +35,7 @@ export class CarService {
   }
 
   updateCar(id: number, car: Car): Observable<Car> {
-    return this.http.put<Car>(`${environment.apiURL}/cars/${id}`, car);
+    return this.http.put<Car>(`${environment.apiURL}/cars/${id}/edit`, car);
   }
 
   deleteCar(id: number): Observable<Car> {
