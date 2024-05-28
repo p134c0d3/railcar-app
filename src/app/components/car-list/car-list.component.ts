@@ -20,7 +20,6 @@ import { AuthenticationService } from '../../shared/authentication.service';
 import { User } from '../../models/user.model';
 import { UserService } from '../../shared/user.service';
 
-
 @Component({
   selector: 'app-car-list',
   standalone: true,
@@ -32,7 +31,7 @@ import { UserService } from '../../shared/user.service';
     ReactiveFormsModule,
     SearchFilterPipe,
     NgForOf,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
   ],
   templateUrl: './car-list.component.html',
   styleUrl: './car-list.component.scss',
@@ -64,7 +63,7 @@ export class CarListComponent implements OnInit {
     private rawMaterialService: RawMaterialService,
     public authService: AuthenticationService,
     private userService: UserService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.carService.getCars();
@@ -84,7 +83,7 @@ export class CarListComponent implements OnInit {
 
     this.userService.currentUserBehaviorSubject.subscribe((user) => {
       this.currentUser = user;
-    })
+    });
   }
 
   // loadCars() {
@@ -136,10 +135,10 @@ export class CarListComponent implements OnInit {
     if (cars === null || cars === undefined) {
       return;
     } else {
-    const abbrevs = cars.map(car => car.car_number.slice(0, 4));
-    const uniqueAbbrevs = [...new Set(abbrevs)];  // Set is a collection of unique values
-    console.log(uniqueAbbrevs);
-    this.company = uniqueAbbrevs;
+      const abbrevs = cars.map((car) => car.car_number.slice(0, 4));
+      const uniqueAbbrevs = [...new Set(abbrevs)]; // Set is a collection of unique values
+      console.log(uniqueAbbrevs);
+      this.company = uniqueAbbrevs;
     }
   }
 
@@ -151,9 +150,11 @@ export class CarListComponent implements OnInit {
   }
 
   filterByCompany(term: string) {
-    this.cars = this.allCars.filter(car => car.car_number.includes(term));
+    this.cars = this.allCars.filter((car) => car.car_number.includes(term));
     if (this.selectedItem !== '') {
-      this.cars = this.cars.filter(car => car.raw_material.material_name.includes(this.selectedItem));
+      this.cars = this.cars.filter((car) =>
+        car.raw_material.material_name.includes(this.selectedItem)
+      );
     }
 
     if (this.filterMod !== null) {
@@ -162,15 +163,17 @@ export class CarListComponent implements OnInit {
       this.filterMod = null;
       // Apply modifications if al
       if (this.filterMod == 1) {
-        this.cars = this.cars.filter(car => car.received_date !== null);
+        this.cars = this.cars.filter((car) => car.received_date !== null);
       } else if (this.filterMod == 2) {
-        this.cars = this.cars.filter(car => car.received_date === null);
+        this.cars = this.cars.filter((car) => car.received_date === null);
       } else if (this.filterMod == 3) {
-        this.cars = this.cars.filter(car => car.extraction_start_date !== null);
+        this.cars = this.cars.filter(
+          (car) => car.extraction_start_date !== null
+        );
       } else if (this.filterMod == 4) {
-        this.cars = this.cars.filter(car => car.emptied_date !== null);
+        this.cars = this.cars.filter((car) => car.emptied_date !== null);
       } else if (this.filterMod == 5) {
-        this.cars = this.cars.filter(car => car.released_date !== null);
+        this.cars = this.cars.filter((car) => car.released_date !== null);
       }
     }
   }
@@ -179,22 +182,34 @@ export class CarListComponent implements OnInit {
     // Reset the filter modifications if the filter is changed
     this.filterModCars = null;
     this.filterMod = null;
-    this.cars = this.allCars.filter(car => car.raw_material.material_name.includes(term));
+    this.cars = this.allCars.filter((car) =>
+      car.raw_material.material_name.includes(term)
+    );
     if (this.selectedCompany !== '') {
-      this.cars = this.cars.filter(car => car.car_number.includes(this.selectedCompany));
+      this.cars = this.cars.filter((car) =>
+        car.car_number.includes(this.selectedCompany)
+      );
     }
 
     if (this.filterMod !== null) {
       if (this.filterMod == 1) {
-        this.cars = this.cars.filter(car => car.received_date !== null && car.extraction_start_date === null);
+        this.cars = this.cars.filter(
+          (car) =>
+            car.received_date !== null && car.extraction_start_date === null
+        );
       } else if (this.filterMod == 2) {
-        this.cars = this.cars.filter(car => car.received_date === null);
+        this.cars = this.cars.filter((car) => car.received_date === null);
       } else if (this.filterMod == 3) {
-        this.cars = this.cars.filter(car => car.extraction_start_date !== null && car.emptied_date === null);
+        this.cars = this.cars.filter(
+          (car) =>
+            car.extraction_start_date !== null && car.emptied_date === null
+        );
       } else if (this.filterMod == 4) {
-        this.cars = this.cars.filter(car => car.emptied_date !== null && car.released_date === null);
+        this.cars = this.cars.filter(
+          (car) => car.emptied_date !== null && car.released_date === null
+        );
       } else if (this.filterMod == 5) {
-        this.cars = this.cars.filter(car => car.released_date !== null);
+        this.cars = this.cars.filter((car) => car.released_date !== null);
       }
     }
   }
@@ -215,15 +230,22 @@ export class CarListComponent implements OnInit {
       this.cars = this.filterModCars;
     }
     if (this.filterMod == 1) {
-      this.cars = this.cars.filter(car => car.received_date !== null && car.extraction_start_date === null);
+      this.cars = this.cars.filter(
+        (car) =>
+          car.received_date !== null && car.extraction_start_date === null
+      );
     } else if (this.filterMod == 2) {
-      this.cars = this.cars.filter(car => car.received_date === null);
+      this.cars = this.cars.filter((car) => car.received_date === null);
     } else if (this.filterMod == 3) {
-      this.cars = this.cars.filter(car => car.extraction_start_date !== null && car.emptied_date === null);
+      this.cars = this.cars.filter(
+        (car) => car.extraction_start_date !== null && car.emptied_date === null
+      );
     } else if (this.filterMod == 4) {
-      this.cars = this.cars.filter(car => car.emptied_date !== null && car.released_date === null);
+      this.cars = this.cars.filter(
+        (car) => car.emptied_date !== null && car.released_date === null
+      );
     } else if (this.filterMod == 5) {
-      this.cars = this.cars.filter(car => car.released_date !== null);
+      this.cars = this.cars.filter((car) => car.released_date !== null);
     }
   }
 
