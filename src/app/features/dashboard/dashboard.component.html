@@ -1,7 +1,7 @@
 <div class="container text-center">
   <div class="d-flex justify-content-evenly form-group mt-3">
     <div class="flex-fill">
-      <select [(ngModel)]="selectedCompany" class="form-select" style="height:100%" (change)="filterByCompany(selectedCompany)">
+      <select [(ngModel)]="selectedCompany" class="form-select" style="height:100%" (change)="filterData()">
         <option value='' selected>Choose Company</option>
         @for (item of this.company; track item){
         <option value="{{ item }}">{{ item }}</option>
@@ -9,7 +9,7 @@
       </select>
     </div>
     <div class="flex-fill">
-      <select [(ngModel)]="selectedItem" class="form-select" style="height:100%; margin-left: 3px" (change)="filterByMaterial(selectedItem)">
+      <select [(ngModel)]="selectedItem" class="form-select" style="height:100%; margin-left: 3px" (change)="filterData()">
         <option value='' selected>Choose Raw Material</option>
         @for (item of this.materials; track item){
         <option value="{{ item.material_name }}">{{ item.material_name }}</option>
@@ -19,11 +19,11 @@
 
     <div class="flex-fill d-inline-flex">
       <label class="form-label" for="startDate">Start Date: </label>
-      <input class="form-control" type="date" [(ngModel)]="startDate" id="startDate" name="startDate" (change)="filterByDate()" required>
+      <input class="form-control" type="date" [(ngModel)]="startDate" id="startDate" name="startDate" (change)="filterData()" required>
     </div>
     <div class="flex-fill d-inline-flex">
       <label class="form-label" for="endDate">End Date: </label>
-      <input class="form-control" type="date" [(ngModel)]="endDate" id="endDate" name="endDate" (change)="filterByDate()" required>
+      <input class="form-control" type="date" [(ngModel)]="endDate" id="endDate" name="endDate" (change)="filterData()" required>
     </div>
     <div class="flex-fill">
       <button class="btn btn-outline-secondary" style="height:100%; width: 75%" (click)="resetFilters()">Reset</button>
