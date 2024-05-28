@@ -168,7 +168,7 @@ export class DashboardComponent implements OnInit{
     this.endDate = null;
     this.selectedCompany = '';
     this.selectedItem = '';
-    this.cars = this.allCars;
+    this.cars = [];
     this.resetData();
   }
 
