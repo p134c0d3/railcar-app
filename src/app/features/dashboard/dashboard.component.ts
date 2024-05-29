@@ -61,7 +61,7 @@ export class DashboardComponent implements OnInit{
     this.carService.allCars$.subscribe((res) => {
       this.allCars = res;
       this.getCompany(this.allCars);
-      console.log('All cars: ', this.allCars);
+      // console.log('All cars: ', this.allCars);
       this.getChartData(this.allCars);
       }
     );
@@ -90,16 +90,16 @@ export class DashboardComponent implements OnInit{
     this.currentWeightRequested = this.chartService.currentWeight(carList, 'requested_date', 'received_date').toLocaleString();
     this.currentWeightEmptied = this.chartService.currentWeight(carList, 'emptied_date', '').toLocaleString();
 
-    console.log('Total requested cars: ', this.totalRequestedCars);
-    console.log('Total received cars: ', this.totalReceivedCars);
-    console.log('Total empty cars: ', this.totalEmptyCars);
-    console.log('Total unreceived cars: ', this.totalUnreceivedCars);
-    console.log('Total in queue cars: ', this.totalInQueueCars);
-    console.log('Total start extraction cars: ', this.totalStartExtractionCars);
-    console.log('Current extracting cars: ', this.currentExtractingCars);
-    console.log('Current empty cars: ', this.currentEmptyCars);
-    console.log('Current unreleased cars: ', this.currentUnreleasedCars);
-    console.log('Current released cars: ', this.currentReleasedCars);
+    // console.log('Total requested cars: ', this.totalRequestedCars);
+    // console.log('Total received cars: ', this.totalReceivedCars);
+    // console.log('Total empty cars: ', this.totalEmptyCars);
+    // console.log('Total unreceived cars: ', this.totalUnreceivedCars);
+    // console.log('Total in queue cars: ', this.totalInQueueCars);
+    // console.log('Total start extraction cars: ', this.totalStartExtractionCars);
+    // console.log('Current extracting cars: ', this.currentExtractingCars);
+    // console.log('Current empty cars: ', this.currentEmptyCars);
+    // console.log('Current unreleased cars: ', this.currentUnreleasedCars);
+    // console.log('Current released cars: ', this.currentReleasedCars);
     // console.log('Gauge data: ', this.gaugeData);
     // Build the datasets for the charts
     this.chart1Data = [];
@@ -126,7 +126,7 @@ export class DashboardComponent implements OnInit{
     } else {
     const abbrevs = cars.map(car => car.car_number.slice(0, 4));
     const uniqueAbbrevs = [...new Set(abbrevs)];  // Set is a collection of unique values
-    console.log(uniqueAbbrevs);
+    // console.log(uniqueAbbrevs);
     this.company = uniqueAbbrevs;
     }
   }
@@ -134,37 +134,16 @@ export class DashboardComponent implements OnInit{
   getRawMaterials() {
     this.rawMaterialService.getRawMaterials().subscribe((data: any) => {
       this.materials = data;
-      console.log(data);
+      // console.log(data);
     });
   }
 
-  filterByDate(){
-    let filteredData = [];
-    if ((this.selectedCompany === '') && (this.selectedItem === '')) {
-      this.cars = [];
-      this.cars.push(...this.allCars.filter(car => {
-        const itemDate = new Date(car.requested_date)
-        const start_date = new Date(this.startDate)
-        const end_date = new Date (this.endDate)
-        if (!this.startDate && !this.endDate) {
-          return true;
-        } else if (!this.startDate) {
-          return itemDate <= end_date!;
-        } else if (!this.endDate) {
-          return itemDate >= start_date!;
-        } else {
-          return itemDate >= start_date! && itemDate <= end_date!;
-        }
-      }));
-      this.getChartData(this.cars);
-      this.drawCharts();
-      return
-    }
-
-    filteredData.push(...this.cars.filter(item => {
-      const itemDate = new Date(item.requested_date);
-      const start_date = new Date(this.startDate);
-      const end_date = new Date (this.endDate);
+  filterData(){
+    this.cars = [];
+    this.cars.push(...this.allCars.filter(car => {
+      const itemDate = new Date(car.requested_date)
+      const start_date = new Date(this.startDate)
+      const end_date = new Date (this.endDate)
       if (!this.startDate && !this.endDate) {
         return true;
       } else if (!this.startDate) {
@@ -173,44 +152,13 @@ export class DashboardComponent implements OnInit{
         return itemDate >= start_date!;
       } else {
         return itemDate >= start_date! && itemDate <= end_date!;
-      }
-    }));
-    this.getChartData(filteredData)
-    this.drawCharts();
-  }
+    }}));
 
-  filterByCompany(term: string) {
-    let filteredData = []
-    // Checking to see if a startDate or endDate has been modified - endDate will not be a Date object once modified
-    if (this.startDate || this.endDate) {
-      filteredData = this.cars.filter(car => car.car_number.includes(term));
-      if (this.selectedItem !== ''){
-        filteredData = filteredData.filter(car => car.raw_material.material_name.includes(this.selectedItem))
-      }
-      this.getChartData(filteredData);
-      return
-    }
-    this.cars = this.allCars.filter(car => car.car_number.includes(term));
-    if (this.selectedItem !== '') {
-      this.cars = this.cars.filter(car => car.raw_material.material_name.includes(this.selectedItem));
-    }
-    this.getChartData(this.cars);
-  }
-
-  filterByMaterial(term: string) {
-    let filteredData = [];
-    // Checking to see if a startDate or endDate has been modified - endDate will not be a Date object once modified
-    if (this.startDate || this.endDate) {
-      filteredData = this.cars.filter(car => car.raw_material.material_name.includes(term));
-      if (this.selectedCompany !== ''){
-        filteredData = filteredData.filter(car => car.car_number.includes(this.selectedCompany))
-      }
-      this.getChartData(filteredData);
-      return
-    }
-    this.cars = this.allCars.filter(car => car.raw_material.material_name.includes(term));
     if (this.selectedCompany !== '') {
       this.cars = this.cars.filter(car => car.car_number.includes(this.selectedCompany));
+    }
+    if (this.selectedItem !== '') {
+      this.cars = this.cars.filter(car => car.raw_material.material_name.includes(this.selectedItem));
     }
     this.getChartData(this.cars);
   }
@@ -220,13 +168,12 @@ export class DashboardComponent implements OnInit{
     this.endDate = null;
     this.selectedCompany = '';
     this.selectedItem = '';
-    this.cars = this.allCars;
-    this.updateData();
+    this.cars = [];
+    this.resetData();
   }
 
-  updateData() {
+  resetData() {
     this.getChartData(this.allCars);
-
   }
 
   drawCharts() {
