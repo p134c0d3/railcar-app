@@ -9,16 +9,17 @@ import { environment } from '../../environments/environment';
 })
 export class CarService {
   private currentCar: Car;
-  allCarsSubject = new BehaviorSubject<Car[] | null >(null);
+  allCarsSubject = new BehaviorSubject<Car[] | null>(null);
   allCars$ = this.allCarsSubject.asObservable();
 
   constructor(private http: HttpClient) {}
 
   getCars() {
-    return this.http.get(`${environment.apiURL}/cars`)
+    return this.http
+      .get(`${environment.apiURL}/cars`)
       .pipe(
-        map(data => this.allCarsSubject.next(data as Car[])),
-        catchError(err => {
+        map((data) => this.allCarsSubject.next(data as Car[])),
+        catchError((err) => {
           console.error('Error fetching cars: ', err);
           return this.allCarsSubject.asObservable();
         })
@@ -35,7 +36,7 @@ export class CarService {
   }
 
   updateCar(id: number, car: Car): Observable<Car> {
-    return this.http.put<Car>(`${environment.apiURL}/cars/${id}/edit`, car);
+    return this.http.put<Car>(`${environment.apiURL}/cars/${id}`, car);
   }
 
   deleteCar(id: number): Observable<Car> {
